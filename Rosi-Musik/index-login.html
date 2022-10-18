@@ -118,28 +118,47 @@ https://templatemo.com/tm-570-chain-app-dev
 
       <section class="popupBody">
         <!-- User Profile -->
-        <div class="user_profile" style="margin-left: 100px">
+        <div class="user_profile">
           <img
             src="assets/images/client-image.jpg"
             class="mx-auto"
             style="width: 100px; border-radius: 50%; margin-left: 100px" />
           <h5>Randi Baraku</h5>
-          <!-- Default dropright button -->
-          <div class="btn-group dropright">
+          <!-- Detail Profile -->
+          <!-- dropdown -->
+          <div class="dropdown">
             <button
+              class="dropdown-toggle"
               type="button"
-              class="btn btn-secondary dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false">
-              Dropright
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="width: 300px">
+              Profile
             </button>
-            <div class="dropdown-menu">
-              <!-- Dropdown menu links -->
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Nama: randi baraku</a></li>
+              <li>
+                <a class="dropdown-item" href="#">email: randi123@gmail.com</a>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown" style="margin-top: 10px">
+            <button
+              class="dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="width: 300px">
+              Status Pemesanan
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Menunggu Konfirmasi</a></li>
+              <!-- <li>
+                <a class="dropdown-item" href="#">email: randi123@gmail.com</a>
+              </li> -->
+            </ul>
           </div>
         </div>
         <!-- Social Login -->

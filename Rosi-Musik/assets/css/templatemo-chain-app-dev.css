@@ -1883,7 +1883,7 @@ a.btn_red {
   display: inline-block;
   padding: 5px 10px;
   margin-right: 10px;
-  /* float: left; */
+  float: left;
   color: #fff;
   font-size: 16px;
   text-align: center;
@@ -1894,7 +1894,7 @@ a.btn_red {
 }
 
 .social_login .google .icon {
-  background: #dd4b39;
+  background: #827b7b;
 }
 
 .social_login .icon_title {
