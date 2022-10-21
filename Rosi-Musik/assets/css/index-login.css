@@ -1779,7 +1779,50 @@ footer p a:hover {
 PopUp
 ---------------------------------------------
 */
+.detail_profile nav {
+  background: rgb(255, 255, 255);
+  /* position: absolute; */
+  line-height: 30px;
 
+  width: 380px;
+  padding: 8px 25px;
+}
+.detail_profile nav label {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  border-bottom: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+}
+.detail_profile nav label:hover {
+  color: rgb(55, 57, 59);
+}
+.detail_profile .button span {
+  float: right;
+  line-height: 35px;
+}
+.detail_profile nav ul {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: 10px;
+  display: none;
+  margin-left: 20%;
+}
+input[type="checkbox"] {
+  display: none;
+}
+[id^="btn"]:checked + ul {
+  display: block;
+}
+.detail_profile nav ul li {
+  list-style: none;
+  padding: 5px 0px;
+}
 #lean_overlay {
   position: fixed;
   z-index: 100;
@@ -1793,10 +1836,12 @@ PopUp
 
 .popupContainer {
   position: absolute;
-  width: 330px;
+  width: 432px;
   height: auto;
-  left: 45%;
+  left: 75%;
   top: 60px;
+  /* margin-top: -50px;
+  margin-left: -150px; */
   background: #fff;
 }
 
