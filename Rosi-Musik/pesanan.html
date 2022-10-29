@@ -33,7 +33,7 @@ https://templatemo.com/tm-570-chain-app-dev
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous" />
-    <link rel="stylesheet" href="assets/css/deskripsi-paket.css" />
+    <link rel="stylesheet" href="assets/css/pesanan.css" />
     <link rel="stylesheet" href="assets/css/animated.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
   </head>
@@ -80,13 +80,11 @@ https://templatemo.com/tm-570-chain-app-dev
                   <a href="index.html">Beranda</a>
                 </li>
                 <li class="scroll-to-section">
-                  <a href="daftar-paket.html" class="active">Daftar Paket</a>
+                  <a href="#services" class="active">Daftar Paket</a>
                 </li>
+                <li class="scroll-to-section"><a href="#about">Galeri</a></li>
                 <li class="scroll-to-section">
-                  <a href="galeri.html">Galeri</a>
-                </li>
-                <li class="scroll-to-section">
-                  <a href="tentang-kami.html">Tentang Kami</a>
+                  <a href="#pricing">Tentang Kami</a>
                 </li>
                 <!-- <li class="scroll-to-section">
                   <a href="#newsletter">Newsletter</a>
@@ -211,64 +209,140 @@ https://templatemo.com/tm-570-chain-app-dev
       </section>
     </div>
     <div class="container">
-      <div class="deskripsi"><p>Deskripsi Paket 1</p></div>
+      <div class="deskripsi"><p>Checkout</p></div>
     </div>
     <div
       class="main-banner wow fadeIn"
       id="top"
       data-wow-duration="1s"
-      data-wow-delay="0.5s">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-lg-6 align-self-center">
-                <div
-                  class="left-content show-up header-text wow fadeInLeft"
-                  data-wow-duration="1s"
-                  data-wow-delay="1s">
+      data-wow-delay="0.5s"></div>
+    <div class="container pesanan m-auto" style="margin: -200px">
+      <div class="row">
+        <div class="col-sm-6">
+          <div
+            class="card"
+            style="
+              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+            ">
+            <div class="card-body">
+              <h5 class="card-title mb-5">Isi Data</h5>
+              <form>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="">Nama</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="First name"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Nama Paket</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Last name"
+                      required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="">Tanggal Mulai</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      placeholder="Last name"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Tanggal Selesai</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      placeholder="Tanggal"
+                      required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="">No Telepon</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="No Telepon"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Alamat</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Alamat"
+                      required />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label for="">Catatan</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      required></textarea>
+                  </div>
+                  <div class="confirm-pesan mb-2">
+                    <button class="btn btn-success btn" type="submit">
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div
+            class="card"
+            style="
+              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+            ">
+            <div class="card-body">
+              <h5 class="card-title mb-5">Ringkasan Pemesanan</h5>
+              <div class="row deskripsi-paket mb-4">
+                <div class="col-md-6">
+                  <img
+                    src="assets/images/image-7.png"
+                    alt=""
+                    class="img-fluid"
+                    style="width: 139px; height: 118px" />
+                </div>
+                <div class="col-md-6">
+                  <p class="text-right nama-paket">Paket 1</p>
+                  <p class="text-right harga-paket">Rp. 1.000.000</p>
+                </div>
+              </div>
+              <div class="rincian-paket mb-4">
+                <h6>Pada Paket ini akan berisi:</h6>
+                <ul class="aksesoris">
+                  <li>1 Paket sound system</li>
+                  <li>1 Teknisi</li>
+                  <li>3 Kru AJS</li>
+                  <li>1 Ranjer</li>
+                  <li>1 unit kendaran transportasi</li>
+                </ul>
+              </div>
+
+              <div class="card-footer bg-transparent border-2 m-auto">
+                <div class="harga-pesanan mb-3">
                   <div class="row">
-                    <div class="col-lg-12">
-                      <h2>Rosi Music</h2>
-                      <p>
-                        Rosi Music merupakan sebuah perusahaan penyedia jasa
-                        layanan musik yang ada di kota pringsewu. Perusahaan
-                        kami berdiri sejak tahun XXXX dan sudah di percaya oleh
-                        berbagai klient dalam membantuk mensukseskan acara
-                        mereka.
-                      </p>
-                      <h2>Daftar Barang</h2>
-                      <p>
-                        Pada paket ini kamu akan mendaptkan barang sewa berupa :
-                      </p>
-                      <ul>
-                        <li>1 Sound Sistem</li>
-                        <li>1 Teknisi</li>
-                        <li>3 Kru AJS</li>
-                        <li>1 Ranjer</li>
-                        <li>1 Unit Kendaraan Transportasi</li>
-                      </ul>
-                      <h2>Harga Paket</h2>
-                      <p
-                        style="
-                          font-family: 'Roboto';
-                          font-style: normal;
-                          font-weight: 600;
-                          font-size: 48px;
-                          line-height: 30px;
-                        ">
-                        Rp. 1.750.000
-                      </p>
+                    <div class="col-md-6">
+                      <p class="text-left nama-paket">Total Harga</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="text-right harga-paket">Rp. 1.000.000</p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div
-                  class="img-fluid"
-                  data-wow-duration="1s"
-                  data-wow-delay="0.5s">
-                  <img src="assets/images/image-5.png" alt="" />
+                <div class="tombol-pesan">
+                  <button class="btn btn-success btn" type="submit">
+                    <a href="checkout.html" style="color: #ffff">Pesan</a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -276,29 +350,7 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="sewa">
-        <button
-          type="button"
-          class="btn btn-success"
-          style="background: #2b8700; border-radius: 4px; margin-right: 20px">
-          <a href="pesanan.html" style="text-decoration: none; color: white"
-            >Buat Pesanan Sekarang</a
-          >
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          style="
-            background: #ffffff;
-            border: 2px solid #2b8700;
-            border-radius: 4px;
-            color: #2b8700;
-          ">
-          Sewa Melalui Whatsapp
-        </button>
-      </div>
-    </div>
+
     <footer id="newsletter">
       <div class="container">
         <!-- <div class="row">
