@@ -1427,13 +1427,15 @@ The Clients
   position: relative;
   z-index: 1;
   overflow: hidden;
+  /* width: 540px;
+  height: 639px; */
 }
 
 .pricing-item-regular:before {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(../images/regular-table-top.png);
+  /* background-image: url(../images/regular-table-top.png); */
   z-index: 0;
   content: "";
   width: 274px;
@@ -1444,7 +1446,7 @@ The Clients
   position: absolute;
   bottom: 0;
   right: 0;
-  background-image: url(../images/regular-table-bottom.png);
+  /* background-image: url(../images/regular-table-bottom.png); */
   z-index: 0;
   content: "";
   width: 370px;
@@ -1467,9 +1469,9 @@ The Clients
   margin-bottom: 30px;
 }
 
-.pricing-item-regular .icon img {
-  width: 120px;
-  height: 106px;
+.pricing-item-regular .icon .img-thumbnail img {
+  width: 480px;
+  height: 310px;
   margin-bottom: 30px;
 }
 

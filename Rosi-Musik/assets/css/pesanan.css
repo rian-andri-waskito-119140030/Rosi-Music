@@ -2082,24 +2082,132 @@ PopUp
 ---------------------------------------------
 */
 
+.detail_profile nav {
+  background: rgb(255, 255, 255);
+  /* position: absolute; */
+  line-height: 30px;
+
+  width: 380px;
+  padding: 8px 25px;
+}
+.detail_profile nav label {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  border-bottom: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+}
+.detail_profile nav label:hover {
+  color: rgb(55, 57, 59);
+}
+.detail_profile .button span {
+  float: right;
+  line-height: 35px;
+}
+.detail_profile ul {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: 10px;
+  display: none;
+  margin-left: 10%;
+}
+input[type="checkbox"] {
+  display: none;
+}
+[id^="btn"]:checked + ul {
+  display: block;
+}
+.detail_profile nav ul li {
+  list-style: none;
+  padding: 5px 0px;
+}
 #lean_overlay {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   top: 0px;
   left: 0px;
   height: 100%;
   width: 100%;
-  background: #000;
+  background: transparent;
   display: none;
 }
 
 .popupContainer {
   position: absolute;
-  width: 330px;
-  height: auto;
-  left: 45%;
-  top: 60px;
+  width: 432px;
+  height: 100%;
+  left: 86% !important;
+  top: 0px !important;
+  /* margin-top: -50px;
+  margin-left: -150px; */
   background: #fff;
+}
+@media (max-width: 1200px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    height: auto;
+  }
+  .popupContainer .popupBody .popupHeader {
+    width: fit-content;
+  }
+}
+@media (max-width: 900px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    height: auto;
+  }
+  .popupContainer .popupBody .popupHeader {
+    width: fit-content;
+  }
+}
+@media (max-width: 768px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: auto;
+  }
+  .popupContainer {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    height: auto;
+  }
+  .popupContainer .popupBody .popupHeader {
+    width: 70%;
+  }
+}
+@media (max-width: 480px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    height: auto;
+  }
+  .popupContainer .popupBody .popupHeader {
+    width: 70%;
+  }
+}
+@media (max-width: 320px) {
+  .popupContainer {
+    left: 50% !important;
+    top: 120px !important;
+    height: auto;
+  }
+  .popupContainer .popupBody .popupHeader {
+    width: 70%;
+  }
 }
 
 .btn {
@@ -2144,53 +2252,71 @@ a.btn_red {
   margin-left: 5%;
 }
 /* Popup Styles*/
-
+.popupContainer {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 .popupHeader {
   font-size: 16px;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  border-radius: 10px;
 }
 
 .popupHeader {
-  background: #f4f4f2;
+  background: #ffffff;
   position: relative;
   padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   font-weight: bold;
+  text-align: center;
 }
 
 .popupHeader .modal_close {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   padding: 10px 15px;
-  background: #4b8ef1;
+  background: #fffbfb;
   cursor: pointer;
-  color: #fff;
+  color: rgb(8, 8, 8);
   font-size: 16px;
+  border-radius: 10px;
 }
 
 .popupBody {
   padding: 20px;
+  /* text-align: center; */
 }
-
+.popupBody .user_profile {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.popubBody .detail_profile {
+  text-align: right;
+  margin-bottom: 10px;
+}
 .social_login .social_box {
   display: block;
   clear: both;
   padding: 10px;
   margin-bottom: 10px;
-  background: #f4f4f2;
+  background: #ffffff;
   overflow: hidden;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
 }
-
+/* .social_login .icon img {
+  width: 20px;
+  height: 20px;
+} */
 .social_login .icon {
-  display: inline-block;
-
-  padding: 5px 10px;
+  /* display: inline-block; */
+  /* padding: 5px 10px; */
   margin-right: 10px;
   float: left;
   color: #fff;
-  font-size: 16px;
-  text-align: center;
+  /* font-size: 16px;
+  text-align: center; */
 }
 
 .social_login .fb .icon {
@@ -2198,7 +2324,7 @@ a.btn_red {
 }
 
 .social_login .google .icon {
-  background: #dd4b39;
+  background: #ffffff;
 }
 
 .social_login .icon_title {

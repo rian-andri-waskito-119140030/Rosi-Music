@@ -90,10 +90,13 @@ https://templatemo.com/tm-570-chain-app-dev
                   <a href="#newsletter">Newsletter</a>
                 </li> -->
                 <li>
-                  <div class="gradient-button">
+                  <div class="">
                     <a id="modal_trigger" href="#modal"
-                      ><i class="fa fa-sign-in-alt"></i> Login Sekarang</a
-                    >
+                      ><i class=""></i
+                      ><img
+                        src="assets/images/94084743_p0.jpg"
+                        style="width: 46px; height: 46px; border-radius: 50%"
+                    /></a>
                   </div>
                 </li>
               </ul>
@@ -108,106 +111,72 @@ https://templatemo.com/tm-570-chain-app-dev
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <div id="modal" class="popupContainer" style="display: none">
+    <div id="modal" class="popupContainer" style="display: none; float: left">
       <div class="popupHeader">
-        <span class="header_title">Login</span>
+        <span class="header_title" style="color: white">Profile</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
       </div>
-
       <section class="popupBody">
-        <!-- Social Login -->
-        <div class="social_login">
-          <div class="">
-            <a href="#" class="social_box fb">
-              <span class="icon"><i class="fab fa-facebook"></i></span>
-              <span class="icon_title">Connect with Facebook</span>
-            </a>
+        <!-- User Profile -->
+        <div class="user_profile">
+          <img
+            src="assets/images/94084743_p0.jpg"
+            class="mx-auto"
+            style="
+              width: 112px;
+              height: 112px;
+              border-radius: 50%;
+              margin-left: 100px;
+              margin-bottom: 10px;
+            " />
+          <h5>Hu Tao</h5>
+          <img
+            src="assets/images/heading-line-dec.png"
+            alt=""
+            style="width: 33px; height: 4px" />
+        </div>
 
+        <div class="detail_profile">
+          <!-- Detail Profile -->
+          <!-- dropdown animated -->
+          <nav>
+            <label for="btn" class="button">
+              Profile
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn" />
+            <ul class="menu">
+              <li>Nama: Hu Tao</li>
+              <li>Email: hu.119140030@student.anime.an.jp</li>
+            </ul>
+          </nav>
+          <nav>
+            <label for="btn-1" class="button">
+              Status Pemesanan
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn-1" />
+            <ul class="menu">
+              <li>Status Pesanan : Menunggu Validasi</li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Social Login -->
+        <!-- <div class="social_login">
+          <div class="">
             <a href="#" class="social_box google">
               <span class="icon"><i class="fab fa-google-plus"></i></span>
               <span class="icon_title">Connect with Google</span>
             </a>
           </div>
-
-          <div class="centeredText">
-            <span>Or use your Email address</span>
-          </div>
-
-          <div class="action_btns">
-            <div class="one_half">
-              <a href="#" id="login_form" class="btn">Login</a>
-            </div>
-            <div class="one_half last">
-              <a href="#" id="register_form" class="btn">Sign up</a>
-            </div>
-          </div>
-        </div>
+        </div> -->
 
         <!-- Username & Password Login form -->
-        <div class="user_login">
-          <form>
-            <label>Email / Username</label>
-            <input type="text" />
-            <br />
-
-            <label>Password</label>
-            <input type="password" />
-            <br />
-
-            <div class="checkbox">
-              <input id="remember" type="checkbox" />
-              <label for="remember">Remember me on this computer</label>
-            </div>
-
-            <div class="action_btns">
-              <div class="one_half">
-                <a href="#" class="btn back_btn"
-                  ><i class="fa fa-angle-double-left"></i> Back</a
-                >
-              </div>
-              <div class="one_half last">
-                <a href="#" class="btn btn_red">Login</a>
-              </div>
-            </div>
-          </form>
-
-          <a href="#" class="forgot_password">Forgot password?</a>
-        </div>
 
         <!-- Register Form -->
-        <div class="user_register">
-          <form>
-            <label>Full Name</label>
-            <input type="text" />
-            <br />
-
-            <label>Email Address</label>
-            <input type="email" />
-            <br />
-
-            <label>Password</label>
-            <input type="password" />
-            <br />
-
-            <div class="checkbox">
-              <input id="send_updates" type="checkbox" />
-              <label for="send_updates">Send me occasional email updates</label>
-            </div>
-
-            <div class="action_btns">
-              <div class="one_half">
-                <a href="#" class="btn back_btn"
-                  ><i class="fa fa-angle-double-left"></i> Back</a
-                >
-              </div>
-              <div class="one_half last">
-                <a href="#" class="btn btn_red">Register</a>
-              </div>
-            </div>
-          </form>
-        </div>
       </section>
     </div>
+
     <div class="container">
       <div class="deskripsi"><p>Checkout</p></div>
     </div>
