@@ -161,7 +161,9 @@ hgroup {
 * {
   box-sizing: border-box;
 }
-
+html::-webkit-scrollbar {
+  width: 0px;
+}
 html,
 body {
   font-family: "Roboto", sans-serif;

@@ -200,28 +200,110 @@ https://templatemo.com/tm-570-chain-app-dev
               Atas Nama: Rosi Music
             </p>
             <!-- upload bukti pembayaran -->
-            <form class="upload-bukti" action="">
-              <div class="form-group mb-5">
-                <label for="exampleFormControlFile1"
-                  >Upload Bukti Pembayaran</label
-                >
-                <div class="upload-btn-wrapper">
-                  <button class="btn">
-                    <img
-                      src="assets/images/image-8.png"
-                      alt=""
-                      style="width: 50px; height: 50px" />
-                    <p>Upload Files</p>
-                  </button>
-                  <input type="file" name="myfile" required />
-                </div>
-                <div class="confirm-pesan mb-2">
-                  <button class="btn btn-success btn" type="submit">
-                    Submit
-                  </button>
+            <p class="card-text bayar-dp">
+              Masukkan bukti pembayaran dibawah ini
+            </p>
+            <div class="wrapper m-auto">
+              <form action="#">
+                <input class="file-input" type="file" name="file" hidden />
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Upload Files</p>
+              </form>
+              <section class="progress-area"></section>
+              <section class="uploaded-area"></section>
+            </div>
+            <div class="back-to-home">
+              <button
+                style="
+                  width: 482px;
+                  height: 56px;
+                  background: linear-gradient(
+                    267.4deg,
+                    #5676ed 6.18%,
+                    #30d3fc 100%
+                  );
+                  border-radius: 4px;
+                "
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Kirim
+              </button>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <!-- <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Modal title
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div> -->
+                    <div class="modal-body">
+                      <img
+                        src="assets/images/image-12.png"
+                        alt=""
+                        style="margin-bottom: 20px" />
+                      <p
+                        style="
+                          font-family: 'Roboto';
+                          font-style: normal;
+                          font-weight: 400;
+                          font-size: 20px;
+                          line-height: 23px;
+                          text-align: center;
+                          letter-spacing: -0.006em;
+
+                          color: #000000;
+                          margin-bottom: 20px;
+                        ">
+                        Bukti pembayaran berhasil dikirim. Silahkan menunggu
+                        validasi dari admin dengan mengecek di halaman profil
+                        secara berkala
+                      </p>
+                      <a href="index-login.html"
+                        ><button
+                          style="
+                            width: 250px;
+                            height: 52px;
+                            background: linear-gradient(
+                              267.4deg,
+                              #5676ed 6.18%,
+                              #30d3fc 100%
+                            );
+                            border-radius: 10px;
+                            border: none;
+                            color: white;
+                          ">
+                          Kembali Ke Beranda
+                        </button></a
+                      >
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div> -->
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -330,5 +412,68 @@ https://templatemo.com/tm-570-chain-app-dev
     <script src="assets/js/imagesloaded.js"></script>
     <script src="assets/js/popup.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+      const form = document.querySelector("form"),
+        fileInput = document.querySelector(".file-input"),
+        progressArea = document.querySelector(".progress-area"),
+        uploadedArea = document.querySelector(".uploaded-area");
+      form.addEventListener("click", () => {
+        fileInput.click();
+      });
+      fileInput.onchange = ({ target }) => {
+        let file = target.files[0];
+        if (file) {
+          let fileName = file.name;
+          if (fileName.length >= 12) {
+            let splitName = fileName.split(".");
+            fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
+          }
+          uploadFile(fileName);
+        }
+      };
+      function uploadFile(name) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/upload.php");
+        xhr.upload.addEventListener("progress", ({ loaded, total }) => {
+          let fileLoaded = Math.floor((loaded / total) * 100);
+          let fileTotal = Math.floor(total / 1000);
+          let fileSize;
+          fileTotal < 1024
+            ? (fileSize = fileTotal + " KB")
+            : (fileSize = (loaded / (1024 * 1024)).toFixed(2) + " MB");
+          let progressHTML = `<li class="row">
+                          <i class="fas fa-file-alt"></i>
+                          <div class="content">
+                            <div class="details">
+                              <span class="name">${name} • Mengirim</span>
+                              <span class="percent">${fileLoaded}%</span>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress" style="width: ${fileLoaded}%"></div>
+                            </div>
+                          </div>
+                        </li>`;
+          uploadedArea.classList.add("onprogress");
+          progressArea.innerHTML = progressHTML;
+          if (loaded == total) {
+            progressArea.innerHTML = "";
+            let uploadedHTML = `<li class="row">
+                            <div class="content upload">
+                              <i class="fas fa-file-alt"></i>
+                              <div class="details">
+                                <span class="name">${name} • Sudah Terkirim</span>
+                                <span class="size">${fileSize}</span>
+                              </div>
+                            </div>
+                            <i class="fas fa-check"></i>
+                          </li>`;
+            uploadedArea.classList.remove("onprogress");
+            uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+          }
+        });
+        let data = new FormData(form);
+        xhr.send(data);
+      }
+    </script>
   </body>
 </html>

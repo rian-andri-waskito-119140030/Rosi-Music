@@ -161,7 +161,9 @@ hgroup {
 * {
   box-sizing: border-box;
 }
-
+html::-webkit-scrollbar {
+  width: 0px;
+}
 html,
 body {
   font-family: "Roboto", sans-serif;
@@ -1125,6 +1127,10 @@ Banner Style
   line-height: 23px;
   letter-spacing: -0.006em;
   color: #000000;
+  margin-bottom: 10px;
+}
+.checkout .bayar-dp p b {
+  margin-bottom: 10px;
 }
 .checkout .upload-bukti label {
   display: none;
@@ -1189,6 +1195,117 @@ Banner Style
   height: 56px;
   margin-left: 29.8%;
 }
+.wrapper {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wrapper form {
+  height: 233px;
+  width: 482px;
+
+  display: flex;
+  cursor: pointer;
+  margin: 30px 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  background: rgba(86, 118, 237, 0.06);
+  border: 2px dashed #5676ed;
+  border-radius: 10px;
+}
+form :where(i) {
+  color: #5676ed;
+}
+form :where(p) {
+  color: #000000;
+}
+form i {
+  font-size: 50px;
+}
+form p {
+  margin-top: 15px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  letter-spacing: -0.006em;
+
+  color: #000000;
+}
+
+section .row {
+  margin-bottom: 10px;
+  background: #e9f0ff;
+  list-style: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+section .row i {
+  color: #6990f2;
+  font-size: 30px;
+}
+section .details span {
+  font-size: 14px;
+}
+.progress-area .row .content {
+  width: 100%;
+  margin-left: 15px;
+}
+.progress-area .details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+  justify-content: space-between;
+}
+.progress-area .content .progress-bar {
+  height: 6px;
+  width: 100%;
+  margin-bottom: 4px;
+  background: #fff;
+  border-radius: 30px;
+}
+.content .progress-bar .progress {
+  height: 100%;
+  width: 0%;
+  background: #6990f2;
+  border-radius: inherit;
+}
+.uploaded-area {
+  max-height: 232px;
+  overflow-y: scroll;
+}
+.uploaded-area.onprogress {
+  max-height: 150px;
+}
+.uploaded-area::-webkit-scrollbar {
+  width: 0px;
+}
+.uploaded-area .row .content {
+  display: flex;
+  align-items: center;
+}
+.uploaded-area .row .details {
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+}
+.uploaded-area .row .details .size {
+  color: #404040;
+  font-size: 11px;
+}
+.uploaded-area i.fa-check {
+  font-size: 16px;
+}
 .main-banner {
   background-repeat: no-repeat;
   background-position: center center;
@@ -1219,7 +1336,7 @@ Banner Style
   gap: 10px;
 
   position: absolute;
-  width: 1520px;
+  width: 1537px;
   height: 167px;
   left: -1px;
   /* right: -1px; */
