@@ -2,7 +2,7 @@
 
 # Pentagram
 **List Of Member** </br>
-Project Manage: Randi Baraku </br>
+Project Manager: Randi Baraku </br>
 UI/UX Design: Lucky Febrian </br>
 Frontend Developer: Rian Andri Waskito </br>
 Backend Developer: Putu Ary Kusuma Yudha </br>
