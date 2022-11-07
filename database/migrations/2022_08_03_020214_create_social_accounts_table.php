@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('barang_dipaket', function (Blueprint $table) {
+        Schema::create('social_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('id_paket');
-            $table->string('id_jenis_barang');
-            $table->integer('jumlah');
+            $table->bigInteger('user_id');
+            $table->string('provider_id')->unique();
+            $table->string('provider_name');
             $table->timestamps();
-
-            $table->foreign('id_paket')->references('id_paket')->on('paket');
-            $table->foreign('id_jenis_barang')->references('id_jenis_barang')->on('jenis_barang');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_dipaket');
+        Schema::dropIfExists('social_accounts');
     }
 };

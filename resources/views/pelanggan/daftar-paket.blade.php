@@ -56,6 +56,7 @@ https://templatemo.com/tm-570-chain-app-dev
 
     @include('layout.user_nav')
 
+    {{-- <?php dd(auth()->guard('pelanggan')->user()); ?> --}}
     {{-- <?php dd($data[0]->paket); ?> --}}
     <div id="pricing" class="pricing-tables">
       <div class="container">

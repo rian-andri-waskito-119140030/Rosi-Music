@@ -68,7 +68,7 @@ return [
     'providers' => [
         'pelanggans' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Pelanggan::class,
+            'model' => App\Models\User::class,
         ],
     
         'admins' => [

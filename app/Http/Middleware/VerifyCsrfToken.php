@@ -13,10 +13,10 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        'http://rosi-music.test/',
-        'http://rosi-music.test/jenis_barang/',
-        'http://rosi-music.test/admin/barang/',
-        'http://rosi-music.test/admin/paket/',
-        'http://rosi-music.test/admin/jenis/',
+        'http://rosi2.test/',
+        'http://rosi2.test/jenis_barang/',
+        'http://rosi2.test/admin/barang/',
+        'http://rosi2.test/admin/paket/',
+        'http://rosi2.test/admin/jenis/',
     ];
 }
