@@ -148,12 +148,22 @@
                               placeholder="Username" />
                           </div>
                           <div class="mb-4">
-                            <input
-                              type="password"
-                              class="form-control form-control-alt form-control-lg"
-                              id="login-password"
-                              name="login-password"
-                              placeholder="Password" />
+                            <div class="input-group">
+                              <input
+                                type="password"
+                                class="form-control form-control-alt form-control-lg"
+                                id="login-password"
+                                name="login-password"
+                                placeholder="Password"
+                                aria-describedby="password" />
+
+                              <span class="input-group-text">
+                                <i
+                                  class="fa fa-eye-slash"
+                                  id="togglePassword"
+                                  style="cursor: pointer"></i
+                              ></span>
+                            </div>
                           </div>
                           <!-- <div class="mb-4">
                             <div class="form-check">
@@ -218,5 +228,32 @@
 
     <!-- Page JS Code -->
     <script src="assets/js/pages/op_auth_signin.min.js"></script>
+    <script>
+      $("#togglePassword").click(function (e) {
+        e.preventDefault();
+        var type = $(this)
+          .parent()
+          .parent()
+          .find("#login-password")
+          .attr("type");
+        if (type == "password") {
+          $(this)
+            .parent()
+            .parent()
+            .find("#login-password")
+            .attr("type", "text");
+          $(this).addClass("fa-eye");
+          $(this).removeClass("fa-eye-slash");
+        } else {
+          $(this)
+            .parent()
+            .parent()
+            .find("#login-password")
+            .attr("type", "password");
+          $(this).addClass("fa-eye-slash");
+          $(this).removeClass("fa-eye");
+        }
+      });
+    </script>
   </body>
 </html>
