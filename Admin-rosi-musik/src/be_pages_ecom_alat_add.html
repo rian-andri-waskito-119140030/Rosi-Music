@@ -430,7 +430,26 @@
                           placeholder="Masukkan Nama Barang"
                           required />
                       </div>
-
+                      <div class="col-6">
+                        <!-- Select2 (.js-select2 class is initialized in Helpers.jqSelect2()) -->
+                        <!-- For more info and examples you can check out https://github.com/select2/select2 -->
+                        <label
+                          class="form-label"
+                          for="one-ecom-product-category"
+                          >Jenis Barang</label
+                        >
+                        <select
+                          class="js-select2 form-select"
+                          id="one-ecom-product-category"
+                          name="one-ecom-product-category"
+                          style="width: 100%"
+                          placeholder="Pilih Barang">
+                          <option></option>
+                          <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                          <option value="1">Bisa Dipakai</option>
+                          <option value="2">Maintenance</option>
+                        </select>
+                      </div>
                       <div class="col-6 mb-4">
                         <!-- Select2 (.js-select2 class is initialized in Helpers.jqSelect2()) -->
                         <!-- For more info and examples you can check out https://github.com/select2/select2 -->
@@ -526,7 +545,7 @@
     <script src="assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <script src="assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
-    <script src="assets/js/plugins/select2/js/select2.full.min.js"></script>
+    <script src="assets/js/plugins/select2/js/select1.full.min.js"></script>
     <script src="assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script src="assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
@@ -538,6 +557,7 @@
         "js-flatpickr",
         "jq-datepicker",
         "jq-maxlength",
+        "jq-select2",
         "jq-select2",
         "jq-masked-inputs",
         "jq-rangeslider",
