@@ -194,6 +194,54 @@ https://templatemo.com/tm-570-chain-app-dev
               border-radius: 10px;
             ">
             <div class="card-body">
+              <h5 class="card-title mb-5">Ringkasan Pemesanan</h5>
+              <div class="row deskripsi-paket mb-4">
+                <div class="col-md-6">
+                  <img
+                    src="assets/images/image-7.png"
+                    alt=""
+                    class="img-fluid"
+                    style="width: 139px; height: 118px" />
+                </div>
+                <div class="col-md-6">
+                  <p class="text-right nama-paket">Paket 1</p>
+                  <p class="text-right harga-paket">Rp. 1.000.000</p>
+                </div>
+              </div>
+              <div class="rincian-paket mb-4">
+                <h6>Pada Paket ini akan berisi:</h6>
+                <ul class="aksesoris">
+                  <li>1 Paket sound system</li>
+                  <li>1 Teknisi</li>
+                  <li>3 Kru AJS</li>
+                  <li>1 Ranjer</li>
+                  <li>1 unit kendaran transportasi</li>
+                </ul>
+              </div>
+
+              <div class="card-footer bg-transparent border-2 m-auto">
+                <div class="harga-pesanan mb-3">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="text-left nama-paket">Total Harga</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="text-right harga-paket">Rp. 1.000.000</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div
+            class="card"
+            style="
+              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+            ">
+            <div class="card-body">
               <h5 class="card-title mb-5">Isi Data</h5>
               <form>
                 <div class="row">
@@ -253,77 +301,23 @@ https://templatemo.com/tm-570-chain-app-dev
                       rows="3"
                       required></textarea>
                   </div>
-                  <div class="confirm-pesan mb-2">
-                    <button class="btn btn-success btn" type="submit">
-                      Simpan
+                  <div class="tombol-pesan">
+                    <button
+                      class="btn btn-success btn"
+                      type="submit"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal">
+                      Pesan
                     </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div
-            class="card"
-            style="
-              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-              border-radius: 10px;
-            ">
-            <div class="card-body">
-              <h5 class="card-title mb-5">Ringkasan Pemesanan</h5>
-              <div class="row deskripsi-paket mb-4">
-                <div class="col-md-6">
-                  <img
-                    src="assets/images/image-7.png"
-                    alt=""
-                    class="img-fluid"
-                    style="width: 139px; height: 118px" />
-                </div>
-                <div class="col-md-6">
-                  <p class="text-right nama-paket">Paket 1</p>
-                  <p class="text-right harga-paket">Rp. 1.000.000</p>
-                </div>
-              </div>
-              <div class="rincian-paket mb-4">
-                <h6>Pada Paket ini akan berisi:</h6>
-                <ul class="aksesoris">
-                  <li>1 Paket sound system</li>
-                  <li>1 Teknisi</li>
-                  <li>3 Kru AJS</li>
-                  <li>1 Ranjer</li>
-                  <li>1 unit kendaran transportasi</li>
-                </ul>
-              </div>
-
-              <div class="card-footer bg-transparent border-2 m-auto">
-                <div class="harga-pesanan mb-3">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <p class="text-left nama-paket">Total Harga</p>
-                    </div>
-                    <div class="col-md-6">
-                      <p class="text-right harga-paket">Rp. 1.000.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="tombol-pesan">
-                  <button
-                    class="btn btn-success btn"
-                    type="submit"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Pesan
-                  </button>
-                  <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <!-- <div class="modal-header">
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <!-- <div class="modal-header">
                       <h1 class="modal-title fs-5" id="exampleModalLabel">
                         Modal title
                       </h1>
@@ -333,45 +327,45 @@ https://templatemo.com/tm-570-chain-app-dev
                         data-bs-dismiss="modal"
                         aria-label="Close"></button>
                     </div> -->
-                        <div class="modal-body text-center">
-                          <img
-                            src="assets/images/image-12.png"
-                            alt=""
-                            style="margin-bottom: 20px" />
-                          <p
-                            style="
-                              font-family: 'Roboto';
-                              font-style: normal;
-                              font-weight: 400;
-                              font-size: 20px;
-                              line-height: 23px;
-                              text-align: center;
-                              letter-spacing: -0.006em;
-
-                              color: #000000;
-                              margin-bottom: 20px;
-                            ">
-                            Silahkan Menunggu Status Pemesanan Di Menu Profile
-                          </p>
-                          <a href="index-login.html"
-                            ><button
+                          <div class="modal-body text-center">
+                            <img
+                              src="assets/images/image-12.png"
+                              alt=""
+                              style="margin-bottom: 20px" />
+                            <p
                               style="
-                                width: 250px;
-                                height: 52px;
-                                background: linear-gradient(
-                                  267.4deg,
-                                  #5676ed 6.18%,
-                                  #30d3fc 100%
-                                );
-                                border-radius: 10px;
-                                border: none;
-                                color: white;
+                                font-family: 'Roboto';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;
+                                line-height: 23px;
+                                text-align: center;
+                                letter-spacing: -0.006em;
+
+                                color: #000000;
+                                margin-bottom: 20px;
                               ">
-                              Kembali Ke Beranda
-                            </button></a
-                          >
-                        </div>
-                        <!-- <div class="modal-footer">
+                              Silahkan Menunggu Status Pemesanan Di Menu Profile
+                            </p>
+                            <a href="index-login.html"
+                              ><button
+                                style="
+                                  width: 250px;
+                                  height: 52px;
+                                  background: linear-gradient(
+                                    267.4deg,
+                                    #5676ed 6.18%,
+                                    #30d3fc 100%
+                                  );
+                                  border-radius: 10px;
+                                  border: none;
+                                  color: white;
+                                ">
+                                Kembali Ke Beranda
+                              </button></a
+                            >
+                          </div>
+                          <!-- <div class="modal-footer">
                       <button
                         type="button"
                         class="btn btn-secondary"
@@ -382,11 +376,12 @@ https://templatemo.com/tm-570-chain-app-dev
                         Save changes
                       </button>
                     </div> -->
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
