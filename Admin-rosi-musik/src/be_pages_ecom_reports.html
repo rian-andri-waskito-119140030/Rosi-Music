@@ -182,19 +182,64 @@
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="be_pages_ecom_reports.html">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
                   <i class="nav-main-link-icon fa fa-dollar"></i>
                   <span class="nav-main-link-name">Keuangan</span>
                 </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_transaksi.html">
+                      <span class="nav-main-link-name">Transaksi</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a class="nav-main-link" href="be_pages_ecom_hutang.html">
+                      <span class="nav-main-link-name">Hutang</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a class="nav-main-link" href="be_pages_ecom_reports.html">
+                      <span class="nav-main-link-name">Laporan Keuangan</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
                   <i class="nav-main-link-icon si si-bar-chart"></i>
-                  <span class="nav-main-link-name">Alat dan Barang</span>
+                  <span class="nav-main-link-name"
+                    >Barang dan Jenis Barang</span
+                  >
                 </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <a class="nav-main-link" href="be_pages_ecom_alat.html">
+                      <span class="nav-main-link-name">Barang</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_alat_jenis.html">
+                      <span class="nav-main-link-name">Jenis Barang</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
+                <a class="nav-main-link" href="be_pages_ecom_paket.html">
                   <i class="nav-main-link-icon si si-bar-chart"></i>
                   <span class="nav-main-link-name">Paket</span>
                 </a>
@@ -356,7 +401,7 @@
         <!-- Page Content -->
         <div class="content">
           <!-- Quick Overview -->
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-6 col-lg-3">
               <a
                 class="block block-rounded block-link-shadow text-center"
@@ -373,13 +418,13 @@
                 </div>
               </a>
             </div>
-          </div>
+          </div> -->
           <!-- END Quick Overview -->
 
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Keuangan</h3>
+              <h3 class="block-title">Laporan Keuangan</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -400,21 +445,33 @@
                     class="table table-bordered table-vcenter js-dataTable-buttons">
                     <thead>
                       <tr>
-                        <th class="text-center">ID</th>
-                        <th>Jenis</th>
-                        <th class="d-none d-sm-table-cell">Keterangan</th>
+                        <th class="text-center">No</th>
                         <th>Tanggal</th>
-                        <th class="d-none d-sm-table-cell">Nominal</th>
+                        <th class="d-none d-sm-table-cell">Keterangan</th>
+                        <th>Debit</th>
+                        <th class="d-none d-sm-table-cell">Kredit</th>
+                        <th>Saldo</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">Masuk</td>
+                        <td class="fw-semibold fs-sm">02/02/2022</td>
                         <td class="d-none d-sm-table-cell fs-sm">
                           Pemasukan Paket 1
                         </td>
-                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Rp 1.300.000</span
+                          >
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Rp 1.300.000</span
+                          >
+                        </td>
                         <td class="d-none d-sm-table-cell fs-sm">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
