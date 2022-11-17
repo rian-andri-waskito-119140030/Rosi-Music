@@ -65,6 +65,9 @@
     <link
       rel="stylesheet"
       href="assets/js/plugins/dropzone/min/dropzone.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/magnific-popup/magnific-popup.css" />
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css" />
@@ -458,11 +461,11 @@
                           readonly />
                       </div>
                       <div class="col-6">
-                        <label class="form-label">Paket</label>
+                        <label class="form-label">Jenis Paket</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="paket"
+                          placeholder="jenis paket"
                           readonly />
                       </div>
                       <div class="col-6">
@@ -474,11 +477,27 @@
                           readonly />
                       </div>
                       <div class="col-6">
+                        <label class="form-label">Pilihan Paket</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="pilhan paket"
+                          readonly />
+                      </div>
+                      <div class="col-6">
                         <label class="form-label">Tanggal Selesai</label>
                         <input
                           type="text"
                           class="form-control"
                           placeholder="02/02/2022"
+                          readonly />
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Status</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Tervalidasi"
                           readonly />
                       </div>
                       <div class="col-6">
@@ -490,12 +509,22 @@
                           readonly />
                       </div>
                       <div class="col-6">
-                        <label class="form-label">Status</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Tervalidasi"
-                          readonly />
+                        <label class="form-label" for="example-file-input">
+                          Bukti Transfer</label
+                        >
+                        <div class="row items-push js-gallery img-fluid-200">
+                          <div
+                            class="col-md-6 col-lg-4 col-xl-3 animated fadeIn">
+                            <a
+                              class="img-link img-link-zoom-in img-thumb img-lightbox"
+                              href="assets/media/photos/photo2@2x.jpg">
+                              <img
+                                class="img-fluid"
+                                src="assets/media/photos/photo2.jpg"
+                                alt="" />
+                            </a>
+                          </div>
+                        </div>
                       </div>
                       <div class="col-6">
                         <label
@@ -604,7 +633,7 @@
     <script src="assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script src="assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
-
+    <script src="assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
     <!-- Page JS Helpers (Select2 + Bootstrap Maxlength + CKEditor plugins) -->
 
     <script>
@@ -617,6 +646,7 @@
         "jq-rangeslider",
         "jq-colorpicker",
         "js-ckeditor",
+        "jq-magnific-popup",
       ]);
     </script>
   </body>

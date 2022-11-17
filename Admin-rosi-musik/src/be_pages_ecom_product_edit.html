@@ -65,6 +65,9 @@
     <link
       rel="stylesheet"
       href="assets/js/plugins/dropzone/min/dropzone.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/magnific-popup/magnific-popup.css" />
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css" />
@@ -454,14 +457,23 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Nama" />
+                          placeholder="Nama"
+                          required />
                       </div>
                       <div class="col-6">
-                        <label class="form-label">Paket</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="paket" />
+                        <label class="form-label" for="example-select"
+                          >Jenis Paket</label
+                        >
+                        <select
+                          class="form-select"
+                          id="example-select"
+                          name="example-select"
+                          required>
+                          <option selected>Pilih Jenis Paket</option>
+                          <option value="1">Tervalidasi</option>
+                          <option value="2">Menunggu Validasi</option>
+                          <option value="3">Pesanan Ditolak</option>
+                        </select>
                       </div>
                       <div class="col-6">
                         <label class="form-label" for="example-flatpickr-custom"
@@ -473,7 +485,23 @@
                           id="example-flatpickr-custom"
                           name="example-flatpickr-custom"
                           placeholder="d/m/y"
-                          data-date-format="d/m/y" />
+                          data-date-format="d/m/Y"
+                          required />
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label" for="example-select"
+                          >Pilihan Paket</label
+                        >
+                        <select
+                          class="js-select2 form-select"
+                          id="example-select"
+                          name="example-select"
+                          required>
+                          <option selected>Pilih Paket</option>
+                          <option value="1">Tervalidasi</option>
+                          <option value="2">Menunggu Validasi</option>
+                          <option value="3">Pesanan Ditolak</option>
+                        </select>
                       </div>
                       <div class="col-6">
                         <label class="form-label" for="example-flatpickr-custom"
@@ -485,35 +513,55 @@
                           id="example-flatpickr-custom"
                           name="example-flatpickr-custom"
                           placeholder="d/m/y"
-                          data-date-format="d/m/y" />
+                          data-date-format="d/m/Y"
+                          required />
                       </div>
+                      <div class="col-6">
+                        <label class="form-label" for="example-select"
+                          >Status</label
+                        >
+                        <select
+                          class="form-select"
+                          id="example-select"
+                          name="example-select"
+                          required>
+                          <option selected>Pilih Status</option>
+                          <option value="1">Tervalidasi</option>
+                          <option value="2">Menunggu Validasi</option>
+                          <option value="3">Pesanan Ditolak</option>
+                        </select>
+                      </div>
+
                       <div class="col-6">
                         <label class="form-label">No HP</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Masukkan No HP" />
+                          placeholder="Masukkan No HP"
+                          required />
                       </div>
                       <div class="col-6">
-                        <!-- Select2 (.js-select2 class is initialized in Helpers.jqSelect2()) -->
-                        <!-- For more info and examples you can check out https://github.com/select2/select2 -->
-                        <label
-                          class="form-label"
-                          for="one-ecom-product-category"
-                          >Status</label
+                        <label class="form-label" for="example-file-input"
+                          >Masukkan Bukti Transfer</label
                         >
-                        <select
-                          class="js-select2 form-select"
-                          id="one-ecom-product-category"
-                          name="one-ecom-product-category"
-                          style="width: 100%"
-                          data-placeholder="Pilih Status">
-                          <option></option>
-                          <!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                          <option value="1">Tervalidasi</option>
-                          <option value="2">Pesanan Ditolak</option>
-                          <option value="3">Menunggu Validasi</option>
-                        </select>
+                        <div class="row items-push js-gallery img-fluid-200">
+                          <div
+                            class="col-md-6 col-lg-4 col-xl-3 animated fadeIn">
+                            <a
+                              class="img-link img-link-zoom-in img-thumb img-lightbox"
+                              href="assets/media/photos/photo2@2x.jpg">
+                              <img
+                                class="img-fluid"
+                                src="assets/media/photos/photo2.jpg"
+                                alt="" />
+                            </a>
+                          </div>
+                        </div>
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="example-file-input"
+                          required />
                       </div>
                       <div class="col-6">
                         <label
@@ -526,7 +574,8 @@
                           id="one-ecom-product-description-short"
                           name="one-ecom-product-description-short"
                           rows="4"
-                          placeholder="Masukkan Alamat"></textarea>
+                          placeholder="Masukkan Alamat"
+                          required></textarea>
                       </div>
                       <div class="col-6 mb-4">
                         <label
@@ -539,7 +588,8 @@
                           id="one-ecom-product-description-short"
                           name="one-ecom-product-description-short"
                           rows="4"
-                          placeholder="Masukkan Catatan"></textarea>
+                          placeholder="Masukkan Catatan"
+                          required></textarea>
                       </div>
                     </div>
 
@@ -620,7 +670,7 @@
     <script src="assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script src="assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
-
+    <script src="assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
     <!-- Page JS Helpers (Select2 + Bootstrap Maxlength + CKEditor plugins) -->
 
     <script>
@@ -633,6 +683,7 @@
         "jq-rangeslider",
         "jq-colorpicker",
         "js-ckeditor",
+        "jq-magnific-popup",
       ]);
     </script>
   </body>

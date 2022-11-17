@@ -487,6 +487,24 @@
                           placeholder="Masukkan Harga Sewa" />
                       </div>
                       <div class="col-6">
+                        <label class="form-label" for="example-file-input"
+                          >Gambar</label
+                        >
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="example-file-input"
+                          required />
+                      </div>
+                      <div class="col-6">
+                        <!-- CKEditor (js-ckeditor-inline + js-ckeditor ids are initialized in Helpers.jsCkeditor()) -->
+                        <!-- For more info and examples you can check out http://ckeditor.com -->
+                        <label class="form-label">Deskripsi Lengkap</label>
+                        <textarea
+                          id="js-ckeditor"
+                          name="one-ecom-product-description"></textarea>
+                      </div>
+                      <div class="col-6">
                         <label
                           class="form-label"
                           for="one-ecom-product-description-short"
@@ -498,14 +516,6 @@
                           name="one-ecom-product-description-short"
                           rows="4"></textarea>
                       </div>
-                    </div>
-                    <div class="col-6">
-                      <!-- CKEditor (js-ckeditor-inline + js-ckeditor ids are initialized in Helpers.jsCkeditor()) -->
-                      <!-- For more info and examples you can check out http://ckeditor.com -->
-                      <label class="form-label">Deskripsi Lengkap</label>
-                      <textarea
-                        id="js-ckeditor"
-                        name="one-ecom-product-description"></textarea>
                     </div>
 
                     <div class="mb-7">
