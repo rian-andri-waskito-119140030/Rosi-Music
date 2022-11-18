@@ -65,6 +65,9 @@
     <link
       rel="stylesheet"
       href="assets/js/plugins/dropzone/min/dropzone.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/magnific-popup/magnific-popup.css" />
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css" />
@@ -192,10 +195,35 @@
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="be_pages_ecom_products.html">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
                   <i class="nav-main-link-icon si si-envelope-letter"></i>
                   <span class="nav-main-link-name">Pemesanan</span>
                 </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_products_sistem.html">
+                      <span class="nav-main-link-name"
+                        >Pemesanan Via Sistem</span
+                      >
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_products_wa.html">
+                      <span class="nav-main-link-name"
+                        >Pemesanan Via Whatsapp</span
+                      >
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-main-item">
                 <a
@@ -423,7 +451,7 @@
           <!-- Info -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <a href="be_pages_ecom_products.html">
+              <a href="be_pages_ecom_alat.html">
                 <span class="fa fa-arrow-left text-secondary m-3"></span>
               </a>
               <h3 class="block-title">Masukkan Barang</h3>
@@ -459,12 +487,25 @@
                       </div>
                       <div class="col-6">
                         <div class="block block-bordered rounded-2 text-center">
-                          <div class="block-content">
+                          <div class="items-push js-gallery img-fluid-200">
+                            <div class="animated fadeIn text-center">
+                              <a
+                                class="img-link img-link-zoom-in img-thumb img-lightbox"
+                                href="assets/media/photos/photo41.png">
+                                <img
+                                  class="img-fluid"
+                                  style="width: 71px; height: 107px"
+                                  src="assets/media/photos/photo41.png"
+                                  alt="" />
+                              </a>
+                            </div>
+                          </div>
+                          <!-- <div class="block-content">
                             <img
                               class="mb-4"
                               style="width: 71px; height: 107px"
                               src="assets/media/photos/photo41.png" />
-                          </div>
+                          </div> -->
                         </div>
                         <label class="form-label" for="example-file-input"
                           >Ganti Foto</label
@@ -584,6 +625,7 @@
     <script src="assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script src="assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
+    <script src="assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
 
     <!-- Page JS Helpers (Select2 + Bootstrap Maxlength + CKEditor plugins) -->
 
@@ -597,6 +639,7 @@
         "jq-rangeslider",
         "jq-colorpicker",
         "js-ckeditor",
+        "jq-magnific-popup",
       ]);
     </script>
   </body>

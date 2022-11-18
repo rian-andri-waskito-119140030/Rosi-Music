@@ -430,7 +430,7 @@
             <div class="col-6 col-lg-3">
               <a
                 class="block block-rounded block-link-shadow text-center"
-                href="be_pages_ecom_reports_add.html">
+                href="be_pages_ecom_product_add.html">
                 <div class="block-content block-content-full">
                   <div class="fs-2 fw-semibold text-success">
                     <i class="fa fa-plus"></i>
@@ -438,7 +438,7 @@
                 </div>
                 <div class="block-content py-2 bg-body-light">
                   <p class="fw-medium fs-sm text-success mb-0">
-                    Tambah Data Keuangan
+                    Tambah Pesanan
                   </p>
                 </div>
               </a>
@@ -449,7 +449,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Laporan Keuangan</h3>
+              <h3 class="block-title">Data Pemesanan Via Sistem</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -470,38 +470,432 @@
                     class="table table-bordered table-vcenter js-dataTable-buttons">
                     <thead>
                       <tr>
-                        <th class="text-center">No</th>
-                        <th>Tanggal</th>
-                        <th class="d-none d-sm-table-cell">Keterangan</th>
-                        <th>Debit</th>
-                        <th class="d-none d-sm-table-cell">Kredit</th>
-                        <th>Saldo</th>
+                        <th class="text-center">ID</th>
+                        <th>Nama</th>
+                        <th class="d-none d-sm-table-cell">Paket</th>
+                        <th>Tgl Mulai</th>
+                        <th>Tgl Selesai</th>
+                        <th class="d-none d-sm-table-cell">Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">02/02/2022</td>
+                        <td class="fw-semibold fs-sm">Nurhadi Aldo</td>
                         <td class="d-none d-sm-table-cell fs-sm">
-                          Pemasukan Paket 1
+                          Paket 1 Lengkap
                         </td>
-                        <td class="d-none d-sm-table-cell fs-sm">
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">02/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
+                            >Tervalidasi</span
                           >
                         </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">2</td>
+                        <td class="fw-semibold fs-sm">Mamat Nurahman</td>
                         <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 3 Non-Diessel
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">03/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">04/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
+                            >Tervalidasi</span
                           >
                         </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">3</td>
+                        <td class="fw-semibold fs-sm">Asep Racing</td>
                         <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 5 Non-Diessel
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">05/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">06/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
+                            >Tervalidasi</span
                           >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">4</td>
+                        <td class="fw-semibold fs-sm">Adi Suyadi</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Non-MC
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">07/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">08/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">5</td>
+                        <td class="fw-semibold fs-sm">Rahmat</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 6 Non-MC & Non-Diessel
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">08/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">10/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-bold d-inline-block py-1 px-3 rounded-3 bg-danger-light text-danger"
+                            >Pesanan Ditolak</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">6</td>
+                        <td class="fw-semibold fs-sm">Randi</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 8 Non-MC l
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">11/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">12/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-bold d-inline-block py-1 px-3 rounded-3 bg-danger-light text-danger"
+                            >Pesanan Ditolak</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">7</td>
+                        <td class="fw-semibold fs-sm">Baraku</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Non-Diessel
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">13/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">14/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-3 bg-warning-light text-warning"
+                            >Menunggu Validasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">8</td>
+                        <td class="fw-semibold fs-sm">Nurhadi Aldo</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Lengkap
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">02/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">9</td>
+                        <td class="fw-semibold fs-sm">Nurhadi Aldo</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Lengkap
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">02/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">10</td>
+                        <td class="fw-semibold fs-sm">Nurhadi Aldo</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Lengkap
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">02/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center fs-sm">11</td>
+                        <td class="fw-semibold fs-sm">Nurhadi Aldo</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Paket 1 Lengkap
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">02/11/2021</td>
+                        <td class="d-none d-sm-table-cell">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
+                          >
+                        </td>
+                        <td class="text-center fs-sm">
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_edit.html"
+                            data-bs-toggle="tooltip"
+                            title="Edit">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="be_pages_ecom_product_view.html"
+                            data-bs-toggle="tooltip"
+                            title="View">
+                            <i class="fa fa-fw fa-eye"></i>
+                          </a>
+                          <a
+                            class="btn btn-sm btn-alt-secondary"
+                            href="javascript:void(0)"
+                            data-bs-toggle="tooltip"
+                            title="Delete">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
                         </td>
                       </tr>
                     </tbody>

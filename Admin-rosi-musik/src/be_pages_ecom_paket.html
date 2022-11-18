@@ -176,10 +176,35 @@
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="be_pages_ecom_products.html">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
                   <i class="nav-main-link-icon si si-envelope-letter"></i>
                   <span class="nav-main-link-name">Pemesanan</span>
                 </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_products_sistem.html">
+                      <span class="nav-main-link-name"
+                        >Pemesanan Via Sistem</span
+                      >
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_products_wa.html">
+                      <span class="nav-main-link-name"
+                        >Pemesanan Via Whatsapp</span
+                      >
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-main-item">
                 <a
@@ -422,7 +447,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Pemesanan</h3>
+              <h3 class="block-title">Data Paket</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -478,7 +503,7 @@
                             class="btn btn-sm btn-alt-secondary"
                             href="be_pages_ecom_paket_edit.html"
                             data-bs-toggle="tooltip"
-                            title="View">
+                            title="Edit">
                             <i class="fa fa-fw fa-pencil-alt"></i>
                           </a>
                           <a
@@ -492,20 +517,22 @@
                       </tr>
                       <tr>
                         <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">GTR101</td>
+                        <td class="fw-semibold fs-sm">Paket NON-MC</td>
+                        <td class="d-none d-sm-table-cell fs-sm">Paket 1</td>
                         <td class="d-none d-sm-table-cell fs-sm">
-                          Gitar Listrik
-                        </td>
-                        <td class="text-center fs-sm">
-                          <img
-                            style="width: 71px; height: 107px"
-                            src="assets/media/photos/photo41.png" />
+                          <ul style="list-style: none">
+                            <li>1 Paket Sound System</li>
+                            <li>1 Teknisi</li>
+                            <li>3 Krus AJS</li>
+                            <li>1 Ranjer</li>
+                            <li>1 Unit Kendaraan Transportasi</li>
+                          </ul>
                         </td>
 
                         <td class="d-none d-sm-table-cell">
                           <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >Maintenance</span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Rp 1.300.000</span
                           >
                         </td>
                         <td class="text-center fs-sm">
@@ -513,7 +540,7 @@
                             class="btn btn-sm btn-alt-secondary"
                             href="be_pages_ecom_paket_edit.html"
                             data-bs-toggle="tooltip"
-                            title="View">
+                            title="Edit">
                             <i class="fa fa-fw fa-pencil-alt"></i>
                           </a>
                           <a

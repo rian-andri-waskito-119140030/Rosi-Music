@@ -42,13 +42,29 @@
     <!-- Page JS Plugins CSS -->
     <link
       rel="stylesheet"
-      href="assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css" />
+      href="assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
     <link
       rel="stylesheet"
-      href="assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css" />
+      href="assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" />
     <link
       rel="stylesheet"
-      href="assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css" />
+      href="assets/js/plugins/select2/css/select2.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/dropzone/min/dropzone.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/flatpickr/flatpickr.min.css" />
+    <!-- Page JS Plugins CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/select2/css/select2.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/js/plugins/dropzone/min/dropzone.min.css" />
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css" />
@@ -146,7 +162,7 @@
             <!-- END Dark Mode -->
 
             <!-- Options -->
-            <div class="dropdown d-inline-block ms-1"></div>
+
             <!-- END Options -->
 
             <!-- Close Sidebar, Visible only on mobile screens -->
@@ -176,35 +192,10 @@
                 </a>
               </li>
               <li class="nav-main-item">
-                <a
-                  class="nav-main-link nav-main-link-submenu"
-                  data-toggle="submenu"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  href="#">
+                <a class="nav-main-link" href="be_pages_ecom_products.html">
                   <i class="nav-main-link-icon si si-envelope-letter"></i>
                   <span class="nav-main-link-name">Pemesanan</span>
                 </a>
-                <ul class="nav-main-submenu">
-                  <li class="nav-main-item">
-                    <a
-                      class="nav-main-link"
-                      href="be_pages_ecom_products_sistem.html">
-                      <span class="nav-main-link-name"
-                        >Pemesanan Via Sistem</span
-                      >
-                    </a>
-                  </li>
-                  <li class="nav-main-item">
-                    <a
-                      class="nav-main-link"
-                      href="be_pages_ecom_products_wa.html">
-                      <span class="nav-main-link-name"
-                        >Pemesanan Via Whatsapp</span
-                      >
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li class="nav-main-item">
                 <a
@@ -425,98 +416,68 @@
       <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-          <!-- Quick Overview -->
-          <!-- <div class="row">
-            <div class="col-6 col-lg-3">
-              <a
-                class="block block-rounded block-link-shadow text-center"
-                href="be_pages_ecom_reports_add.html">
-                <div class="block-content block-content-full">
-                  <div class="fs-2 fw-semibold text-success">
-                    <i class="fa fa-plus"></i>
-                  </div>
-                </div>
-                <div class="block-content py-2 bg-body-light">
-                  <p class="fw-medium fs-sm text-success mb-0">
-                    Tambah Data Keuangan
-                  </p>
-                </div>
-              </a>
-            </div>
-          </div> -->
-          <!-- END Quick Overview -->
+          <!-- Quick Overview + Actions -->
 
-          <!-- All Products -->
+          <!-- END Quick Overview + Actions -->
+
+          <!-- Info -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Laporan Keuangan</h3>
+              <a href="be_pages_ecom_products.html">
+                <span class="fa fa-arrow-left text-secondary m-3"></span>
+              </a>
+              <h3 class="block-title">Pembayaran</h3>
             </div>
             <div class="block-content">
-              <!-- Search Form -->
+              <div class="row m-auto">
+                <div class="col-lg-12">
+                  <form
+                    action="be_pages_ecom_product_edit.html"
+                    method="POST"
+                    onsubmit="return false;">
+                    <div class="mb-4">
+                      <label class="form-label" for="one-ecom-product-id" hidden
+                        >PID</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="one-ecom-product-id"
+                        name="one-ecom-product-id"
+                        value="789"
+                        readonly
+                        hidden />
+                    </div>
+                    <div class="row g-4">
+                      <div class="col-6">
+                        <label class="form-label">Uang Tunai</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Masukkan Uang Tunai"
+                          required />
+                      </div>
+                    </div>
 
-              <!-- END Search Form -->
-
-              <!-- All Products Table -->
-              <!-- Dynamic Table with Export Buttons -->
-              <div class="block block-rounded">
-                <!-- <div class="block-header block-header-default">
-                  <h3 class="block-title">
-                    Dynamic Table <small>Export Buttons</small>
-                  </h3>
-                </div> -->
-                <div class="block-content block-content-full">
-                  <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                  <table
-                    class="table table-bordered table-vcenter js-dataTable-buttons">
-                    <thead>
-                      <tr>
-                        <th class="text-center">No</th>
-                        <th>Tanggal</th>
-                        <th class="d-none d-sm-table-cell">Keterangan</th>
-                        <th>Debit</th>
-                        <th class="d-none d-sm-table-cell">Kredit</th>
-                        <th>Saldo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">02/02/2022</td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          Pemasukan Paket 1
-                        </td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
-                          >
-                        </td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
-                          >
-                        </td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <div class="mb-7">
+                      <button type="submit" class="btn btn-primary float-end">
+                        Simpan
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <!-- END Dynamic Table with Export Buttons -->
-              <!-- END All Products Table -->
-
-              <!-- Pagination -->
-
-              <!-- END Pagination -->
             </div>
           </div>
-          <!-- END All Products -->
+          <!-- END Info -->
+
+          <!-- Meta Data -->
+
+          <!-- END Meta Data -->
+
+          <!-- Media -->
+
+          <!-- END Media -->
         </div>
         <!-- END Page Content -->
       </main>
@@ -558,23 +519,38 @@
         webpack is putting everything together at assets/_js/main/app.js
     -->
     <script src="assets/js/oneui.app.min.js"></script>
-    <!-- jQuery (required for DataTables plugin) -->
+
+    <!-- jQuery (required for Select2 + Bootstrap Maxlength plugin) -->
     <script src="assets/js/lib/jquery.min.js"></script>
 
     <!-- Page JS Plugins -->
-    <script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <script src="assets/js/plugins/select2/js/select2.full.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="assets/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
+    <script src="assets/js/plugins/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="assets/js/plugins/select2/js/select1.full.min.js"></script>
+    <script src="assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+    <script src="assets/js/plugins/dropzone/min/dropzone.min.js"></script>
 
-    <!-- Page JS Code -->
-    <script src="assets/js/pages/be_tables_datatables.min.js"></script>
+    <!-- Page JS Helpers (Select2 + Bootstrap Maxlength + CKEditor plugins) -->
+
+    <script>
+      One.helpersOnLoad([
+        "js-flatpickr",
+        "jq-datepicker",
+        "jq-maxlength",
+        "jq-select2",
+        "jq-select2",
+        "jq-masked-inputs",
+        "jq-rangeslider",
+        "jq-colorpicker",
+        "js-ckeditor",
+      ]);
+    </script>
   </body>
 </html>
