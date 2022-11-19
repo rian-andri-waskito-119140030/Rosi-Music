@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Paket;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,4 +24,9 @@ class Pesanan extends Model
         'catatan',
         'status',
     ];
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class, 'id_paket');
+    }
 }

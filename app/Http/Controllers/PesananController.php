@@ -7,7 +7,6 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Pesanan;
 use App\Models\Paket;
 use App\Http\Controllers\Controller;
-use App\Models\Barang_Dipaket;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,13 +16,19 @@ class PesananController extends Controller
     public function index()
     {
         //get posts
-        $paket = Pesanan::with('barang_dipaket')->get();
+        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
 
         //return collection of posts as a resource
-        return response()->json([
-            'message' => 'List daftar Paket',
-            'data'    => $paket,
-        ]);
+        // return view('admin.pesanan', ['data' => $pesanan]);
+    }
+
+    public function tampil()
+    {
+        //get posts
+        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->where('status', 'Menunggu Validasi')->get();
+
+        //return collection of posts as a resource
+        return view('admin.pesanan', ['data' => $pesanan]);
     }
 
     public function store(Request $request)
@@ -55,14 +60,20 @@ class PesananController extends Controller
             'no_hp'             => $request->no_hp,
             'alamat'            => $request->alamat,
             'catatan'           => $request->catatan,
-            'status'            => 'Menunggu DP/pembayaran',
+            'status'            => 'Menunggu Validasi',
         ]);
 
         //return response
-        return response()->json([
-            'message' => 'Paket berhasil ditambahkan',
-            'data'    => $barang_dipaket,
-        ]);
+        return redirect('/');
+    }
+
+    public function validasi_pesanan($id_pesanan)
+    {
+        //get posts
+        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
+
+        //return collection of posts as a resource
+        // return view('admin.pesanan', ['data' => $pesanan]);
     }
 
     public function show(Paket $paket)
@@ -123,6 +134,13 @@ class PesananController extends Controller
             'message' => 'Barang berhasil diubah',
             'data'    => $barang,
         ]);
+    }
+
+    public function checkout($id_pesanan)
+    {
+        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
+        
+        return view('pelanggan.checkout', ['data' => $pesanan]);
     }
     
     /**

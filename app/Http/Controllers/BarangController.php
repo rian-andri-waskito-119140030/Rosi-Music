@@ -7,6 +7,8 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Barang;
 use App\Models\Kondisi_Barang;
 use App\Http\Controllers\Controller;
+use App\Models\Jenis_Barang;
+use App\Models\Jenis_Paket;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,10 +21,14 @@ class BarangController extends Controller
         $barang = Barang::get();
 
         //return collection of posts as a resource
-        return response()->json([
-            'message' => 'List daftar barang',
-            'data'    => $barang,
-        ]);
+        return view('admin.barang.barang', ['data' => $barang]);
+    }
+
+    public function tambah()
+    {
+        $jenis_barang= Jenis_Barang::get();
+        //return collection of posts as a resource
+        return view('admin.barang.tambah_barang', ['data' => $jenis_barang]);
     }
 
     public function store(Request $request)
@@ -31,7 +37,7 @@ class BarangController extends Controller
         $validator = Validator::make($request->all(), [
             'gambar'         => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'nama_barang'    => 'required',
-            'id_jenis'       => 'required',
+            'id_jenis_barang'=> 'required',
             'kondisi'        => 'required',
         ]);
 
@@ -50,15 +56,20 @@ class BarangController extends Controller
             'id_barang'      => $id,
             'gambar'         => $gambar->getClientOriginalName(),
             'nama_barang'    => $request->nama_barang,
-            'id_jenis'       => $request->id_jenis,
+            'id_jenis_barang'=> $request->id_jenis_barang,
             'kondisi'        => $request->kondisi,
         ]);
 
-        $baik=count(Barang::where('kondisi', 'Baik')->get());
-        $rusak=count(Barang::where('kondisi', 'Rusak')->get());
-        $diperbaiki=count(Barang::where('kondisi', 'Diperbaiki')->get());
+        $baik=count(Barang::where('id_jenis_barang', $barang->id_jenis_barang)->where('kondisi', 'Baik')->get());
+        $rusak=count(Barang::where('id_jenis_barang', $barang->id_jenis_barang)->where('kondisi', 'Rusak')->get());
+        $diperbaiki=count(Barang::where('id_jenis_barang', $barang->id_jenis_barang)->where('kondisi', 'Diperbaiki')->get());
 
-        $kondisi=Kondisi_Barang::where('id_jenis', $barang->id_jenis)
+        Jenis_Barang::where('id_jenis_barang', $barang->id_jenis_barang)
+                ->update([
+                'jumlah' => $baik+$rusak+$diperbaiki
+            ]);
+
+        Kondisi_Barang::where('id_jenis_barang', $barang->id_jenis_barang)
                 ->update([
                 'baik'          => $baik,
                 'rusak'         => $rusak,
@@ -66,30 +77,32 @@ class BarangController extends Controller
             ]);
 
         //return response
-        return response()->json([
-            'message' => 'Barang berhasil ditambahkan',
-            'data'    => $barang,
-        ]);
+        return redirect('/admin/barang');
     }
 
-    public function show(Barang $barang)
+    public function edit($id_barang)
     {
+        $barang=Barang::where('id_barang', $id_barang)->get();
+        $jenis_barang=Jenis_Barang::get();
+        // dd($barang[0]);
         //return single post as a resource
-        return response()->json([
-            'message' => 'Barang berhasil ditemukan',
-            'data'    => $barang,
+        return view('admin.barang.edit_barang', [
+            'barang'      => $barang[0],
+            'jenis_barang' => $jenis_barang,
         ]);
     }
 
-    public function update(Request $request, Barang $barang)
+    public function update($id_barang, Request $request)
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'gambar'         => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gambar'         => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama_barang'    => 'required',
-            'id_jenis'       => 'required',
+            'id_jenis_barang'=> 'required',
             'kondisi'        => 'required',
         ]);
+
+        $barang=Barang::where('id_barang', $id_barang);
 
         //check if validation fails
         if ($validator->fails()) {
@@ -110,7 +123,7 @@ class BarangController extends Controller
             $barang->update([
                 'gambar'         => $gambar->getClientOriginalName(),
                 'nama_barang'    => $request->nama_barang,
-                'id_jenis'       => $request->id_jenis,
+                'id_jenis_barang'=> $request->id_jenis_barang,
                 'kondisi'        => $request->kondisi,
             ]);
 
@@ -119,16 +132,13 @@ class BarangController extends Controller
             //update post without image
             $barang->update([
                 'nama_barang'    => $request->nama_barang,
-                'id_jenis'       => $request->jenis_barang,
+                'id_jenis_barang'=> $request->id_jenis_barang,
                 'kondisi'        => $request->kondisi,
             ]);
         }
 
         //return response
-        return response()->json([
-            'message' => 'Barang berhasil diubah',
-            'data'    => $barang,
-        ]);
+        return redirect('/admin/barang');
     }
     
     /**

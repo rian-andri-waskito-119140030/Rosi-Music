@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Barang_Dipaket;
+use App\Models\Pesanan;
 use App\Models\Jenis_Paket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,5 +27,10 @@ class Paket extends Model
     public function jenis_paket()
     {
         return $this->belongsTo(Jenis_Paket::class, 'id_jenis_paket');
+    }
+
+    public function pesanan()
+    {
+        return $this->hasOne(Pesanan::class, 'id_paket');
     }
 }

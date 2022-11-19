@@ -9,6 +9,8 @@ use App\Http\Controllers\JenisPaketController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\JenisBarangController;
+use App\Http\Controllers\PesananController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,10 +36,34 @@ Route::get('/tentang-kami', function () {
 Route::get('/jenis-paket/{id_jenis_paket}', [PaketController::class, 'index'])->name('daftar-paket');
 Route::get('/paket/{id_paket}', [PaketController::class, 'show'])->name('deskripsi-paket');
 Route::get('/pesanan/{id_paket}', [PaketController::class, 'pesanan'])->name('deskripsi-paket');
+Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+Route::get('/checkout/{id_pesanan}', [PesananController::class, 'checkout']);
 
-Route::resource('/admin/paket/', PaketController::class);
+Route::get('/admin/pesanan', [PesananController::class, 'tampil'])->middleware('auth:admin');
+Route::post('/admin/validasi/{id_pesanan}', [PesananController::class, 'validasi_pesanan'])->middleware('auth:admin');
 
-Route::resource('/admin/barang/', BarangController::class);
+Route::get('/admin/jenis-paket/', [JenisPaketController::class, 'tampil'])->middleware('auth:admin');
+Route::get('/admin/jenis-paket/tambah', [JenisPaketController::class, 'tambah'])->middleware('auth:admin');
+Route::post('/admin/jenis-paket/tambah', [JenisPaketController::class, 'store'])->middleware('auth:admin');
+
+Route::get('/admin/paket/', [PaketController::class, 'paket'])->name('admin.paket')->middleware('auth:admin');
+Route::get('/admin/paket/tambah', [PaketController::class, 'tambah'])->name('admin.paket-tambah')->middleware('auth:admin');
+Route::post('/admin/paket/tambah', [PaketController::class, 'store'])->name('admin.paket-tambah-store')->middleware('auth:admin');
+Route::delete('/admin/paket/hapus/{id_paket}', [PaketController::class, 'destroy'])->name('admin.paket-hapus')->middleware('auth:admin');
+Route::get('/admin/paket/edit/{id_paket}', [PaketController::class, 'edit'])->name('admin.paket-edit')->middleware('auth:admin');
+Route::post('/admin/paket/edit/{id_paket}', [PaketController::class, 'update'])->name('admin.paket-edit-store')->middleware('auth:admin');
+Route::resource('/admin/tes/', PaketController::class);
+
+Route::get('/admin/jenis-barang/', [JenisBarangController::class, 'index'])->middleware('auth:admin');
+Route::get('/admin/jenis-barang/tambah', [JenisBarangController::class, 'tambah'])->middleware('auth:admin');
+Route::post('/admin/jenis-barang/tambah', [JenisBarangController::class, 'store'])->middleware('auth:admin');
+
+Route::get('/admin/barang/', [BarangController::class, 'index'])->middleware('auth:admin');
+Route::get('/admin/barang/tambah', [BarangController::class, 'tambah'])->middleware('auth:admin');
+Route::post('/admin/barang/tambah', [BarangController::class, 'store'])->middleware('auth:admin');
+Route::get('/admin/barang/edit/{id_barang}', [BarangController::class, 'edit'])->name('admin.barang-edit')->middleware('auth:admin');
+Route::post('/admin/barang/edit/{id_barang}', [BarangController::class, 'update'])->name('admin.barang-edit-store')->middleware('auth:admin');
+
 Route::resource('/jenis_barang/', JenisBarangController::class);
 
 
@@ -51,13 +77,10 @@ Route::resource('/jenis_barang/', JenisBarangController::class);
 Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 
-Route::get('admin/login', [AdminAuthController::class, 'index'])->name('login')->middleware('guest');
-Route::post('admin/login', [AdminAuthController::class, 'authenticate']);
-Route::post('admin/logout', [AdminAuthController::class, 'logout']);
+Route::get('/admin/login', [AdminAuthController::class, 'index'])->name('admin.login')->middleware('guest');
+Route::post('admin/login', [AdminAuthController::class, 'authenticate'])->name('admin.login-store');
+Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::get('admin/register', [AdminAuthController::class, 'register'])->middleware('guest');
-Route::post('admin/register', [AdminAuthController::class, 'post_register']);
-
-Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->middleware('auth:admin');
+Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth:admin');
 
 require __DIR__.'/auth.php';

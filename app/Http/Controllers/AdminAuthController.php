@@ -13,10 +13,7 @@ class AdminAuthController extends Controller
 {
     public function index()
     {
-        return view('login.index', [
-            'title' => 'Login',
-            'active' => 'login'
-        ]);
+        return view('admin.login');
     }
 
     public function authenticate(Request $request)
@@ -42,7 +39,7 @@ class AdminAuthController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect('/dashboard');
+        return redirect('/admin/login');
     }
 
     public function register()
@@ -56,22 +53,17 @@ class AdminAuthController extends Controller
     public function post_register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|max:255',
+            'nama'      => 'required|max:255',
             'username'  => ['required', 'min:3', 'max:255', 'unique:admin'],
             'password'  => 'required|min:5|max:255',
-            'avatar'    => 'required',
         ]);
-
-        //  dd($request->all());
-         $avatar = $request->avatar;
-        //  $avatar->storeAs('public/avatar_admin', $avatar->getClientOriginalName());
 
         //create Meja
         Admin::create([
-            'name'      => $request->name,
+            'nama'      => $request->name,
             'username'  => $request->username,
             'password'  => Hash::make($request->password),
-            'avatar'    => $avatar,
+            'avatar'    => 'default.png',
         ]);
 
         // $request->session()->flash('success', 'Registration successfull! Please login');
@@ -81,6 +73,6 @@ class AdminAuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.index');
+        return view('admin.dashboard');
     }
 }

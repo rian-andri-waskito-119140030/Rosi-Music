@@ -72,88 +72,6 @@ https://templatemo.com/tm-570-chain-app-dev
               border-radius: 10px;
             ">
             <div class="card-body">
-              <h5 class="card-title mb-5">Isi Data</h5>
-              <form>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="">Nama</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Nama Lengkap"
-                      value="{{Auth::guard('pelanggan')->user()->nama}}"
-                      required />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="">Nama Paket</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Nama Paket"
-                      value="{{ $data->nama_paket }}"
-                      required />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="">Tanggal Mulai</label>
-                    <input
-                      id="tgl1"
-                      type="date"
-                      class="form-control"
-                      placeholder="Last name"
-                      required />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="">Tanggal Selesai</label>
-                    <input
-                      id="tgl2"
-                      type="date"
-                      class="form-control"
-                      placeholder="Tanggal"
-                      required />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="">No Telepon</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="No Telepon"
-                      required />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="">Alamat</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Alamat"
-                      required />
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label for="">Catatan</label>
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                      required></textarea>
-                  </div>
-                  <div class="confirm-pesan mb-2">
-                    <button class="btn btn-success btn" type="submit">
-                      Simpan
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        {{-- <?php dd($data); ?> --}}
-        <div class="col-sm-6">
-          <div
-            class="card"
-            style="
-              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-              border-radius: 10px;
-            ">
-            <div class="card-body">
               <h5 class="card-title mb-5">Ringkasan Pemesanan</h5>
               <div class="row deskripsi-paket mb-4">
                 <div class="col-md-6">
@@ -186,17 +104,177 @@ https://templatemo.com/tm-570-chain-app-dev
                     </div>
                   </div>
                 </div>
-                <div class="tombol-pesan">
-                  <a href="checkout.html"
-                    ><button class="btn btn-success btn" type="submit">
-                      Pesan
-                    </button></a
-                  >
-                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="col-sm-6">
+          <div
+            class="card"
+            style="
+              box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+            ">
+            <div class="card-body">
+              <h5 class="card-title mb-5">Isi Data</h5>
+              <form action="{{ route('pesanan.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="">Nama</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nama Lengkap"
+                      value="{{Auth::guard('pelanggan')->user()->nama}}"
+                      required />
+                    <input type="text" class="form-control"  name="id_pelanggan" value="{{Auth::guard('pelanggan')->user()->id}}" style='display:none'>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Nama Paket</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nama Paket"
+                      value="{{ $data->nama_paket }}"
+                      required />
+                      <input type="text" class="form-control"  name="id_paket" value="{{ $data->id_paket }}" style='display:none'>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="">Tanggal Mulai</label>
+                    <input
+                      id="tgl1"
+                      name="tanggal_booking"
+                      type="date"
+                      class="form-control"
+                      placeholder="Last name"
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Tanggal Selesai</label>
+                    <input
+                      id="tgl2"
+                      name="tanggal_selesai"
+                      type="date"
+                      class="form-control"
+                      placeholder="Tanggal"
+                      required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="">No Hp.</label>
+                    <input
+                      type="text"
+                      name="no_hp"
+                      class="form-control"
+                      placeholder="No Hp."
+                      required />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Alamat</label>
+                    <input
+                      type="text"
+                      name="alamat"
+                      class="form-control"
+                      placeholder="Alamat"
+                      required />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label for="">Catatan</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      name="catatan"
+                      rows="3"
+                      required></textarea>
+                  </div>
+                  {{-- <div class="confirm-pesan mb-2">
+                    <button class="btn btn-success btn" type="submit">
+                      Pesan
+                    </button>
+                  </div> --}}
+                  <div class="tombol-pesan">
+                    <button
+                      class="btn btn-success btn"
+                      type="submit"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal">
+                      Pesan
+                    </button>
+                    {{-- <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <!-- <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Modal title
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div> -->
+                          <div class="modal-body text-center">
+                            <img
+                              src="assets/images/image-12.png"
+                              alt=""
+                              style="margin-bottom: 20px" />
+                            <p
+                              style="
+                                font-family: 'Roboto';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;
+                                line-height: 23px;
+                                text-align: center;
+                                letter-spacing: -0.006em;
+                                color: #000000;
+                                margin-bottom: 20px;
+                              ">
+                              Silahkan Menunggu Status Pemesanan Di Menu Profile
+                            </p>
+                            <a href="/"
+                              ><button
+                                style="
+                                  width: 250px;
+                                  height: 52px;
+                                  background: linear-gradient(
+                                    267.4deg,
+                                    #5676ed 6.18%,
+                                    #30d3fc 100%
+                                  );
+                                  border-radius: 10px;
+                                  border: none;
+                                  color: white;
+                                ">
+                                Kembali Ke Beranda
+                              </button></a
+                            >
+                          </div>
+                          <!-- <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div> -->
+                        </div>
+                      </div> --}}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{-- <?php dd($data); ?> --}}
+       
       </div>
     </div>
 

@@ -109,7 +109,7 @@ https://templatemo.com/tm-570-chain-app-dev
                   class="img-fluid"
                   data-wow-duration="1s"
                   data-wow-delay="0.5s">
-                  <img src={{ URL::asset("assets/images/image-5.png")}} alt="" />
+                  <img src='{{ URL::asset("storage/paket")}}/{{ $data->gambar }}' alt="" />
                 </div>
               </div>
             </div>

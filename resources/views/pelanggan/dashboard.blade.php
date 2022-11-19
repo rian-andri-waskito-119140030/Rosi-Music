@@ -32,7 +32,13 @@ https://templatemo.com/tm-570-chain-app-dev
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous" />
-    <link rel="stylesheet" href={{ URL::asset('assets/css/templatemo-chain-app-dev.css')}} />
+    
+    
+    @auth
+      <link rel="stylesheet" href="assets/css/index-login.css" />
+    @else
+      <link rel="stylesheet" href={{ URL::asset('assets/css/templatemo-chain-app-dev.css')}} />
+    @endauth
     <link rel="stylesheet" href={{ URL::asset('assets/css/animated.css')}} />
     <link rel="stylesheet" href={{ URL::asset('assets/css/owl.css')}} />
   </head>
@@ -62,7 +68,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <nav class="main-nav">
               <!-- ***** Logo Start ***** -->
               <a
-                href="index.html"
+                href="/"
                 class="logo"
                 style="
                   font-size: 32px;
@@ -90,6 +96,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 </li> -->
                 @auth
                 <li>
+                  <link rel="stylesheet" href={{ URL::asset("assets/css/index-login.css")}} />
                   <div class="">
                     <a id="modal_trigger" href="#modal"
                      ><i class=""></i
@@ -100,78 +107,6 @@ https://templatemo.com/tm-570-chain-app-dev
                     </div>
                 </li>
             
-                <div id="modal" class="popupContainer" style="display: none; float: left">
-                  <div class="popupHeader">
-                    <span class="header_title" style="color: white">Profile</span>
-                    <span class="modal_close"><i class="fa fa-times"></i></span>
-                  </div>
-                  <section class="popupBody">
-                    <!-- User Profile -->
-                    <div class="user_profile">
-                      <img
-                        src="{{ auth()->guard('pelanggan')->user()->avatar }}"
-                        class="mx-auto"
-                        style="
-                          width: 112px;
-                          height: 112px;
-                          border-radius: 50%;
-                          margin-left: 100px;
-                          margin-bottom: 10px;
-                        " />
-                      <h5>{{ auth()->guard('pelanggan')->user()->nama }}</h5>
-                      <img
-                        src="assets/images/heading-line-dec.png"
-                        alt=""
-                        style="width: 33px; height: 4px" />
-                    </div>
-            
-                    <div class="detail_profile">
-                      <!-- Detail Profile -->
-                      <!-- dropdown animated -->
-                      <nav>
-                        <label for="btn" class="button">
-                          Profile
-                          <span class="fas fa-caret-right"></span>
-                        </label>
-                        <input type="checkbox" id="btn" />
-                        <ul class="menu">
-                          <li>Nama : {{ auth()->guard('pelanggan')->user()->nama }}</li>
-                          <li>Email: {{ auth()->guard('pelanggan')->user()->email }}</li>
-                        </ul>
-                      </nav>
-                      <nav>
-                        <label for="btn-1" class="button">
-                          Status Pemesanan
-                          <span class="fas fa-caret-right"></span>
-                        </label>
-                        <input type="checkbox" id="btn-1" />
-                        <ul class="menu">
-                          <li>Status Pesanan : Menunggu Validasi</li>
-                        </ul>
-                      </nav>
-                      <li>
-                        <form action="/logout" method="post">
-                              @csrf
-                            <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                        </form>
-                      </li>
-                    </div>
-                    <!-- Social Login -->
-                    <!-- <div class="social_login">
-                      <div class="">
-                        <a href="#" class="social_box google">
-                          <span class="icon"><i class="fab fa-google-plus"></i></span>
-                          <span class="icon_title">Connect with Google</span>
-                        </a>
-                      </div>
-                    </div> -->
-            
-                    <!-- Username & Password Login form -->
-            
-                    <!-- Register Form -->
-                  </section>
-                </div>
-            
                   @else
                   <li>
                     <div class="gradient-button">
@@ -181,7 +116,7 @@ https://templatemo.com/tm-570-chain-app-dev
                     </div>
                   </li>
                   
-                  <div id="modal" class="popupContainer" style="display: none">
+                  {{-- <div id="modal" class="popupContainer" style="display: none">
                     <div class="popupHeader">
                       <span class="header_title">Login</span>
                       <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -196,7 +131,7 @@ https://templatemo.com/tm-570-chain-app-dev
                             <span class="icon_title">Connect with Google</span>
                           </a>
                         </div>
-                      </div>
+                      </div> --}}
                 @endauth
               </ul>
               <a class="menu-trigger">
@@ -208,17 +143,170 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
       </div>
     </header>
-    <!-- ***** Header Area End ***** -->
+    @auth
+    <div id="modal" class="popupContainer" style="display: none; float: left">
+      <div class="popupHeader">
+        <span class="header_title" style="color: white">Profile</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+      </div>
+      <section class="popupBody">
+        <!-- User Profile -->
+        <div class="user_profile">
+          <img
+            src="{{ auth()->guard('pelanggan')->user()->avatar }}"
+            class="mx-auto"
+            style="
+              width: 112px;
+              height: 112px;
+              border-radius: 50%;
+              margin-left: 100px;
+              margin-bottom: 10px;
+            " />
+          <h5>{{ auth()->guard('pelanggan')->user()->nama }}</h5>
+          <img
+            src="assets/images/heading-line-dec.png"
+            alt=""
+            style="width: 33px; height: 4px" />
+        </div>
 
-   
-    
+        <div class="detail_profile">
+          <!-- Detail Profile -->
+          <!-- dropdown animated -->
+          <nav>
+            <label for="btn" class="button">
+              Profile
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn" />
+            <ul class="menu">
+              <li>Nama : {{ auth()->guard('pelanggan')->user()->nama }}</li>
+              <li>Email: {{ auth()->guard('pelanggan')->user()->email }}</li>
+            </ul>
+          </nav>
+          <nav>
+            <label for="btn-1" class="button">
+              Status Pemesanan
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn-1" />
+            <ul class="menu">
+              <li>Status Pesanan : Menunggu Validasi</li>
+              <div style="margin-top: 5px !important">
+                <a
+                  href="checkout.html"
+                  style="
+                    text-decoration: none;
+                    border: solid 1px #000000;
+                    color: #fffdfd;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    background-color: rgb(54, 212, 54);
+                    box-shadow: dimgray;
+                    width: 20%;
+                    height: 30%;
+                  ">
+                  Upload Bukti Pembayaran
+                </a>
+              </div>
+
+              <br />
+              Informasi Pesanan :
+              <p
+                style="
+                  margin-top: 10px;
+                  font-family: 'Roboto';
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 14px;
+                  line-height: 19px;
+                  /* identical to box height */
+                  letter-spacing: -0.006em;
+                  color: #000000;
+                ">
+                Paket 1 Non-MC :
+              </p>
+              <ul style="display: block; list-style: decimal-leading-zero">
+                <li>1 Paket sound system</li>
+                <li>1 Paket sound system</li>
+                <li>1 Paket sound system</li>
+                <li>1 Paket sound system</li>
+              </ul>
+            </ul>
+          </nav>
+          <nav>
+            <form action="/logout" method="post">
+              @csrf
+              <button
+                type="submit"
+                class="btn mt-3"
+                style="
+                  background-color: white;
+                  width: 108%;
+                  border-bottom: 1px solid #e8e8e8;
+                  border-top: 1px solid #e8e8e8;
+                ">
+                <p
+                  style="
+                    float: left;
+                    margin-left: -5%;
+                    font-family: 'Source Serif Pro';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 23px;
+                    letter-spacing: -0.006em;
+                    color: #000000;
+                  ">
+                  Log Out
+                </p>
+                <img
+                  src="assets/images/image-13.png"
+                  style="width: 20px; height: 20px; float: right" />
+              </button>
+            </form>
+          </nav>
+        </div>
+        <!-- Social Login -->
+        <!-- <div class="social_login">
+          <div class="">
+            <a href="#" class="social_box google">
+              <span class="icon"><i class="fab fa-google-plus"></i></span>
+              <span class="icon_title">Connect with Google</span>
+            </a>
+          </div>
+        </div> -->
 
         <!-- Username & Password Login form -->
 
         <!-- Register Form -->
-       
       </section>
     </div>
+    @else
+    <div id="modal" class="popupContainer" style="display: none">
+      <div class="popupHeader">
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+        <span class="header_title">Login</span>
+      </div>
+
+      <section class="popupBody">
+        <!-- Social Login -->
+        <div class="social_login">
+          <div class="">
+            <a href="/auth/google" class="social_box google">
+              <span class="icon"><img src="assets/images/image-6.png" /></span>
+              <span class="icon_title">Login menggunakan Google</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Username & Password Login form -->
+
+        <!-- Register Form -->
+      </section>
+    </div>
+    @endauth
+    
+    
     {{-- <?php print(Auth::guard('pelanggan'))->user(); ?> --}}
     <div
       class="main-banner wow fadeIn"

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('jenis_barang', function (Blueprint $table) {
             $table->string('id_jenis_barang')->primary();
             $table->string('jenis_barang');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

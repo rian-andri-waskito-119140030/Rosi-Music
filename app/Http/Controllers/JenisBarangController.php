@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Jenis_Barang;
+use App\Models\Kondisi_Barang;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -15,13 +16,15 @@ class JenisBarangController extends Controller
     public function index()
     {
         //get posts
-        $jenis_barang = Jenis_Barang::get();
+        $jenis_barang = Jenis_Barang::join('kondisi_barang', 'jenis_barang.id_jenis_barang', '=', 'kondisi_barang.id_jenis_barang')->get();
 
         //return collection of posts as a resource
-        return response()->json([
-            'message' => 'List daftar jenis barang',
-            'data'    => $jenis_barang,
-        ]);
+        return view('admin.jenis_barang.jenis_barang', ['data' => $jenis_barang]);
+    }
+
+    public function tambah()
+    {
+        return view('admin.jenis_barang.tambah_jenis_barang');
     }
 
     public function store(Request $request)
@@ -41,13 +44,18 @@ class JenisBarangController extends Controller
         $barang = Jenis_Barang::create([
             'id_jenis_barang' => $id,
             'jenis_barang'    => $request->jenis_barang,
+            'jumlah'          => 0,
+        ]);
+
+        Kondisi_Barang::create([
+            'id_jenis_barang'   => $barang->id_jenis_barang,
+            'baik'              => 0,
+            'rusak'             => 0,
+            'diperbaiki'        => 0,
         ]);
 
         //return response
-        return response()->json([
-            'message' => 'Jenis Barang berhasil ditambahkan',
-            'data'    => $barang,
-        ]);
+        return redirect('/admin/jenis-barang');
     }
 
     public function show(Jenis_Barang $jenis_barang)

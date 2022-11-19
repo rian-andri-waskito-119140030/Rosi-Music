@@ -14,7 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'http://rosi2.test/',
-        'http://rosi2.test/jenis_barang/',
+        'http://127.0.0.1:8000/jenis_barang',
         'http://rosi2.test/admin/barang/',
         'http://rosi2.test/admin/paket/',
         'http://rosi2.test/admin/jenis/',

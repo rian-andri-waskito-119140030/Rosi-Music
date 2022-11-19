@@ -21,6 +21,23 @@ class JenisPaketController extends Controller
         return view('pelanggan.dashboard', ['data' => $jenis_paket]);
     }
 
+    public function tampil()
+    {
+        //get posts
+        $jenis_paket = Jenis_Paket::get();
+
+        //return collection of posts as a resource
+        return view('admin.jenis_paket.jenis_paket', ['data' => $jenis_paket]);
+    }
+
+    public function tambah()
+    {
+
+        //return collection of posts as a resource
+        return view('admin.jenis_paket.tambah_jenis_paket');
+    }
+
+
     public function store(Request $request)
     {
         //define validation rules
