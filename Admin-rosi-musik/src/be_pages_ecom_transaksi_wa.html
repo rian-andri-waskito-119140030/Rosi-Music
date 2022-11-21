@@ -476,7 +476,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Hutang</h3>
+              <h3 class="block-title">Data Transaksi Via WA</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -494,15 +494,16 @@
                 <div class="block-content block-content-full">
                   <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
                   <table
+                    id="example"
                     class="table table-bordered table-vcenter js-dataTable-buttons">
                     <thead>
                       <tr>
                         <th class="text-center">No</th>
-
+                        <th class="text-center">ID Transaksi</th>
                         <th>Nama Pelanggan</th>
-                        <th class="d-none d-sm-table-cell">Nama Paket</th>
-
-                        <th class="d-none d-sm-table-cell">Hutang</th>
+                        <th class="d-none d-sm-table-cell">Tanggal</th>
+                        <th class="d-none d-sm-table-cell">Total Bayar</th>
+                        <th class="d-none d-sm-table-cell">Status</th>
                         <th class="d-none d-sm-table-cell">Action</th>
                         <!-- <th>Action</th> -->
                       </tr>
@@ -510,13 +511,16 @@
                     <tbody>
                       <tr>
                         <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">Nurhaldi Aldo</td>
-                        <td class="d-none d-sm-table-cell fs-sm">Paket 1 MC</td>
-
+                        <td class="fw-semibold fs-sm">TR-001</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          Nurhaldi Aldo
+                        </td>
+                        <td class="d-none d-sm-table-cell fs-sm">01/11/2021</td>
+                        <td class="d-none d-sm-table-cell fs-sm">120.000</td>
                         <td class="d-none d-sm-table-cell">
                           <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >500.000</span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Tervalidasi</span
                           >
                         </td>
                         <td class="text-center fs-sm">
@@ -539,6 +543,7 @@
                             <i class="fa fa-fw fa-times"></i>
                           </a> -->
                         </td>
+
                         <!-- <td class="text-center fs-sm">
                           <a
                             class="btn btn-sm btn-alt-secondary"

@@ -213,16 +213,43 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   href="#">
-                  <i class="nav-main-link-icon fa fa-dollar"></i>
-                  <span class="nav-main-link-name">Keuangan</span>
+                  <i class="nav-main-link-icon fa fa-fw fa-money-check"></i>
+                  <span class="nav-main-link-name">Transaksi</span>
                 </a>
                 <ul class="nav-main-submenu">
                   <li class="nav-main-item">
                     <a
                       class="nav-main-link"
+                      href="be_pages_ecom_transaksi_keluar.html">
+                      <span class="nav-main-link-name">Transaksi Keluar</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_transaksi.html">
+                      <span class="nav-main-link-name">Transaksi Masuk</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
+                  <i class="nav-main-link-icon fa fa-dollar"></i>
+                  <span class="nav-main-link-name">Keuangan</span>
+                </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <!-- <a
+                      class="nav-main-link"
                       href="be_pages_ecom_transaksi.html">
                       <span class="nav-main-link-name">Transaksi</span>
-                    </a>
+                    </a> -->
                   </li>
                   <li class="nav-main-item">
                     <a class="nav-main-link" href="be_pages_ecom_hutang.html">
@@ -496,25 +523,28 @@
                         </td>
                         <td class="text-center fs-sm">
                           <a
-                            class="btn btn-sm btn-alt-secondary"
+                            class="btn btn-sm btn-alt-success"
                             href="be_pages_ecom_product_edit.html"
                             data-bs-toggle="tooltip"
-                            title="Edit">
-                            <i class="fa fa-fw fa-pencil-alt"></i>
+                            title="Validasi">
+                            <i class="fa fa-fw fa-check-circle"></i>
                           </a>
+                          <button
+                            id="btn-detail"
+                            type="button"
+                            class="btn btn-sm btn-alt-danger"
+                            data-toggle="modal"
+                            data-target="#modal-block-normal"
+                            data-bs-toggle="tooltip"
+                            title="Pesanan Ditolak">
+                            <i class="fa fa-fw fa-times-circle"></i>
+                          </button>
                           <a
                             class="btn btn-sm btn-alt-secondary"
                             href="be_pages_ecom_product_view.html"
                             data-bs-toggle="tooltip"
                             title="View">
                             <i class="fa fa-fw fa-eye"></i>
-                          </a>
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="javascript:void(0)"
-                            data-bs-toggle="tooltip"
-                            title="Delete">
-                            <i class="fa fa-fw fa-times"></i>
                           </a>
                         </td>
                       </tr>
@@ -900,6 +930,60 @@
                       </tr>
                     </tbody>
                   </table>
+                  <div
+                    class="modal fade"
+                    id="modal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-hidden="true">
+                    <div
+                      class="modal-dialog modal-dialog-popout"
+                      role="document">
+                      <div class="modal-content">
+                        <div class="block block-themed block-transparent mb-0">
+                          <div class="block-header bg-primary-dark">
+                            <h3 class="block-title">Edit Transaksi</h3>
+                            <button
+                              type="button"
+                              class="btn btn-alt-danger"
+                              data-bs-dismiss="modal"
+                              aria-label="Close">
+                              <i class="fa fa-fw fa-times"></i>
+                            </button>
+                          </div>
+                          <form action="">
+                            <div class="block-content fs-sm mb-3">
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <div class="form-group">
+                                    <label for="example-text-input"
+                                      >Catatan Penolakan</label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id="one-ecom-product-description-short"
+                                      name="one-ecom-product-description-short"
+                                      rows="4"
+                                      placeholder="Masukkan Catatan Penolakan"
+                                      required></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="block-content block-content-full text-end border-top">
+                              <button
+                                type="submit"
+                                class="btn btn-alt-primary"
+                                data-bs-dismiss="modal">
+                                <i class="fa fa-check me-1"></i>Save
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- END Dynamic Table with Export Buttons -->
@@ -970,5 +1054,13 @@
 
     <!-- Page JS Code -->
     <script src="assets/js/pages/be_tables_datatables.min.js"></script>
+    <script>
+      //modal
+      $(document).ready(function () {
+        $(".btn").on("click", function () {
+          $("#modal").modal("show");
+        });
+      });
+    </script>
   </body>
 </html>

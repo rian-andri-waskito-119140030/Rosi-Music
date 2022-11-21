@@ -213,16 +213,43 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   href="#">
-                  <i class="nav-main-link-icon fa fa-dollar"></i>
-                  <span class="nav-main-link-name">Keuangan</span>
+                  <i class="nav-main-link-icon fa fa-fw fa-money-check"></i>
+                  <span class="nav-main-link-name">Transaksi</span>
                 </a>
                 <ul class="nav-main-submenu">
                   <li class="nav-main-item">
                     <a
                       class="nav-main-link"
+                      href="be_pages_ecom_transaksi_keluar.html">
+                      <span class="nav-main-link-name">Transaksi Keluar</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a
+                      class="nav-main-link"
+                      href="be_pages_ecom_transaksi.html">
+                      <span class="nav-main-link-name">Transaksi Masuk</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link nav-main-link-submenu"
+                  data-toggle="submenu"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  href="#">
+                  <i class="nav-main-link-icon fa fa-dollar"></i>
+                  <span class="nav-main-link-name">Keuangan</span>
+                </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <!-- <a
+                      class="nav-main-link"
                       href="be_pages_ecom_transaksi.html">
                       <span class="nav-main-link-name">Transaksi</span>
-                    </a>
+                    </a> -->
                   </li>
                   <li class="nav-main-item">
                     <a class="nav-main-link" href="be_pages_ecom_hutang.html">
@@ -449,7 +476,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Transaksi</h3>
+              <h3 class="block-title">Data Transaksi Via Sistem</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -503,6 +530,7 @@
                             class="btn btn-sm btn-alt-primary"
                             data-toggle="modal"
                             data-target="#modal-block-normal"
+                            data-bs-toggle="tooltip"
                             title="Bayar">
                             <i class="fa fa-fw fa-money-bill-alt"></i>
                           </button>
