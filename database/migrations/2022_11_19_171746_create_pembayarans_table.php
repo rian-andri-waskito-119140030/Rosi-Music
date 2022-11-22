@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
+        Schema::create('pembayaran', function (Blueprint $table) {
+            $table->string('id_pembayaran')->primary();
+            $table->string('id_transaksi');
+            $table->integer('uang_bayar');
+            $table->datetime('waktu_bayar');
             $table->timestamps();
+
+            $table->foreign('id_transaksi')->references('id_transaksi')->on('transaksi');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembayarans');
+        Schema::dropIfExists('pembayaran');
     }
 };

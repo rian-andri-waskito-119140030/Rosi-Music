@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('id_pesanan');
             $table->integer('total_bayar');
             $table->dateTime('waktu_transaksi');
-            $table->string('status');
+            $table->string('status_transaksi');
             $table->timestamps();
 
             $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');

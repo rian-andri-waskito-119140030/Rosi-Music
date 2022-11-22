@@ -144,6 +144,7 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </header>
     @auth
+    {{-- <?php dd($profil); ?> --}}
     <div id="modal" class="popupContainer" style="display: none; float: left">
       <div class="popupHeader">
         <span class="header_title" style="color: white">Profile</span>
@@ -183,6 +184,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li>Email: {{ auth()->guard('pelanggan')->user()->email }}</li>
             </ul>
           </nav>
+          @isset($profil)
           <nav>
             <label for="btn-1" class="button">
               Status Pemesanan
@@ -190,23 +192,26 @@ https://templatemo.com/tm-570-chain-app-dev
             </label>
             <input type="checkbox" id="btn-1" />
             <ul class="menu">
-              <li>Status Pesanan : Menunggu Validasi</li>
+              <li>Status Pesanan : <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($profil->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($profil->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($profil->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $profil->status }}</span></li>
               <div style="margin-top: 5px !important">
+                @if ($profil->status== "Tervalidasi")
                 <a
-                  href="checkout.html"
-                  style="
-                    text-decoration: none;
-                    border: solid 1px #000000;
-                    color: #fffdfd;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    background-color: rgb(54, 212, 54);
-                    box-shadow: dimgray;
-                    width: 20%;
-                    height: 30%;
-                  ">
-                  Upload Bukti Pembayaran
-                </a>
+                href="checkout.html"
+                style="
+                  text-decoration: none;
+                  border: solid 1px #000000;
+                  color: #fffdfd;
+                  padding: 5px 10px;
+                  border-radius: 5px;
+                  background-color: rgb(54, 212, 54);
+                  box-shadow: dimgray;
+                  width: 20%;
+                  height: 30%;
+                ">
+                Upload Bukti Pembayaran
+              </a>
+                @endif
+                
               </div>
 
               <br />
@@ -223,16 +228,14 @@ https://templatemo.com/tm-570-chain-app-dev
                   letter-spacing: -0.006em;
                   color: #000000;
                 ">
-                Paket 1 Non-MC :
+                {{ $profil->paket->nama_paket }} :
               </p>
               <ul style="display: block; list-style: decimal-leading-zero">
-                <li>1 Paket sound system</li>
-                <li>1 Paket sound system</li>
-                <li>1 Paket sound system</li>
-                <li>1 Paket sound system</li>
+                <?= $profil->paket->deskripsi_panjang; ?>
               </ul>
             </ul>
           </nav>
+          @endisset
           <nav>
             <form action="/logout" method="post">
               @csrf

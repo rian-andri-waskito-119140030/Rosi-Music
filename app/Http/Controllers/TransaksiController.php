@@ -5,30 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Pesanan;
+use App\Models\PesananWA;
+use App\Models\Transaksi;
 use App\Models\Paket;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 
-class PesananController extends Controller
+class TransaksiController extends Controller
 {
     public function index()
     {
         //get posts
-        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
+        $transaksi = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                    ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                    // ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
+                    // ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
+                    // ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+                    ->get();
 
         //return collection of posts as a resource
-        // return view('admin.pesanan', ['data' => $pesanan]);
+        return view('admin.transaksi.transaksi', ['data' => $transaksi]);
     }
 
-    public function tampil()
+    public function tampil_transaksi_sistem()
     {
         //get posts
-        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->where('status', 'Menunggu Validasi')->get();
+        $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                            ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                            ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
+                            ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+                            ->get();
 
         //return collection of posts as a resource
-        return view('admin.pesanan', ['data' => $pesanan]);
+        return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
     }
 
     public function store(Request $request)
@@ -65,15 +76,6 @@ class PesananController extends Controller
 
         //return response
         return redirect('/');
-    }
-
-    public function validasi_pesanan($id_pesanan)
-    {
-        //get posts
-        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
-
-        //return collection of posts as a resource
-        // return view('admin.pesanan', ['data' => $pesanan]);
     }
 
     public function show(Paket $paket)
@@ -134,13 +136,6 @@ class PesananController extends Controller
             'message' => 'Barang berhasil diubah',
             'data'    => $barang,
         ]);
-    }
-
-    public function checkout($id_pesanan)
-    {
-        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
-        
-        return view('pelanggan.checkout', ['data' => $pesanan]);
     }
     
     /**

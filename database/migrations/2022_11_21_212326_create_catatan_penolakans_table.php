@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pesanan', function (Blueprint $table) {
-            $table->string('id_pesanan')->primary();
-            $table->string('id_paket');
-            $table->date('tanggal_booking');
-            $table->date('tanggal_selesai');
-            $table->string('no_hp');
-            $table->string('alamat');
+        Schema::create('catatan_penolakan', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_pesanan');
+            $table->string('catatan_penolakan');
             $table->timestamps();
 
-            $table->foreign('id_paket')->references('id_paket')->on('paket');
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pesanan');
+        Schema::dropIfExists('catatan_penolakan');
     }
 };

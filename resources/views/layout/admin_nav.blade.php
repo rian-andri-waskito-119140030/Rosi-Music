@@ -67,7 +67,7 @@
             </a>
             <ul class="nav-main-submenu">
               <li class="nav-main-item">
-               <a class="nav-main-link" href="/admin/pesanan">
+               <a class="nav-main-link" href="/admin/pesanan-sistem">
                   <span class="nav-main-link-name"
                     >Pesanan Via Sistem</span
                   >
@@ -76,10 +76,73 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="be_pages_ecom_products_wa.html">
+                  href="/admin/pesanan-wa">
                   <span class="nav-main-link-name"
                     >Pesanan Via Whatsapp</span
                   >
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-main-item">
+            <a
+              class="nav-main-link nav-main-link-submenu"
+              data-toggle="submenu"
+              aria-haspopup="true"
+              aria-expanded="false"
+              href="#">
+              <i class="nav-main-link-icon fa fa-fw fa-money-check"></i>
+              <span class="nav-main-link-name">Transaksi</span>
+            </a>
+            <ul class="nav-main-submenu">
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link"
+                  href="/admin/transaksi-sistem">
+                  <span class="nav-main-link-name"
+                    >Transaksi Masuk Via Sistem</span
+                  >
+                </a>
+              </li>
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link"
+                  href="/admin/transaksi-wa">
+                  <span class="nav-main-link-name"
+                    >Transaksi Masuk Via WA</span
+                  >
+                </a>
+              </li>
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link"
+                  href="be_pages_ecom_transaksi_keluar.html">
+                  <span class="nav-main-link-name">Transaksi Keluar</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-main-item">
+            <a
+              class="nav-main-link nav-main-link-submenu"
+              data-toggle="submenu"
+              aria-haspopup="true"
+              aria-expanded="false"
+              href="#">
+              <i class="nav-main-link-icon fa fa-fw fa-money-check"></i>
+              <span class="nav-main-link-name">Hutang</span>
+            </a>
+            <ul class="nav-main-submenu">
+              <li class="nav-main-item">
+                <a class="nav-main-link" href="/admin/hutang-sistem">
+                  <span class="nav-main-link-name">Hutang Transaksi Sistem</span>
+                </a>
+              </li>
+              <li class="nav-main-item">
+                <a
+                  class="nav-main-link"
+                  href="be_pages_ecom_transaksi_keluar.html">
+                  <span class="nav-main-link-name">Hutang Transaksi WA</span>
                 </a>
               </li>
             </ul>
@@ -94,18 +157,6 @@
               <span class="nav-main-link-name">Keuangan</span>
             </a>
             <ul class="nav-main-submenu">
-              <li class="nav-main-item">
-                <a
-                  class="nav-main-link"
-                  href="be_pages_ecom_transaksi.html">
-                  <span class="nav-main-link-name">Transaksi</span>
-                </a>
-              </li>
-              <li class="nav-main-item">
-                <a class="nav-main-link" href="be_pages_ecom_hutang.html">
-                  <span class="nav-main-link-name">Hutang</span>
-                </a>
-              </li>
               <li class="nav-main-item">
                 <a class="nav-main-link" href="be_pages_ecom_reports.html">
                   <span class="nav-main-link-name">Laporan Keuangan</span>

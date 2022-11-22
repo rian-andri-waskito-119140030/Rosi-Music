@@ -31,6 +31,6 @@ class Paket extends Model
 
     public function pesanan()
     {
-        return $this->hasOne(Pesanan::class, 'id_paket');
+        return $this->hasMany(Pesanan::class, 'id_paket');
     }
 }

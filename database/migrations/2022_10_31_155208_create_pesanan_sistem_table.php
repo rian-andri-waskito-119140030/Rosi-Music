@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pesanan', function (Blueprint $table) {
-            $table->string('id_pesanan')->primary();
-            $table->string('id_paket');
-            $table->date('tanggal_booking');
-            $table->date('tanggal_selesai');
-            $table->string('no_hp');
-            $table->string('alamat');
+        Schema::create('pesanan_sistem', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_pesanan');
+            $table->bigInteger('id_pelanggan')->unsigned();
+            $table->text('catatan');
+            $table->string('status');
             $table->timestamps();
 
-            $table->foreign('id_paket')->references('id_paket')->on('paket');
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
+            $table->foreign('id_pelanggan')->references('id')->on('users');
         });
     }
 

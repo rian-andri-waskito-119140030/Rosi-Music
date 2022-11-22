@@ -17,7 +17,7 @@ class Transaksi extends Model
         'id_pesanan',
         'total_bayar',
         'waktu_transaksi',
-        'status',
+        'status_transaksi',
     ];
 
 }

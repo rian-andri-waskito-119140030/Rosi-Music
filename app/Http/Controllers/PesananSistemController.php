@@ -4,41 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use App\Models\PesananWA;
-use App\Models\Paket;
-use App\Models\Transaksi;
-use App\Http\Controllers\Controller;
-use App\Models\Hutang;
 use App\Models\Pesanan;
+use App\Models\Paket;
+use App\Http\Controllers\Controller;
+use App\Models\CatatanPenolakan;
+use App\Models\Hutang;
+use App\Models\PesananSistem;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 
-class PesananWAController extends Controller
+class PesananSistemController extends Controller
 {
     public function index()
     {
         //get posts
-        $pesanan = Pesanan::join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->get();
+        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
 
         //return collection of posts as a resource
-        return view('admin.pesanan.pesanan_wa.pesanan_wa', ['data' => $pesanan]);
+        // return view('admin.pesanan', ['data' => $pesanan]);
     }
 
-    public function tambah()
+    public function tampil()
     {
         //get posts
-        $paket = Paket::orderBy('id_jenis_paket', 'asc')->get();
+        $pesanan = Pesanan::join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')->where('status', 'Menunggu Validasi')->get();
 
         //return collection of posts as a resource
-        return view('admin.pesanan.pesanan_wa.tambah_pesanan_wa', ['data' => $paket]);
+        return view('admin.pesanan.pesanan_sistem.pesanan', ['data' => $pesanan]);
     }
 
     public function store(Request $request)
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'nama'              => 'required',
+            'id_pelanggan'      => 'required',
             'id_paket'          => 'required',
             'tanggal_booking'   => 'required',
             'tanggal_selesai'   => 'required',
@@ -63,23 +64,40 @@ class PesananWAController extends Controller
             'alamat'            => $request->alamat,
         ]);
 
-        PesananWA::create([
+        PesananSistem::create([
             'id_pesanan'        => $pesanan->id_pesanan,
-            'nama'              => $request->nama,
+            'id_pelanggan'      => $request->id_pelanggan,
+            'catatan'           => $request->catatan,
+            'status'            => 'Menunggu Validasi',
         ]);
 
-        $tgl1 = new \DateTime($pesanan->tanggal_booking);
-        $tgl2 = new \DateTime($pesanan->tanggal_selesai);
-        $selisih = ($tgl2->diff($tgl1)->d)+1;
+        //return response
+        return redirect('/');
+    }
 
-        $paket=Paket::where('id_paket', $pesanan->id_paket)->get();
+    public function validasi_pesanan($id_pesanan)
+    {
+        //get posts
+        PesananSistem::where('id_pesanan', $id_pesanan)->update([
+            'status'    => "Tervalidasi",
+        ]);
+
+        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
+
+        $tgl1 = new \DateTime($pesanan[0]->tanggal_booking);
+        $tgl2 = new \DateTime($pesanan[0]->tanggal_selesai);
+        $selisih = ($tgl2->diff($tgl1)->d)+1;
+        // dd($selisih);
+
+        $paket=Paket::where('id_paket', $pesanan[0]->id_paket)->get();
 
         $bayar=($selisih*$paket[0]->harga_sewa)-(($selisih-1)*200000);
+        // dd($bayar);
 
         $id_tr = IdGenerator::generate(['table' => 'transaksi', 'field'=>'id_transaksi', 'length' => 12, 'prefix' => 'TR-']);
         Transaksi::create([
             'id_transaksi'      => $id_tr,
-            'id_pesanan'        => $pesanan->id_pesanan,
+            'id_pesanan'        => $id_pesanan,
             'total_bayar'       => $bayar,
             'waktu_transaksi'   => date("Y-m-d H:i:s"),
             'status_transaksi'  => 'Belum Dibayar',
@@ -92,17 +110,24 @@ class PesananWAController extends Controller
             'hutang'         => $bayar,
         ]);
 
-        //return response
-        return redirect('/admin/pesanan-wa');
+        //return collection of posts as a resource
+        return redirect('/admin/pesanan-sistem');
     }
 
-    public function validasi_pesanan($id_pesanan)
+    public function tolak_pesanan($id_pesanan, Request $request)
     {
         //get posts
-        $pesanan = Pesanan::join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')->join('users', 'pesanan.id_pelanggan', '=', 'users.id')->get();
+        PesananSistem::where('id_pesanan', $id_pesanan)->update([
+            'status'    => "Pesanan Ditolak",
+        ]);
+
+        CatatanPenolakan::create([
+            'id_pesanan'        => $id_pesanan,
+            'catatan_penolakan' => $request->catatan_penolakan,
+        ]);
 
         //return collection of posts as a resource
-        // return view('admin.pesanan', ['data' => $pesanan]);
+        return redirect('/admin/pesanan-sistem');
     }
 
     public function show(Paket $paket)
