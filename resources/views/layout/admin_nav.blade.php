@@ -141,7 +141,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="be_pages_ecom_transaksi_keluar.html">
+                  href="/admin/hutang-wa">
                   <span class="nav-main-link-name">Hutang Transaksi WA</span>
                 </a>
               </li>
@@ -300,7 +300,7 @@
             <div class="p-2">
               <form action="/admin/logout" method="post">
                 @csrf
-                <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between""><span class="fs-sm fw-medium">Log Out</span></button>
+                <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between"><span class="fs-sm fw-medium">Log Out</span></button>
               </form>
             </div>
           </div>

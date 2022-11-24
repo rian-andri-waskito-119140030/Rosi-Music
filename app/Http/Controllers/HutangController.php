@@ -27,21 +27,21 @@ class HutangController extends Controller
                     ->get();
 
         //return collection of posts as a resource
-        return view('admin.transaksi.transaksi', ['data' => $transaksi]);
+        return view('admin.transaksi.transaksi', ['data' => $hutang]);
     }
 
     public function tampil_hutang_sistem()
     {
         //get posts
-        $hutang = Hutang::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+        $hutang = Hutang::join('transaksi', 'hutang.id_transaksi', '=', 'transaksi.id_transaksi')
+                    ->join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
                     ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
                     ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
-                    // ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
                     ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
                     ->get();
 
         //return collection of posts as a resource
-        return view('admin.hutang.hutang', ['data' => $hutang]);
+        return view('admin.hutang.tampil_hutang', ['data' => $hutang]);
     }
 
     public function tampil_hutang_wa()
@@ -50,12 +50,10 @@ class HutangController extends Controller
         $hutang = Hutang::join('transaksi', 'hutang.id_transaksi', '=', 'transaksi.id_transaksi')
                     ->join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
                     ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
-                    // ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
                     ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
-                    // ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
                     ->get();
 
         //return collection of posts as a resource
-        return view('admin.hutang.hutang', ['data' => $hutang]);
+        return view('admin.hutang.tampil_hutang_wa', ['data' => $hutang]);
     }
 }

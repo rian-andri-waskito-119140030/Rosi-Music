@@ -15,6 +15,10 @@
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href={{ URL::asset("assets/css/oneui.min.css")}} />
+    
+    <link
+      rel="stylesheet"
+       href={{ URL::asset("assets/js/plugins/magnific-popup/magnific-popup.css")}} />
 
 @endsection
     <!-- Page Container -->
@@ -167,11 +171,22 @@
                           <button
                             id="btn-detail"
                             type="button"
-                            class="btn btn-sm btn-alt-primary"
+                            class="btn btn-sm btn-alt-primary tombol"
                             data-toggle="modal"
                             data-target="#modal-block-normal"
+                            data-bs-toggle="tooltip"
                             title="Bayar">
                             <i class="fa fa-fw fa-money-bill-alt"></i>
+                          </button>
+                          <button
+                            id="btn-detail"
+                            type="button"
+                            class="btn btn-sm btn-alt-primary tombol2"
+                            data-toggle="modal"
+                            data-target="#modal-block-normal"
+                            data-bs-toggle="tooltip"
+                            title="Bukti Pembayaran">
+                            <i class="fa fa-fw fa-camera-alt"></i>
                           </button>
                           <!--modal-->
                           <!-- <a
@@ -269,6 +284,50 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div
+                          class="modal fade"
+                          id="modal2"
+                          tabindex="-1"
+                          role="dialog"
+                          aria-hidden="true">
+                          <div
+                            class="modal-dialog modal-dialog-popout"
+                            role="document">
+                            <div class="modal-content">
+                              <div class="block block-themed block-transparent mb-0">
+                                <div class="block-header bg-primary-dark">
+                                  <h3 class="block-title">Bukti Pembayaran</h3>
+                                  <button
+                                    type="button"
+                                    class="btn btn-alt-danger"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                  </button>
+                                </div>
+                                <div class="text-center">
+                                  <div class="row items-push js-gallery img-fluid-200">
+                                  <div
+                                  class=" animated fadeIn">
+                                    <a
+                                    class="img-link img-link-zoom-in img-thumb img-lightbox"
+                                    href="assets/media/photos/photo2@2x.jpg">
+                                      <img
+                                      class="img-fluid"
+                                      style="display: block;max-width: 100%;height: auto;"                            
+                                      src={{ URL::asset("assets/media/photos/photo2.jpg")}}
+                                      alt="" />
+                                    </a>
+                                  </div>
+                                </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       @endforeach
                     </tbody>
                   </table>
@@ -346,8 +405,13 @@
     <script>
       //modal
       $(document).ready(function () {
-        $(".btn").on("click", function () {
+        $(".tombol").on("click", function () {
           $("#modal").modal("show");
+        });
+      });
+      $(document).ready(function () {
+        $(".tombol2").on("click", function () {
+          $("#modal2").modal("show");
         });
       });
     </script>
