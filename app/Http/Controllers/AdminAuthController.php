@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Paket;
+use App\Models\PesananSistem;
+use App\Models\Barang;
+use App\Models\Keuangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
 
 class AdminAuthController extends Controller
 {
@@ -18,6 +23,7 @@ class AdminAuthController extends Controller
 
     public function authenticate(Request $request)
     {
+        $errors = new MessageBag;
         $credentials = $request->validate([
             'username' => 'required',
             'password' => 'required'
@@ -27,8 +33,8 @@ class AdminAuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');
         }
-
-        return back()->with('loginError', 'Login failed!');
+        $errors = new MessageBag(['password' => ['username atau password salah.']]);
+        return back()->withErrors($errors)->withSuccess('Login details are not valid');
     }
 
     public function logout()
@@ -73,6 +79,17 @@ class AdminAuthController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $jumlah_paket=count(Paket::get());
+        $jumlah_pesanan=count(PesananSistem::where('status', 'Menunggu Validasi')->get());
+        $jumlah_barang=count(Barang::get());
+        $saldo=Keuangan::sum('debit') - Keuangan::sum('kredit');
+
+        // dd('Jumlah barang => '.$jumlah_barang . 'Jumlah paket =>' . $jumlah_paket. 'Jumlah pesanan =>' .$jumlah_pesanan);
+        return view('admin.dashboard', [
+            'paket'             => $jumlah_paket,
+            'pesanan_sistem'    => $jumlah_pesanan,
+            'barang'            => $jumlah_barang,
+            'saldo'             => $saldo,
+        ]);
     }
 }

@@ -116,7 +116,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="be_pages_ecom_transaksi_keluar.html">
+                  href="/admin/transaksi-keluar">
                   <span class="nav-main-link-name">Transaksi Keluar</span>
                 </a>
               </li>
@@ -141,7 +141,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="be_pages_ecom_transaksi_keluar.html">
+                  href="/admin/hutang-wa">
                   <span class="nav-main-link-name">Hutang Transaksi WA</span>
                 </a>
               </li>
@@ -158,7 +158,7 @@
             </a>
             <ul class="nav-main-submenu">
               <li class="nav-main-item">
-                <a class="nav-main-link" href="be_pages_ecom_reports.html">
+                <a class="nav-main-link" href="/admin/keuangan">
                   <span class="nav-main-link-name">Laporan Keuangan</span>
                 </a>
               </li>

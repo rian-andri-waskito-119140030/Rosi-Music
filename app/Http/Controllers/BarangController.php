@@ -77,7 +77,7 @@ class BarangController extends Controller
             ]);
 
         //return response
-        return redirect('/admin/barang');
+        return redirect('/admin/barang')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id_barang)
@@ -114,10 +114,11 @@ class BarangController extends Controller
 
             //upload image
             $gambar = $request->file('gambar');
-            $gambar->storeAs('public/barang', $gambar->getClientOriginalName());
+           
 
             //delete old image
-            Storage::delete('public/barang/'.$barang->gambar);
+            Storage::delete('public/barang/'.$barang->first()->gambar);
+             $gambar->storeAs('public/barang', $gambar->getClientOriginalName());
 
             //update post with new image
             $barang->update([
@@ -138,7 +139,7 @@ class BarangController extends Controller
         }
 
         //return response
-        return redirect('/admin/barang');
+        return redirect('/admin/barang')->with('success', 'Data berhasil diubah');
     }
     
     /**

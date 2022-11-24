@@ -99,7 +99,6 @@
                         <th class="d-none d-sm-table-cell">Paket</th>
                         <th>Tgl Mulai</th>
                         <th>Tgl Selesai</th>
-                        <th class="d-none d-sm-table-cell">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -114,30 +113,6 @@
                         </td>
                         <td class="d-none d-sm-table-cell fs-sm">{{ $item->tanggal_booking }}</td>
                         <td class="d-none d-sm-table-cell fs-sm">{{ $item->tanggal_selesai }}</td>
-
-                        <td class="text-center fs-sm">
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="be_pages_ecom_product_edit_wa.html"
-                            data-bs-toggle="tooltip"
-                            title="Edit">
-                            <i class="fa fa-fw fa-pencil-alt"></i>
-                          </a>
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="be_pages_ecom_product_view_wa.html"
-                            data-bs-toggle="tooltip"
-                            title="View">
-                            <i class="fa fa-fw fa-eye"></i>
-                          </a>
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="javascript:void(0)"
-                            data-bs-toggle="tooltip"
-                            title="Delete">
-                            <i class="fa fa-fw fa-times"></i>
-                          </a>
-                        </td>
                       </tr>
                       @endforeach
                       

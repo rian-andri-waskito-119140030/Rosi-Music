@@ -168,6 +168,9 @@
                           id="example-file-input"
                           name="gambar"
                           required />
+                          @if ($errors->has('gambar'))
+                            <span class="text-danger">{{ $errors->first('gambar') }}</span>
+                          @endif
                       </div>
                       <div class="col-6 mb-4">
                         <!-- Select2 (.js-select2 class is initialized in Helpers.jqSelect2()) -->

@@ -159,7 +159,7 @@
                         <td class="d-none d-sm-table-cell fs-sm">{{ rupiah($item->total_bayar) }}</td>
                         <td class="d-none d-sm-table-cell">
                           <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
                             >{{ $item->status_transaksi }}</span
                           >
                         </td>

@@ -92,13 +92,24 @@
       <!-- Main Container -->
       <main id="main-container">
         <!-- Page Content -->
+        
+        <!-- pop up success upload -->
+      @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div class="content">
           <!-- Quick Overview -->
-          <div class="row">
+           <div class="row">
             <div class="col-6 col-lg-3">
               <a
-                class="block block-rounded block-link-shadow text-center"
-                href="/admin/jenis-barang/tambah">
+                class="btn block block-rounded block-link-shadow text-center"
+                id="btn-detail"
+                type="button"
+                data-toggle="modal"
+                data-target="#modal-block-normal">
                 <div class="block-content block-content-full">
                   <div class="fs-2 fw-semibold text-success">
                     <i class="fa fa-plus"></i>
@@ -113,7 +124,61 @@
             </div>
           </div>
           <!-- END Quick Overview -->
-
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="modal"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+              <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                  <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Tambah Jenis Barang</h3>
+                    <button
+                      type="button"
+                      class="btn btn-alt-danger"
+                      data-bs-dismiss="modal"
+                      aria-label="Close">
+                      <i class="fa fa-fw fa-times"></i>
+                    </button>
+                  </div>
+                  <form  action="/admin/jenis-barang/tambah"
+                  method="POST"
+                  enctype="multipart/form-data">
+                   @csrf
+                    <div class="block-content fs-sm mb-3">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label for="example-text-input">Jenis Barang</label>
+                            <input
+                               type="text"
+                        class="form-control"
+                        placeholder="Masukkan Nama Jenis Barang"
+                        name="jenis_barang"
+                        required
+                              placeholder="Masukkan Jenis Barang" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="block-content block-content-full text-end border-top">
+                      <button
+                        type="submit"
+                        class="btn btn-alt-primary"
+                        data-bs-dismiss="modal">
+                        <i class="fa fa-check me-1"></i>Save
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Modal -->
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
@@ -234,4 +299,12 @@
 
     <!-- Page JS Code -->
     <script src={{  URL::asset("assets/js/pages/be_tables_datatables.min.js") }}></script>
+    <script>
+      //modal
+      $(document).ready(function () {
+        $(".btn").on("click", function () {
+          $("#modal").modal("show");
+        });
+      });
+    </script>
 @endsection 

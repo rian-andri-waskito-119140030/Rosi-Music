@@ -55,7 +55,7 @@ class JenisBarangController extends Controller
         ]);
 
         //return response
-        return redirect('/admin/jenis-barang');
+        return redirect('/admin/jenis-barang')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function show(Jenis_Barang $jenis_barang)

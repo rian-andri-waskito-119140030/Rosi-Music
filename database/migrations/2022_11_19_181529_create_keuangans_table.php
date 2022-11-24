@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('id_keuangan')->primary();
             $table->dateTime('waktu');
             $table->string('keterangan');
-            $table->integer('debit');
-            $table->integer('kredit');
+            $table->integer('debit')->nullable();
+            $table->integer('kredit')->nullable();
             $table->timestamps();
         });
     }

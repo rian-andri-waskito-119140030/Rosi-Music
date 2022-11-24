@@ -92,6 +92,13 @@
       <!-- Main Container -->
       <main id="main-container">
         <!-- Page Content -->
+        <!-- pop up success upload -->
+      @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div class="content">
           <!-- Quick Overview -->
           <div class="row">

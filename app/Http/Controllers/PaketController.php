@@ -9,6 +9,7 @@ use App\Models\Jenis_Paket;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\MessageBag;
 
 
 class PaketController extends Controller
@@ -74,9 +75,8 @@ class PaketController extends Controller
             'deskripsi_singkat' => $request->deskripsi_singkat,
             'deskripsi_panjang' => $this->hapus_string($request->deskripsi_panjang),
         ]);
-
         //return response
-        return redirect('/admin/paket');
+        return redirect('/admin/paket')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function show($id_paket)
@@ -135,14 +135,16 @@ class PaketController extends Controller
         //check if image is not empty
         if ($request->hasFile('gambar')) {
 
-            //upload image
+            //get image file
             $gambar = $request->file('gambar');
-            $gambar->storeAs('public/paket', $gambar->getClientOriginalName());
 
             //delete old image
-            Storage::delete('public/paket/'.$paket->gambar);
+            Storage::delete('public/paket/'.$paket->first()->gambar);
 
-            //update post with new image
+            //upload new image
+            $gambar->storeAs('public/paket', $gambar->getClientOriginalName());
+
+            //update post
             $paket->update([
                 'id_jenis_paket'    => $request->id_jenis_paket,
                 'nama_paket'        => $request->nama_paket,
@@ -151,10 +153,8 @@ class PaketController extends Controller
                 'deskripsi_singkat' => $request->deskripsi_singkat,
                 'deskripsi_panjang' => $this->hapus_string($request->deskripsi_panjang),
             ]);
-
         } else {
-
-            //update post without image
+            //update post
             $paket->update([
                 'id_jenis_paket'    => $request->id_jenis_paket,
                 'nama_paket'        => $request->nama_paket,
@@ -162,10 +162,14 @@ class PaketController extends Controller
                 'deskripsi_singkat' => $request->deskripsi_singkat,
                 'deskripsi_panjang' => $this->hapus_string($request->deskripsi_panjang),
             ]);
-        }
+
+
+
+        } 
+        
 
         //return response
-        return redirect('/admin/paket');
+        return redirect('/admin/paket')->with('success', 'Data berhasil diubah');
     }
     
     /**

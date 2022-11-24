@@ -103,15 +103,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($data as $key => $item)
                       <tr>
-                        <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">Nurhaldi Aldo</td>
-                        <td class="d-none d-sm-table-cell fs-sm">Paket 1 MC</td>
+                        <td class="text-center fs-sm">{{ $key+1 }}</td>
+                        <td class="fw-semibold fs-sm">{{ $item->nama }}</td>
+                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->nama_paket }}</td>
 
                         <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >500.000</span
+                            >{{ rupiah($item->hutang) }}</span
                           >
                         </td>
                         <td class="text-center fs-sm">
@@ -151,75 +152,81 @@
                           </a>
                         </td> -->
                       </tr>
-                    </tbody>
-                  </table>
-                  <div
-                    class="modal fade"
-                    id="modal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-hidden="true">
-                    <div
-                      class="modal-dialog modal-dialog-popout"
-                      role="document">
-                      <div class="modal-content">
-                        <div class="block block-themed block-transparent mb-0">
-                          <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Edit Transaksi</h3>
-                            <button
-                              type="button"
-                              class="btn btn-alt-danger"
-                              data-bs-dismiss="modal"
-                              aria-label="Close">
-                              <i class="fa fa-fw fa-times"></i>
-                            </button>
-                          </div>
-                          <form action="">
-                            <div class="block-content fs-sm mb-3">
-                              <div class="row">
-                                <div class="col-lg-6">
-                                  <div class="form-group">
-                                    <label for="example-text-input"
-                                      >ID Transaksi</label
-                                    >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="example-text-input"
-                                      name="example-text-input"
-                                      placeholder="TR-001"
-                                      disabled />
-                                  </div>
-                                </div>
-                                <div class="col-lg-6">
-                                  <div class="form-group">
-                                    <label for="example-text-input"
-                                      >Uang Tunai</label
-                                    >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="example-text-input"
-                                      name="example-text-input"
-                                      placeholder="Masukkan Uang Tunai" />
-                                  </div>
-                                </div>
+                      <div
+                        class="modal fade"
+                        id="modal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-hidden="true">
+                        <div
+                          class="modal-dialog modal-dialog-popout"
+                          role="document">
+                          <div class="modal-content">
+                            <div class="block block-themed block-transparent mb-0">
+                              <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Bayar Hutang</h3>
+                                <button
+                                  type="button"
+                                  class="btn btn-alt-danger"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close">
+                                  <i class="fa fa-fw fa-times"></i>
+                                </button>
                               </div>
+                              <form action="/admin/pembayaran" method="POST">
+                                @csrf
+                                <input type="text" name="nama_pelanggan" value="{{ $item->nama }}" hidden>
+                                <input type="text" name="nama_paket" value="{{ $item->nama_paket }}" hidden>
+                                <div class="block-content fs-sm mb-3">
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="example-text-input"
+                                          >ID Transaksi</label
+                                        >
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="example-text-input"
+                                          name="id_transaksi"
+                                          value="{{ $item->id_transaksi }}"
+                                          readonly/>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="example-text-input"
+                                          >Uang Tunai</label
+                                        >
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="example-text-input"
+                                          name="uang_bayar"
+                                          placeholder="Masukkan Uang Tunai" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="block-content block-content-full text-end border-top">
+                                  <button
+                                    type="submit"
+                                    class="btn btn-alt-primary"
+                                    data-bs-dismiss="modal">
+                                    <i class="fa fa-check me-1"></i>Save
+                                  </button>
+                                </div>
+                              </form>
                             </div>
-                            <div
-                              class="block-content block-content-full text-end border-top">
-                              <button
-                                type="submit"
-                                class="btn btn-alt-primary"
-                                data-bs-dismiss="modal">
-                                <i class="fa fa-check me-1"></i>Save
-                              </button>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                      @endforeach
+                    
+                    </tbody>
+                  </table>
+                  
                 </div>
               </div>
               <!-- END Dynamic Table with Export Buttons -->

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Jenis_Paket;
 use App\Http\Controllers\Controller;
+use App\Models\CatatanPenolakan;
 use App\Models\Pesanan;
 use App\Models\PesananSistem;
 use Illuminate\Support\Facades\Validator;
@@ -23,9 +24,11 @@ class JenisPaketController extends Controller
 
         if (Auth::guard('pelanggan')->check()) {
             $pesanan=Pesanan::with('paket')->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')->where('id_pelanggan', Auth::guard('pelanggan')->user()->id)->latest('pesanan.created_at')->first();
+            $ditolak=CatatanPenolakan::class::where('id_pesanan', $pesanan->id_pesanan)->first();
             return view('pelanggan.dashboard', [
                 'data'  => $jenis_paket,
                 'profil'=> $pesanan,
+                'ditolak'=> $ditolak,
             ]);
         } else {
             //return collection of posts as a resource

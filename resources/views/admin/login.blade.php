@@ -148,6 +148,12 @@
                               id="login-username"
                               name="username"
                               placeholder="Username" />
+                               @if ($errors->has('username'))
+                                    <!-- <div class="alert alert-danger">
+                                        {{ $errors }}
+                                    </div> -->
+                                <span class="text-danger">{{ $errors->first('username') }}</span>
+                                 @endif
                           </div>
                           <div class="mb-4">
                             <div class="input-group">
@@ -165,7 +171,14 @@
                                   id="togglePassword"
                                   style="cursor: pointer"></i
                               ></span>
+                              
                             </div>
+                             @if ($errors->has('password'))
+                                    <!-- <div class="alert alert-danger">
+                                        {{ $errors }}
+                                    </div> -->
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                           </div>
                           <!-- <div class="mb-4">
                             <div class="form-check">
@@ -190,7 +203,7 @@
                               class="btn w-500 btn-alt-primary">
                               <i
                                 class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>
-                              Sign In
+                              Sign In 
                             </button>
                           </div>
                         </div>

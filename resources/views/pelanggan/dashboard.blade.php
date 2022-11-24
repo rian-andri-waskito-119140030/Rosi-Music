@@ -211,6 +211,9 @@ https://templatemo.com/tm-570-chain-app-dev
                 Upload Bukti Pembayaran
               </a>
                 @endif
+                @if ($profil->status== "Pesanan Ditolak")
+                    <p>Catatan Penolakan : {{ $ditolak->catatan_penolakan }}</p>
+                @endif
                 
               </div>
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Models\Pesanan;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,4 +18,14 @@ class PesananSistem extends Model
         'catatan',
         'status',
     ];
+
+    public function pesanan()
+    {
+        return $this->belongsTo(Pesanan::class, 'id_pesanan');
+    }
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(User::class, 'id_pelanggan');
+    }
 }
