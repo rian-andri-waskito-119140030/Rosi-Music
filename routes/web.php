@@ -14,6 +14,7 @@ use App\Http\Controllers\PesananWAController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\HutangController;
+use App\Http\Controllers\KeuanganController;
 
 
 /*
@@ -45,20 +46,26 @@ Route::post('/pesanan', [PesananSistemController::class, 'store'])->name('pesana
 Route::get('/checkout/{id_pesanan}', [PesananController::class, 'checkout']);
 
 Route::get('/admin/pesanan-sistem', [PesananSistemController::class, 'tampil'])->middleware('auth:admin');
-Route::post('/admin/pesanan-sistem/validasi/{id_pesanan}', [PesananSistemController::class, 'validasi_pesanan'])->middleware('auth:admin');
-Route::post('/admin/pesanan-sistem/tolak/{id_pesanan}', [PesananSistemController::class, 'tolak_pesanan'])->middleware('auth:admin');
+Route::post('/admin/pesanan-sistem/validasi', [PesananSistemController::class, 'validasi_pesanan'])->middleware('auth:admin');
+Route::post('/admin/pesanan-sistem/tolak', [PesananSistemController::class, 'tolak_pesanan'])->middleware('auth:admin');
+Route::get('/admin/pesanan-sistem/detail/{id_pesanan}', [PesananSistemController::class, 'detail'])->middleware('auth:admin');
 
 Route::get('/admin/pesanan-wa', [PesananWAController::class, 'index'])->middleware('auth:admin');
 Route::get('/admin/pesanan-wa/tambah', [PesananWAController::class, 'tambah'])->middleware('auth:admin');
 Route::post('/admin/pesanan-wa/tambah', [PesananWAController::class, 'store'])->middleware('auth:admin');
 
-Route::get('/admin/hutang-sistem', [HutangController::class, 'tampil_hutang_sistem'])->middleware('auth:admin');
-Route::get('/admin/hutang-wa', [HutangController::class, 'tampil_hutang_wa'])->middleware('auth:admin');
-
 Route::post('/admin/pembayaran', [PembayaranController::class, 'store'])->middleware('auth:admin');
 
 Route::get('/admin/transaksi-sistem', [TransaksiController::class, 'tampil_transaksi_sistem'])->middleware('auth:admin');
+
 Route::get('/admin/transaksi-wa', [TransaksiController::class, 'tampil_transaksi_wa'])->middleware('auth:admin');
+Route::get('/admin/transaksi-keluar', [TransaksiController::class, 'tampil_transaksi_keluar'])->middleware('auth:admin');
+Route::post('/admin/transaksi-keluar', [TransaksiController::class, 'tambah_transaksi_keluar'])->middleware('auth:admin');
+
+Route::get('/admin/hutang-sistem', [HutangController::class, 'tampil_hutang_sistem'])->middleware('auth:admin');
+Route::get('/admin/hutang-wa', [HutangController::class, 'tampil_hutang_wa'])->middleware('auth:admin');
+
+Route::get('/admin/keuangan', [KeuanganController::class, 'index'])->middleware('auth:admin');
 
 Route::get('/admin/jenis-paket/', [JenisPaketController::class, 'tampil'])->middleware('auth:admin');
 Route::get('/admin/jenis-paket/tambah', [JenisPaketController::class, 'tambah'])->middleware('auth:admin');

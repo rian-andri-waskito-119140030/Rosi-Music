@@ -87,6 +87,12 @@
         <!-- Main Container -->
         <main id="main-container">
             <!-- Page Content -->
+            @if (session()->has('success'))
+              <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+                <strong>{{ session()->get('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
             <div class="content">
 
                 <!-- All Products -->
@@ -136,8 +142,9 @@
                                                     class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($item->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($item->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($item->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $item->status }}</span>
                                             </td>
                                             <td class="text-center fs-sm">
-                                                <form action="/admin/pesanan-sistem/validasi/{{ $item->id_pesanan }}" method="post">
+                                                <form action="/admin/pesanan-sistem/validasi" method="post">
                                                     @csrf
+                                                    <input type="text" name="id_pesanan" value="{{ $item->id_pesanan }}" hidden>
                                                     <button 
                                                         class="btn btn-sm btn-alt-success"
                                                         data-bs-toggle="tooltip"
@@ -157,7 +164,7 @@
                                                 </button>
                                                 <a
                                                   class="btn btn-sm btn-alt-secondary"
-                                                  href="be_pages_ecom_product_view.html"
+                                                  href="/admin/pesanan-sistem/detail/{{ $item->id_pesanan }}"
                                                   data-bs-toggle="tooltip"
                                                   title="View">
                                                   <i class="fa fa-fw fa-eye"></i>
@@ -186,10 +193,11 @@
                                                     <i class="fa fa-fw fa-times"></i>
                                                   </button>
                                                 </div>
-                                                <form action="" method="post">
+                                                <form action="/admin/pesanan-sistem/tolak" method="post">
                                                   @csrf
                                                   <div class="block-content fs-sm mb-3">
                                                     <div class="row">
+                                                      <input type="text" name="id_pesanan" value="{{ $item->id_pesanan }}" hidden>
                                                       <div class="col-lg-12">
                                                         <div class="form-group">
                                                           <label for="example-text-input"
@@ -198,7 +206,7 @@
                                                           <textarea
                                                             class="form-control"
                                                             id="one-ecom-product-description-short"
-                                                            name="one-ecom-product-description-short"
+                                                            name="catatan_penolakan"
                                                             rows="4"
                                                             placeholder="Masukkan Catatan Penolakan"
                                                             required></textarea>

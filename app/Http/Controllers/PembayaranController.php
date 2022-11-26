@@ -9,6 +9,7 @@ use App\Models\Paket;
 use App\Http\Controllers\Controller;
 use App\Models\CatatanPenolakan;
 use App\Models\Hutang;
+use App\Models\Keuangan;
 use App\Models\Pembayaran;
 use App\Models\PesananSistem;
 use App\Models\Transaksi;
@@ -38,6 +39,7 @@ class PembayaranController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         //define validation rules
         $validator = Validator::make($request->all(), [
             'id_transaksi'      => 'required',
@@ -51,7 +53,7 @@ class PembayaranController extends Controller
 
         //create Pesanan
 
-        $id = IdGenerator::generate(['table' => 'pesanan', 'field'=>'id_pesanan', 'length' => 12, 'prefix' => 'PS-']);
+        $id = IdGenerator::generate(['table' => 'pembayaran', 'field'=>'id_pembayaran', 'length' => 12, 'prefix' => 'PB-']);
         $pembayaran = Pembayaran::create([
             'id_pembayaran'     => $id,
             'id_transaksi'      => $request->id_transaksi,
@@ -65,8 +67,16 @@ class PembayaranController extends Controller
             'hutang'        => $hutang_pelanggan[0]->hutang - $request->uang_bayar,
         ]);
 
+        $id_keuangan = IdGenerator::generate(['table' => 'keuangan', 'field'=>'id_keuangan', 'length' => 12, 'prefix' => 'KU-']);
+        Keuangan::create([
+            'id_keuangan'   => $id_keuangan,
+            'waktu'         => date("Y-m-d H:i:s"),
+            'keterangan'    =>  "Pembayaran penyewaan ".$request->nama_paket." oleh ".$request->nama_pelanggan,
+            'debit'         => $pembayaran->uang_bayar,
+        ]);
+
         //return response
-        return redirect('/admin/hutang');
+        return redirect()->back();
     }
 
     public function validasi_pesanan($id_pesanan)

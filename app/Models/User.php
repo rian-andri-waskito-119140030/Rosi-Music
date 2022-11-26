@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SocialAccount::class);
     }
+
+    public function pesanan_sistem()
+    {
+        return $this->hasMany(PesananSistem::class, 'id_pelanggan');
+    }
 }

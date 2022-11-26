@@ -77,6 +77,12 @@
     <main id="main-container">
       <!-- Hero -->
       <div class="content">
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div
           class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center py-2 text-center text-md-start">
           <div class="flex-grow-1 mb-1 mb-md-0">
@@ -102,9 +108,9 @@
               <div
                 class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                 <dl class="mb-0">
-                  <dt class="fs-3 fw-bold">32</dt>
+                  <dt class="fs-3 fw-bold">{{ $paket }}</dt>
                   <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                    Jenis Paket
+                    Jumlah Paket
                   </dd>
                 </dl>
                 <div class="item item-rounded-lg bg-body-light">
@@ -114,7 +120,7 @@
               <div class="bg-body-light rounded-bottom">
                 <a
                   class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                  href="be_pages_ecom_paket.html">
+                  href="/admin/paket">
                   <span>Lihat Semua Paket</span>
                   <i
                     class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -129,7 +135,7 @@
               <div
                 class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                 <dl class="mb-0">
-                  <dt class="fs-3 fw-bold">124</dt>
+                  <dt class="fs-3 fw-bold">{{ $barang }}</dt>
                   <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
                     Jumlah Barang
                   </dd>
@@ -141,7 +147,7 @@
               <div class="bg-body-light rounded-bottom">
                 <a
                   class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                  href="be_pages_ecom_alat.html">
+                  href="/admin/barang">
                   <span>Lihat Semua Barang</span>
                   <i
                     class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -156,9 +162,9 @@
               <div
                 class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                 <dl class="mb-0">
-                  <dt class="fs-3 fw-bold">45</dt>
+                  <dt class="fs-3 fw-bold">{{ $pesanan_sistem }}</dt>
                   <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                    Pesanan Masuk
+                    Pesanan Sistem Masuk
                   </dd>
                 </dl>
                 <div class="item item-rounded-lg bg-body-light">
@@ -168,8 +174,8 @@
               <div class="bg-body-light rounded-bottom">
                 <a
                   class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                  href="be_pages_ecom_products.html">
-                  <span>Lihat Semua Pesanan Masuk</span>
+                  href="/admin/pesanan-sistem">
+                  <span>Lihat Semua Pesanan Sistem Masuk</span>
                   <i
                     class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                 </a>
@@ -183,7 +189,7 @@
               <div
                 class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                 <dl class="mb-0">
-                  <dt class="fs-3 fw-bold">10.000.000</dt>
+                  <dt class="fs-3 fw-bold">{{ rupiah($saldo) }}</dt>
                   <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
                     Total Saldo
                   </dd>
@@ -195,7 +201,7 @@
               <div class="bg-body-light rounded-bottom">
                 <a
                   class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                  href="be_pages_ecom_reports.html">
+                  href="/admin/keuangan">
                   <span>Lihat Informasi</span>
                   <i
                     class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>

@@ -6,17 +6,18 @@ use App\Models\Transaksi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hutang extends Model
+class BuktiPembayaran extends Model
 {
     use HasFactory;
-    protected $table = 'hutang';
-    protected $primaryKey = 'id_hutang';
+    protected $table = 'bukti_pembayaran';
+    protected $primaryKey = 'id_bukti_pembayaran';
     public $incrementing = false;
     
     protected $fillable = [
-        'id_hutang',
+        'id_bukti_pembayaran',
         'id_transaksi',
-        'hutang',
+        'gambar',
+        'nominal',
     ];
 
     public function transaksi()

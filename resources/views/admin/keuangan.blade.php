@@ -1,6 +1,5 @@
 @extends('layout.base_admin')
 @section('style')
-
     <!-- Stylesheets -->
     <!-- Page JS Plugins CSS -->
     <link
@@ -22,6 +21,7 @@
 @endsection
 
 @section('konten')
+{{-- <?php dd($data); ?> --}}
     <div
       id="page-container"
       class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-boxed">
@@ -52,7 +52,7 @@
             <div class="col-6 col-lg-3">
               <a
                 class="block block-rounded block-link-shadow text-center"
-                href="be_pages_ecom_product_add.html">
+                href="be_pages_ecom_reports_add.html">
                 <div class="block-content block-content-full">
                   <div class="fs-2 fw-semibold text-success">
                     <i class="fa fa-plus"></i>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="block-content py-2 bg-body-light">
                   <p class="fw-medium fs-sm text-success mb-0">
-                    Tambah Pesanan
+                    Tambah Data Keuangan
                   </p>
                 </div>
               </a>
@@ -71,7 +71,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Hutang</h3>
+              <h3 class="block-title">Laporan Keuangan</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -93,140 +93,52 @@
                     <thead>
                       <tr>
                         <th class="text-center">No</th>
-
-                        <th>Nama Pelanggan</th>
-                        <th class="d-none d-sm-table-cell">Nama Paket</th>
-
-                        <th class="d-none d-sm-table-cell">Hutang</th>
-                        <th class="d-none d-sm-table-cell">Action</th>
-                        <!-- <th>Action</th> -->
+                        <th>Waktu</th>
+                        <th class="d-none d-sm-table-cell">Keterangan</th>
+                        <th>Debit</th>
+                        <th class="d-none d-sm-table-cell">Kredit</th>
+                        <th>Saldo</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach ($data as $key => $item)
                       <tr>
                         <td class="text-center fs-sm">{{ $key+1 }}</td>
-                        <td class="fw-semibold fs-sm">{{ $item->nama }}</td>
-                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->nama_paket }}</td>
-
-                        <td class="d-none d-sm-table-cell">
+                        <td class="fw-semibold fs-sm">{{ $item->waktu }}</td>
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          {{ $item->keterangan }}
+                        </td>
+                        @if (is_null($item->debit))
+                        <td class="d-none d-sm-table-cell fs-sm"></td>
+                        @else
+                        <td class="d-none d-sm-table-cell fs-sm">
                           <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >{{ rupiah($item->hutang) }}</span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >{{ rupiah($item->debit) }}</span
                           >
                         </td>
-                        <td class="text-center fs-sm">
-                          <button
-                            id="btn-detail"
-                            type="button"
-                            class="btn btn-sm btn-alt-primary"
-                            data-toggle="modal"
-                            data-target="#modal-block-normal"
-                            data-bs-toggle="tooltip"
-                            title="Bayar">
-                            <i class="fa fa-fw fa-money-bill-alt"></i>
-                          </button>
-                          <!--modal-->
-                          <!-- <a
-                            class="btn btn-sm btn-alt-danger"
-                            href="javascript:void(0)"
-                            data-toggle="tooltip"
-                            title="Delete">
-                            <i class="fa fa-fw fa-times"></i>
-                          </a> -->
+                        @endif
+                        
+                        @if (is_null($item->kredit))
+                        <td class="d-none d-sm-table-cell fs-sm"></td>
+                        @else
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >{{ rupiah($item->kredit) }}</span
+                          >
                         </td>
-                        <!-- <td class="text-center fs-sm">
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="be_pages_ecom_product_edit.html"
-                            data-bs-toggle="tooltip"
-                            title="View">
-                            <i class="fa fa-fw fa-pencil-alt"></i>
-                          </a>
-                          <a
-                            class="btn btn-sm btn-alt-secondary"
-                            href="javascript:void(0)"
-                            data-bs-toggle="tooltip"
-                            title="Delete">
-                            <i class="fa fa-fw fa-times"></i>
-                          </a>
-                        </td> -->
+                        @endif
+                        <td class="d-none d-sm-table-cell fs-sm">
+                          <span
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            >Rp 1.300.000</span
+                          >
+                        </td>
                       </tr>
-                      <div
-                        class="modal fade"
-                        id="modal"
-                        tabindex="-1"
-                        role="dialog"
-                        aria-hidden="true">
-                        <div
-                          class="modal-dialog modal-dialog-popout"
-                          role="document">
-                          <div class="modal-content">
-                            <div class="block block-themed block-transparent mb-0">
-                              <div class="block-header bg-primary-dark">
-                                <h3 class="block-title">Bayar Hutang</h3>
-                                <button
-                                  type="button"
-                                  class="btn btn-alt-danger"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close">
-                                  <i class="fa fa-fw fa-times"></i>
-                                </button>
-                              </div>
-                              <form action="/admin/pembayaran" method="POST">
-                                @csrf
-                                <input type="text" name="nama_pelanggan" value="{{ $item->nama }}" hidden>
-                                <input type="text" name="nama_paket" value="{{ $item->nama_paket }}" hidden>
-                                <div class="block-content fs-sm mb-3">
-                                  <div class="row">
-                                    <div class="col-lg-6">
-                                      <div class="form-group">
-                                        <label for="example-text-input"
-                                          >ID Transaksi</label
-                                        >
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="example-text-input"
-                                          name="id_transaksi"
-                                          value="{{ $item->id_transaksi }}"
-                                          readonly/>
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                      <div class="form-group">
-                                        <label for="example-text-input"
-                                          >Uang Tunai</label
-                                        >
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="example-text-input"
-                                          name="uang_bayar"
-                                          placeholder="Masukkan Uang Tunai" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  class="block-content block-content-full text-end border-top">
-                                  <button
-                                    type="submit"
-                                    class="btn btn-alt-primary"
-                                    data-bs-dismiss="modal">
-                                    <i class="fa fa-check me-1"></i>Save
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       @endforeach
-                    
                     </tbody>
                   </table>
-                  
                 </div>
               </div>
               <!-- END Dynamic Table with Export Buttons -->
@@ -297,12 +209,4 @@
 
     <!-- Page JS Code -->
     <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
-    <script>
-      //modal
-      $(document).ready(function () {
-        $(".btn").on("click", function () {
-          $("#modal").modal("show");
-        });
-      });
-    </script>
 @endsection

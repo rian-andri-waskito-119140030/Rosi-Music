@@ -340,10 +340,10 @@ https://templatemo.com/tm-570-chain-app-dev
               </div>
               <div class="col-lg-6">
                 <div
-                  class="img-fluid"
+                  class="img-box wow fadeInRight"
                   data-wow-duration="1s"
                   data-wow-delay="0.5s">
-                  <img src='{{ URL::asset("storage/paket")}}/{{ $data->gambar }}' alt="" />
+                  <img style="width: 437px; height: 375px;" src='{{ URL::asset("storage/paket")}}/{{ $data->gambar }}' alt="" />
                 </div>
               </div>
             </div>

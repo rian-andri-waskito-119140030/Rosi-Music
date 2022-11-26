@@ -58,6 +58,7 @@ https://templatemo.com/tm-570-chain-app-dev
     <!-- ***** Preloader End ***** -->
 
     <!-- ***** Header Area Start ***** -->
+    
     <header
       class="header-area header-sticky wow slideInDown"
       data-wow-duration="0.75s"
@@ -143,6 +144,12 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
       </div>
     </header>
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
     @auth
     {{-- <?php dd($profil); ?> --}}
     <div id="modal" class="popupContainer" style="display: none; float: left">
@@ -210,6 +217,19 @@ https://templatemo.com/tm-570-chain-app-dev
                 ">
                 Upload Bukti Pembayaran
               </a>
+                @endif
+                @if ($profil->status== "Pesanan Ditolak")
+                    <p  style="
+                  margin-top: 10px;
+                  font-family: 'Roboto';
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 14px;
+                  line-height: 19px;
+                  /* identical to box height */
+                  letter-spacing: -0.006em;
+                  color: #000000;
+                ">Catatan Penolakan : {{ $ditolak->catatan_penolakan }}</p>
                 @endif
                 
               </div>

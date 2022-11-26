@@ -10,24 +10,20 @@ use App\Models\Transaksi;
 use App\Models\Paket;
 use App\Http\Controllers\Controller;
 use App\Models\Hutang;
+use App\Models\Keuangan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 
-class HutangController extends Controller
+class KeuanganController extends Controller
 {
     public function index()
     {
         //get posts
-        $hutang = Hutang::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
-                    ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
-                    // ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
-                    // ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
-                    // ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
-                    ->get();
+        $keuangan = Keuangan::get();
 
         //return collection of posts as a resource
-        return view('admin.transaksi.transaksi', ['data' => $transaksi]);
+        return view('admin.keuangan', ['data' => $keuangan]);
     }
 
     public function tampil_hutang_sistem()

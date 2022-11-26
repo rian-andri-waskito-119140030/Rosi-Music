@@ -72,17 +72,17 @@ class PesananSistemController extends Controller
         ]);
 
         //return response
-        return redirect('/');
+        return redirect('/')->with('success', 'Pesanan Berhasil Dibuat, Silahkan Tunggu Konfirmasi');
     }
 
-    public function validasi_pesanan($id_pesanan)
+    public function validasi_pesanan(Request $request)
     {
         //get posts
-        PesananSistem::where('id_pesanan', $id_pesanan)->update([
+        PesananSistem::where('id_pesanan', $request->id_pesanan)->update([
             'status'    => "Tervalidasi",
         ]);
 
-        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
+        $pesanan=Pesanan::where('id_pesanan', $request->id_pesanan)->get();
 
         $tgl1 = new \DateTime($pesanan[0]->tanggal_booking);
         $tgl2 = new \DateTime($pesanan[0]->tanggal_selesai);
@@ -97,7 +97,7 @@ class PesananSistemController extends Controller
         $id_tr = IdGenerator::generate(['table' => 'transaksi', 'field'=>'id_transaksi', 'length' => 12, 'prefix' => 'TR-']);
         Transaksi::create([
             'id_transaksi'      => $id_tr,
-            'id_pesanan'        => $id_pesanan,
+            'id_pesanan'        => $request->id_pesanan,
             'total_bayar'       => $bayar,
             'waktu_transaksi'   => date("Y-m-d H:i:s"),
             'status_transaksi'  => 'Belum Dibayar',
@@ -111,33 +111,32 @@ class PesananSistemController extends Controller
         ]);
 
         //return collection of posts as a resource
-        return redirect('/admin/pesanan-sistem');
+        return redirect('/admin/pesanan-sistem')->with('success', 'Pesanan Berhasil Divalidasi');
     }
 
-    public function tolak_pesanan($id_pesanan, Request $request)
+    public function tolak_pesanan(Request $request)
     {
         //get posts
-        PesananSistem::where('id_pesanan', $id_pesanan)->update([
+        PesananSistem::where('id_pesanan', $request->id_pesanan)->update([
             'status'    => "Pesanan Ditolak",
         ]);
 
         CatatanPenolakan::create([
-            'id_pesanan'        => $id_pesanan,
+            'id_pesanan'        => $request->id_pesanan,
             'catatan_penolakan' => $request->catatan_penolakan,
         ]);
 
         //return collection of posts as a resource
-        return redirect('/admin/pesanan-sistem');
+        return redirect('/admin/pesanan-sistem')->with('success', 'Pesanan Berhasil Ditolak');
     }
 
-    public function show(Paket $paket)
+    public function detail($id_pesanan)
     {
-        $paket=Paket::with('barang_dipaket')->find($paket->id_paket);
+        $pesanan=PesananSistem::with(['pelanggan', 'pesanan'])->where('id_pesanan', $id_pesanan)->first();
+        $paket=Paket::class::with('jenis_paket')->where('id_paket', $pesanan->pesanan->id_paket)->first();
+        // dd($paket);
         //return single post as a resource
-        return response()->json([
-            'message' => 'Barang berhasil ditemukan',
-            'data'    => $paket,
-        ]);
+        return view('admin.pesanan.pesanan_sistem.detail_pesanan', ['pesanan' => $pesanan, 'paket' => $paket]);
     }
 
     public function update(Request $request, Barang $barang)

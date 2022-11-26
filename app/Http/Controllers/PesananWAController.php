@@ -93,7 +93,7 @@ class PesananWAController extends Controller
         ]);
 
         //return response
-        return redirect('/admin/pesanan-wa');
+        return redirect('/admin/pesanan-wa')->with('success', 'Pesanan Berhasil Ditambahkan');
     }
 
     public function validasi_pesanan($id_pesanan)

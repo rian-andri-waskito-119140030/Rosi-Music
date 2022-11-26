@@ -150,7 +150,7 @@
                           id="one-ecom-product-category"
                           name="id_jenis_barang"
                           style="width: 100%"
-                          placeholder="Pilih Barang">
+                          data-placeholder="Pilih Barang">
                           <option></option>
                           <!-- Required for data-placeholder attribute to work with Select2 plugin -->
                           @foreach ($data as $item)
@@ -181,11 +181,11 @@
                           >Status</label
                         >
                         <select
-                          class="js-select2 form-select"
+                          class="form-select"
                           id="one-ecom-product-category"
                           name="kondisi"
                           style="width: 100%"
-                          data-placeholder="Pilih Status">
+                          placeholder="Pilih Status">
                           <option></option>
                           <!-- Required for data-placeholder attribute to work with Select2 plugin -->
                           <option value="Baik">Baik</option>

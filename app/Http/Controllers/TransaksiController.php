@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use App\Models\Pesanan;
-use App\Models\PesananWA;
+use App\Models\Keuangan;
 use App\Models\Transaksi;
 use App\Models\Paket;
 use App\Http\Controllers\Controller;
+use App\Models\TransaksiKeluar;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,16 +42,32 @@ class TransaksiController extends Controller
         return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
     }
 
-    public function store(Request $request)
+    public function tampil_transaksi_wa()
+    {
+        //get posts
+        $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                            ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                            ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
+                            ->get();
+
+        //return collection of posts as a resource
+        return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
+    }
+
+    public function tampil_transaksi_keluar()
+    {
+        //get posts
+        $transaksi = TransaksiKeluar::get();
+        //return collection of posts as a resource
+        return view('admin.transaksi.keluar.transaksi-keluar', ['data' => $transaksi]);
+    }
+
+    public function tambah_transaksi_keluar(Request $request)
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'id_pelanggan'      => 'required',
-            'id_paket'          => 'required',
-            'tanggal_booking'   => 'required',
-            'tanggal_selesai'   => 'required',
-            'no_hp'             => 'required',
-            'alamat'            => 'required',
+            'nama_transaksi'   => 'required',
+            'pengeluaran'      => 'required',
         ]);
 
         //check if validation fails
@@ -61,21 +77,26 @@ class TransaksiController extends Controller
 
         //create Pesanan
 
-        $id = IdGenerator::generate(['table' => 'pesanan', 'field'=>'id_pesanan', 'length' => 6, 'prefix' => 'PS-']);
-        $pesanan = Pesanan::create([
-            'id_pesanan'        => $id,
-            'id_pelanggan'      => $request->id_pelanggan,
-            'id_paket'          => $request->id_paket,
-            'tanggal_booking'   => $request->tanggal_booking,
-            'tanggal_selesai'   => $request->tanggal_selesai,
-            'no_hp'             => $request->no_hp,
-            'alamat'            => $request->alamat,
-            'catatan'           => $request->catatan,
-            'status'            => 'Menunggu Validasi',
+        $id = IdGenerator::generate(['table' => 'transaksi_keluar', 'field'=>'id_transaksi_keluar', 'length' => 12, 'prefix' => 'TK-']);
+        $transaksi = TransaksiKeluar::create([
+            'id_transaksi_keluar'   => $id,
+            'nama_transaksi'        => $request->nama_transaksi,
+            'waktu'                 => date("Y-m-d H:i:s"),
+            'pengeluaran'           => $request->pengeluaran,
+
         ]);
 
+        $id_keuangan = IdGenerator::generate(['table' => 'keuangan', 'field'=>'id_keuangan', 'length' => 12, 'prefix' => 'KU-']);
+        Keuangan::create([
+            'id_keuangan'   => $id_keuangan,
+            'waktu'         => date("Y-m-d H:i:s"),
+            'keterangan'    =>  $transaksi->nama_transaksi,
+            'kredit'         => $transaksi->pengeluaran,
+        ]);
+
+
         //return response
-        return redirect('/');
+        return redirect()->back()->with('success', 'Transaksi Keluar Berhasil Ditambahkan');
     }
 
     public function show(Paket $paket)
