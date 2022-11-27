@@ -148,17 +148,17 @@ class BarangController extends Controller
      * @param  mixed $post
      * @return void
      */
-    public function destroy(Barang $barang)
+    public function destroy(Request $request)
     {
+        $barang=Barang::where('id_barang', $request->id_barang);
+        Storage::delete('public/barang/'.$barang->first()->gambar);
         //delete image
-        Storage::delete('public/barang/'.$barang->gambar);
-
-        //delete post
         $barang->delete();
 
+        //delete post
+        
+
         //return response
-        return response()->json([
-            'message' => 'Barang berhasil dihapus',
-        ]);
+        return response()->json($barang);
     }
 }

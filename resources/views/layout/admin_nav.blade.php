@@ -98,7 +98,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="/admin/transaksi-sistem">
+                  href="/admin/transaksisistem">
                   <span class="nav-main-link-name"
                     >Transaksi Masuk Via Sistem</span
                   >
@@ -107,7 +107,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="/admin/transaksi-wa">
+                  href="/admin/transaksiwa">
                   <span class="nav-main-link-name"
                     >Transaksi Masuk Via WA</span
                   >

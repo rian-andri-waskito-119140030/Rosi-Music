@@ -39,7 +39,11 @@ class TransaksiController extends Controller
                             ->get();
 
         //return collection of posts as a resource
-        return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
+        //return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
+        return response()->json([
+            'status' => 'success',
+            'data' => $transaksi_sistem
+        ], 200);
     }
 
     public function tampil_transaksi_wa()
@@ -51,7 +55,11 @@ class TransaksiController extends Controller
                             ->get();
 
         //return collection of posts as a resource
-        return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
+        return response()->json([
+            'status' => 'success',
+            'data' => $transaksi_sistem
+        ], 200);
+        //return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
     }
 
     public function tampil_transaksi_keluar()

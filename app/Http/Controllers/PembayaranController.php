@@ -36,6 +36,32 @@ class PembayaranController extends Controller
         //return collection of posts as a resource
         return view('admin.pesanan.pesanan_sistem.pesanan', ['data' => $pesanan]);
     }
+    public function edit_wa($id_transaksi){
+        $transaksi = Transaksi::find($id_transaksi);
+        if ($transaksi){
+            return response()->json([
+                'status' => 'success',
+                'data' => $transaksi
+            ], 200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Transaksi tidak ditemukan'
+        ], 404);
+    }
+    public function edit_sistem($id_transaksi){
+        $transaksi = Transaksi::find($id_transaksi);
+        if ($transaksi){
+            return response()->json([
+                'status' => 'success',
+                'data' => $transaksi
+            ], 200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Transaksi tidak ditemukan'
+        ], 404);
+    }
 
     public function store(Request $request)
     {
@@ -61,11 +87,15 @@ class PembayaranController extends Controller
             'waktu_bayar'       => date("Y-m-d H:i:s"),
         ]);
 
-        $hutang=Hutang::where('id_transaksi', $request->id_transaksi);
-        $hutang_pelanggan=$hutang->get();
-        $hutang->update([
-            'hutang'        => $hutang_pelanggan[0]->hutang - $request->uang_bayar,
-        ]);
+        // $hutang=Hutang::where('id_transaksi', $request->id_transaksi);
+        // $hutang_pelanggan=$hutang->get();
+        // $hutang->update([
+        //     'hutang'        => $hutang_pelanggan[0]->hutang - $request->uang_bayar,
+        // ]);
+        //update hutang
+        $hutang = Hutang::where('id_transaksi', $request->id_transaksi)->first();
+        $hutang->hutang = $hutang->hutang - $request->uang_bayar;
+        $hutang->save();
 
         $id_keuangan = IdGenerator::generate(['table' => 'keuangan', 'field'=>'id_keuangan', 'length' => 12, 'prefix' => 'KU-']);
         Keuangan::create([

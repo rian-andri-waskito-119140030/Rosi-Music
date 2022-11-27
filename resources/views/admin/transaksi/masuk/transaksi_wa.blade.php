@@ -171,7 +171,7 @@
                             class="btn btn-sm btn-alt-primary"
                             data-toggle="modal"
                             data-target="#modal-block-normal"
-                           
+                            value=""
                             title="Bayar">
                             <i class="fa fa-fw fa-money-bill-alt"></i>
                           </button>
@@ -239,7 +239,8 @@
                                             id="id_transaksi"
                                             name="id_transaksi"
                                             
-                                            disabled />
+                                            
+                                            readonly />
                                         </div>
                                       </div>
                                       <div class="col-lg-6">
@@ -250,7 +251,7 @@
                                           <input
                                             type="text"
                                             class="form-control"
-                                            id="example-text-input"
+                                            id="uang_bayar"
                                             name="uang_bayar"
                                             placeholder="Masukkan Uang Tunai" />
                                         </div>
@@ -261,7 +262,7 @@
                                     class="block-content block-content-full text-end border-top">
                                     <button
                                       type="submit"
-                                      class="btn btn-alt-primary"
+                                      class="btn btn-alt-primary tombol-simpan"
                                       data-bs-dismiss="modal">
                                       <i class="fa fa-check me-1"></i>Simpan
                                     </button>
@@ -346,28 +347,27 @@
     <!-- Page JS Code -->
     <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
     <script>
-      //modal
-        $(document).ready(function(){
-        fetch_data_transaksi_sistem();
+      $(document).ready(function(){
+        fetch_data_transaksi_wa();
 
-        function fetch_data_transaksi_sistem(){
+        function fetch_data_transaksi_wa(){
           $.ajax({
             type: "GET",
-            url: "/admin/transaksi-sistem",
+            url: "/admin/transaksi_wa",
             dataType: "json",
             success: function(response){
               console.log(response);
               $('tbody').html("");
               $.each(response.data, function(key, item){
                 $('tbody').append('<tr>\
-                  <td class="text-center fs-sm">'+key+1+'</td>\
+                  <td class="text-center fs-sm">'+key+'</td>\
                   <td class="fw-semibold fs-sm">'+item.id_transaksi+'</td>\
                   <td class="d-none d-sm-table-cell fs-sm">'+item.nama+'</td>\
                   <td class="d-none d-sm-table-cell fs-sm">'+item.waktu_transaksi+'</td>\
                   <td class="d-none d-sm-table-cell fs-sm">'+item.total_bayar+'</td>\
                   <td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">'+item.status_transaksi+'</span></td>\
                   <td class="text-center fs-sm">\
-                    <button  id="btn-detail" type="button" value="'+item.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-sistem" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" >\
+                    <button  id="btn-detail" type="button" value="'+item.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-wa" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" >\
                       <i class="fa fa-fw fa-money-bill-alt"></i>\
                     </button>\
                   </td>\
@@ -376,13 +376,13 @@
             }
           })
         }
-      });
-      $(document).on('click', '.tombol-sistem', function(){
+      })
+      $(document).on('click', '.tombol-wa', function(){
         var id_transaksi = $(this).val();
         console.log(id_transaksi);
         $('.modal').modal('show');
           $.ajax({
-            url: "/admin/edit-sistem/" + id_transaksi,
+            url: "/admin/edit-wa/" + id_transaksi,
             type: "GET",
             dataType: "json",
             success: function (response) {
@@ -399,5 +399,31 @@
             },
           });
       });
+      // $(document).on('click', 'tombol-simpan', function(e){
+      //   e.preventDefault();
+      //   var id_transaksi = $('#id_transaksi').val();
+      //   var uang_bayar = $('#uang_bayar').val();
+      //   $.ajax({
+      //     url: "/admin/update-wa/" + id_transaksi,
+      //     type: "POST",
+      //     data: {
+      //       _token: "{{ csrf_token() }}",
+      //       id_transaksi: id_transaksi,
+      //       uang_bayar: uang_bayar,
+      //     },
+      //     dataType: "json",
+      //     success: function (response) {
+      //       console.log(response);
+      //       if (response.status == 404) {
+      //         alert(response.message);
+      //       } else {
+      //         alert(response.message);
+      //         $('.modal').modal('hide');
+      //         location.reload();
+      //       }
+      //     },
+      //   });
+
+      // })
     </script>
 @endsection

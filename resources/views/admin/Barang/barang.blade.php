@@ -181,9 +181,10 @@
                             <i class="fa fa-fw fa-pencil-alt"></i>
                           </a>
                           <a
-                            class="btn btn-sm btn-alt-secondary"
+                            class="btn btn-sm btn-alt-secondary hapus"
                             href="javascript:void(0)"
                             data-bs-toggle="tooltip"
+                            data-id = "{{ $item->id_barang }}"
                             title="Delete">
                             <i class="fa fa-fw fa-times"></i>
                           </a>
@@ -262,5 +263,36 @@
 
     <!-- Page JS Code -->
     <script src={{  URL::asset("assets/js/pages/be_tables_datatables.min.js") }}></script>
+    <script>
+      $(function(){
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $('body').on('click', '.hapus', function() {
+      if (confirm("Hapus Barang?") == true) {
+        var id_barang = $(this).attr('data-id');
+        console.log("{{ csrf_token() }}");
+        // ajax
+        $.ajax({
+          type: "DELETE",
+          url: "{{ route('admin.barang-hapus') }}",
+          data: {
+            id_barang: id_barang,
+            _token: "{{ csrf_token() }}",
+          },
+          dataType: 'json',
+          success: function(res) {
+            // var oTable = $('#example2').dataTable();
+            // oTable.fnDraw(true);
+            location.reload();
+            
+          }
+        });
+      }
+    });
+      })
+    </script>
 
 @endsection

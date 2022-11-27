@@ -178,19 +178,16 @@ class PaketController extends Controller
      * @param  mixed $post
      * @return void
      */
-    public function destroy(Paket $paket)
+    public function destroy(Request $request)
     {
-        //delete image
-        Storage::delete('public/paket/'.$paket->gambar);
-
-        //delete post
+        $paket=Paket::where('id_paket', $request->id_paket);
+        // dd($paket);
+        //delete old image
+        Storage::delete('public/paket/'.$paket->first()->gambar);
         $paket->delete();
-
-        //return response
-        return response()->json([
-            'message' => 'Paket berhasil dihapus',
-        ]);
+        return response()->json($paket);
     }
+      
 
     public function paket()
     {

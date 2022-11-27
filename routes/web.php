@@ -38,6 +38,12 @@ Route::get('/galeri', function () {
 Route::get('/tentang-kami', function () {
     return view('pelanggan.tentang-kami');
 })->name('tentang-kami');
+Route::get('/admin/transaksiwa', function () {
+    return view('admin.transaksi.masuk.transaksi_wa');
+})->name('transaksi-wa');
+Route::get('/admin/transaksisistem', function () {
+    return view('admin.transaksi.masuk.transaksi');
+})->name('transaksi-sistem');
 
 Route::get('/jenis-paket/{id_jenis_paket}', [PaketController::class, 'index'])->name('daftar-paket');
 Route::get('/paket/{id_paket}', [PaketController::class, 'show'])->name('deskripsi-paket');
@@ -57,8 +63,11 @@ Route::post('/admin/pesanan-wa/tambah', [PesananWAController::class, 'store'])->
 Route::post('/admin/pembayaran', [PembayaranController::class, 'store'])->middleware('auth:admin');
 
 Route::get('/admin/transaksi-sistem', [TransaksiController::class, 'tampil_transaksi_sistem'])->middleware('auth:admin');
-
+Route::get('/admin/edit-wa/{id_transaksi}',[PembayaranController::class, 'edit_wa'])->middleware('auth:admin');
+Route::get('/admin/edit-sistem/{id_transaksi}',[PembayaranController::class, 'edit_sistem'])->middleware('auth:admin');
+Route::post('/admin/update-wa/{id_transaksi}',[PembayaranController::class, 'update_wa'])->middleware('auth:admin');
 Route::get('/admin/transaksi-wa', [TransaksiController::class, 'tampil_transaksi_wa'])->middleware('auth:admin');
+Route::get('/admin/transaksi_wa', [TransaksiController::class, 'tampil_transaksi_wa'])->middleware('auth:admin');
 Route::get('/admin/transaksi-keluar', [TransaksiController::class, 'tampil_transaksi_keluar'])->middleware('auth:admin');
 Route::post('/admin/transaksi-keluar', [TransaksiController::class, 'tambah_transaksi_keluar'])->middleware('auth:admin');
 
@@ -74,7 +83,7 @@ Route::post('/admin/jenis-paket/tambah', [JenisPaketController::class, 'store'])
 Route::get('/admin/paket/', [PaketController::class, 'paket'])->name('admin.paket')->middleware('auth:admin');
 Route::get('/admin/paket/tambah', [PaketController::class, 'tambah'])->name('admin.paket-tambah')->middleware('auth:admin');
 Route::post('/admin/paket/tambah', [PaketController::class, 'store'])->name('admin.paket-tambah-store')->middleware('auth:admin');
-Route::delete('/admin/paket/hapus/{id_paket}', [PaketController::class, 'destroy'])->name('admin.paket-hapus')->middleware('auth:admin');
+Route::delete('/admin/paket/hapus', [PaketController::class, 'destroy'])->name('admin.paket-hapus')->middleware('auth:admin');
 Route::get('/admin/paket/edit/{id_paket}', [PaketController::class, 'edit'])->name('admin.paket-edit')->middleware('auth:admin');
 Route::post('/admin/paket/edit/{id_paket}', [PaketController::class, 'update'])->name('admin.paket-edit-store')->middleware('auth:admin');
 Route::resource('/admin/tes/', PaketController::class);
@@ -88,6 +97,7 @@ Route::get('/admin/barang/tambah', [BarangController::class, 'tambah'])->middlew
 Route::post('/admin/barang/tambah', [BarangController::class, 'store'])->middleware('auth:admin');
 Route::get('/admin/barang/edit/{id_barang}', [BarangController::class, 'edit'])->name('admin.barang-edit')->middleware('auth:admin');
 Route::post('/admin/barang/edit/{id_barang}', [BarangController::class, 'update'])->name('admin.barang-edit-store')->middleware('auth:admin');
+Route::delete('/admin/barang/hapus', [BarangController::class, 'destroy'])->name('admin.barang-hapus')->middleware('auth:admin');
 
 Route::resource('/jenis_barang/', JenisBarangController::class);
 

@@ -184,13 +184,13 @@
                             title="Edit">
                             <i class="fa fa-fw fa-pencil-alt"></i>
                           </a>
-                          <button
-                            class="btn btn-sm btn-alt-secondary"
-                            onclick="hapus('{{ $item->id_paket }}')"
+                          <!-- <button
+                            class="btn btn-sm btn-alt-secondary hapus"
+                            data-id = "{{ $item->id_paket }}"
                             data-bs-toggle="tooltip"
                             title="Hapus">
                             <i class="fa fa-fw fa-times"></i>
-                        </button>
+                        </button> -->
                         </td>
                       </tr>
                       @endforeach
