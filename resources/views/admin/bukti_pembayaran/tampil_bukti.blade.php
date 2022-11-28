@@ -98,7 +98,7 @@
                 <!-- All Products -->
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Data Pemesanan</h3>
+                        <h3 class="block-title">Data Bukti Pembayaran</h3>
                     </div>
                     <div class="block-content">
                         <!-- Search Form -->
@@ -119,11 +119,10 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">No.</th>
+                                            <th>ID Transaksi</th>
                                             <th>Nama</th>
-                                            <th class="d-none d-sm-table-cell">Paket</th>
-                                            <th>Tgl Mulai</th>
-                                            <th>Tgl Selesai</th>
-                                            <th class="d-none d-sm-table-cell">Status</th>
+                                            <th class="d-none d-sm-table-cell">Nominal</th>
+                                            <th class="d-none d-sm-table-cell">Bukti</th>
                                             <th class="d-none d-sm-table-cell">Action</th>
                                         </tr>
                                     </thead>
@@ -131,27 +130,32 @@
                                         @foreach ($data as $key => $item)
                                         <tr>
                                             <td class="text-center fs-sm">{{ $key+1 }}</td>
-                                            <td class="fw-semibold fs-sm">{{ $item->nama }}</td>
+                                            <td class="fw-semibold fs-sm">{{ $item->id_transaksi }}</td>
                                             <td class="d-none d-sm-table-cell fs-sm">
-                                                {{ $item->nama_paket }}
+                                                {{ $item->nama }}
                                             </td>
-                                            <td class="d-none d-sm-table-cell fs-sm">{{ $item->tanggal_booking }}</td>
-                                            <td class="d-none d-sm-table-cell fs-sm">{{ $item->tanggal_selesai }}</td>
+                                            <td class="fw-semibold fs-sm">{{ rupiah($item->nominal) }}</td>
                                             <td class="d-none d-sm-table-cell">
-                                                <span
-                                                    class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($item->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($item->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($item->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $item->status }}</span>
+                                              <img
+                                                style="width: 71px; height: 107px"
+                                                src='{{ URL::asset("storage/bukti_pembayaran/")}}/{{ $item->bukti }}' />
                                             </td>
                                             <td class="text-center fs-sm">
-                                                <form action="/admin/pesanan-sistem/validasi" method="post">
-                                                    @csrf
-                                                    <input type="text" name="id_pesanan" value="{{ $item->id_pesanan }}" hidden>
-                                                    <button 
-                                                        class="btn btn-sm btn-alt-success"
-                                                        data-bs-toggle="tooltip"
-                                                        title="Validasi">
-                                                        <i class="fa fa-fw fa-check-circle"></i>
-                                                    </button>
-                                                  </form>
+                                              <form action="/admin/bukti-pembayaran/validasi" method="POST">
+                                                @csrf
+                                                <input type="text" name="nama_pelanggan" value="{{ $item->nama }}" hidden>
+                                                <input type="text" name="nama_paket" value="{{ $item->nama_paket }}" hidden>
+                                                <input type="text" name="id_bukti_pembayaran" value="{{ $item->id_bukti_pembayaran }}" hidden>
+                                                <input type="text" name="id_transaksi" value="{{ $item->id_transaksi }}" hidden>
+                                                <input type="number" name="uang_bayar" value="{{ $item->nominal }}" hidden>
+                                                <button 
+                                                  class="btn btn-sm btn-alt-success"
+                                                  data-bs-toggle="tooltip"
+                                                  title="Validasi">
+                                                    <i class="fa fa-fw fa-check-circle"></i>
+                                                </button>
+                                              </form>
+                                              
                                                 <button
                                                   id="btn-detail"
                                                   type="button"

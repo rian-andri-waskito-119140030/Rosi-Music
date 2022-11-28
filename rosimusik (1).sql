@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 02:17 PM
+-- Generation Time: Nov 26, 2022 at 12:57 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -69,7 +69,23 @@ INSERT INTO `barang` (`id_barang`, `gambar`, `nama_barang`, `id_jenis_barang`, `
 ('BR-001', '00.jpg', 'Orgen 1', 'JB-001', 'Baik', '2022-11-22 02:03:25', '2022-11-22 12:37:32'),
 ('BR-002', 'cc6759ae8ce7b3356d17a4dec1f41221_2022399379894801329.jpg', 'Sound System 1', 'JB-002', 'Baik', '2022-11-22 02:04:18', '2022-11-22 12:38:39'),
 ('BR-003', 'pc_7.7079296c.png', 'Piano', 'JB-001', 'Baik', '2022-11-22 08:28:47', '2022-11-22 08:28:47'),
-('BR-004', '3.1.jpg', 'Piano', 'JB-002', 'Rusak', '2022-11-22 12:33:57', '2022-11-22 12:33:57');
+('BR-004', '3.1.jpg', 'Piano', 'JB-002', 'Rusak', '2022-11-22 12:33:57', '2022-11-22 12:33:57'),
+('BR-005', 'e4e42702ccf2d4208ba7e5b4877553c8_1914998555765133851.png', 'Piano 2', 'JB-003', 'Rusak', '2022-11-25 10:29:48', '2022-11-25 10:29:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bukti_pembayaran`
+--
+
+CREATE TABLE `bukti_pembayaran` (
+  `id_bukti_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_transaksi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gambar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nominal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -84,6 +100,14 @@ CREATE TABLE `catatan_penolakan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `catatan_penolakan`
+--
+
+INSERT INTO `catatan_penolakan` (`id`, `id_pesanan`, `catatan_penolakan`, `created_at`, `updated_at`) VALUES
+(1, 'PS-000000011', 'alamat terlalu jauh', '2022-11-25 10:49:12', '2022-11-25 10:49:12'),
+(2, 'PS-000000012', 'alamat terlalu jauh', '2022-11-25 10:50:11', '2022-11-25 10:50:11');
 
 -- --------------------------------------------------------
 
@@ -124,7 +148,9 @@ INSERT INTO `hutang` (`id_hutang`, `id_transaksi`, `hutang`, `created_at`, `upda
 ('HT-002', 'TR-000000005', 35800000, '2022-11-22 02:33:17', '2022-11-22 02:33:17'),
 ('HT-003', 'TR-000000006', 6200000, '2022-11-22 08:14:26', '2022-11-22 08:14:26'),
 ('HT-004', 'TR-000000007', 124800000, '2022-11-22 08:27:18', '2022-11-22 08:27:18'),
-('HT-005', 'TR-000000008', 3200000, '2022-11-22 09:30:16', '2022-11-22 09:30:16');
+('HT-005', 'TR-000000008', 3200000, '2022-11-22 09:30:16', '2022-11-22 09:30:16'),
+('HT-006', 'TR-000000009', 9200000, '2022-11-25 03:44:15', '2022-11-25 03:44:15'),
+('HT-007', 'TR-000000010', 142600000, '2022-11-25 03:54:27', '2022-11-25 03:54:27');
 
 -- --------------------------------------------------------
 
@@ -147,7 +173,7 @@ CREATE TABLE `jenis_barang` (
 INSERT INTO `jenis_barang` (`id_jenis_barang`, `jenis_barang`, `jumlah`, `created_at`, `updated_at`) VALUES
 ('JB-001', 'Orgen', 2, '2022-11-13 17:38:13', '2022-11-22 08:28:47'),
 ('JB-002', 'Sound System', 2, '2022-11-16 06:10:08', '2022-11-22 12:33:57'),
-('JB-003', 'Alat Musik', 0, '2022-11-22 12:41:40', '2022-11-22 12:41:40'),
+('JB-003', 'Alat Musik', 1, '2022-11-22 12:41:40', '2022-11-25 10:29:48'),
 ('JB-004', 'Diessel', 0, '2022-11-22 12:46:00', '2022-11-22 12:46:00');
 
 -- --------------------------------------------------------
@@ -185,11 +211,21 @@ CREATE TABLE `keuangan` (
   `id_keuangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `waktu` datetime NOT NULL,
   `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `debit` int(11) NOT NULL,
+  `debit` int(11) NOT NULL DEFAULT 0,
   `kredit` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `keuangan`
+--
+
+INSERT INTO `keuangan` (`id_keuangan`, `waktu`, `keterangan`, `debit`, `kredit`, `created_at`, `updated_at`) VALUES
+('KU-000000001', '2022-11-25 17:07:07', 'Membeli Piano', 0, 1500000, '2022-11-25 10:07:07', '2022-11-25 10:07:07'),
+('KU-000000002', '2022-11-25 17:20:15', 'Membeli Piano', 0, 1500000, '2022-11-25 10:20:15', '2022-11-25 10:20:15'),
+('KU-000000003', '2022-11-25 17:20:51', 'Membeli Sound System', 0, 5000000, '2022-11-25 10:20:51', '2022-11-25 10:20:51'),
+('KU-000000004', '2022-11-25 17:27:06', 'Memperbaiki Piano', 0, 100000, '2022-11-25 10:27:06', '2022-11-25 10:27:06');
 
 -- --------------------------------------------------------
 
@@ -214,7 +250,7 @@ CREATE TABLE `kondisi_barang` (
 INSERT INTO `kondisi_barang` (`id`, `id_jenis_barang`, `baik`, `rusak`, `diperbaiki`, `created_at`, `updated_at`) VALUES
 (1, 'JB-001', 2, 0, 0, '2022-11-15 11:24:54', '2022-11-22 08:28:47'),
 (2, 'JB-002', 1, 1, 0, '2022-11-16 06:10:08', '2022-11-22 12:33:57'),
-(4, 'JB-003', 0, 0, 0, '2022-11-22 12:41:40', '2022-11-22 12:41:40'),
+(4, 'JB-003', 0, 1, 0, '2022-11-22 12:41:40', '2022-11-25 10:29:48'),
 (5, 'JB-004', 0, 0, 0, '2022-11-22 12:46:00', '2022-11-22 12:46:00');
 
 -- --------------------------------------------------------
@@ -253,7 +289,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2022_11_19_171159_create_hutangs_table', 1),
 (18, '2022_11_19_171746_create_pembayarans_table', 1),
 (19, '2022_11_19_181529_create_keuangans_table', 1),
-(20, '2022_11_21_212326_create_catatan_penolakans_table', 2);
+(20, '2022_11_21_212326_create_catatan_penolakans_table', 2),
+(21, '2022_11_23_204440_create_bukti_pembayarans_table', 3),
+(22, '2022_11_24_163510_create_transaksi_keluars_table', 3);
 
 -- --------------------------------------------------------
 
@@ -390,7 +428,11 @@ INSERT INTO `pesanan` (`id_pesanan`, `id_paket`, `tanggal_booking`, `tanggal_sel
 ('PS-000000005', 'PK-003', '2022-11-22', '2022-11-23', '0895640495359', 'yguuds', '2022-11-22 02:33:17', '2022-11-22 02:33:17'),
 ('PS-000000006', 'PK-001', '2022-11-19', '2022-11-22', '0895347363386', 'pasuruan', '2022-11-22 07:59:32', '2022-11-22 07:59:32'),
 ('PS-000000007', 'PK-003', '2022-11-18', '2022-11-24', '0895347262286', 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', '2022-11-22 08:27:18', '2022-11-22 08:27:18'),
-('PS-000000008', 'PK-001', '2022-11-23', '2022-11-24', '123456789', 'wwwwwwwwwwwwww', '2022-11-22 09:28:18', '2022-11-22 09:28:18');
+('PS-000000008', 'PK-001', '2022-11-23', '2022-11-24', '123456789', 'wwwwwwwwwwwwww', '2022-11-22 09:28:18', '2022-11-22 09:28:18'),
+('PS-000000009', 'PK-013', '2022-11-26', '2022-11-30', '123456789', 'desa konoha', '2022-11-25 03:44:15', '2022-11-25 03:44:15'),
+('PS-000000010', 'PK-004', '2022-12-02', '2022-12-09', '087654324322', 'liyue', '2022-11-25 03:54:27', '2022-11-25 03:54:27'),
+('PS-000000011', 'PK-013', '2022-11-26', '2022-11-27', '0895347363386', 'pasuruan', '2022-11-25 10:42:14', '2022-11-25 10:42:14'),
+('PS-000000012', 'PK-013', '2022-11-26', '2022-11-27', '0895347363386', 'pasuruan', '2022-11-25 10:48:33', '2022-11-25 10:48:33');
 
 -- --------------------------------------------------------
 
@@ -417,7 +459,9 @@ INSERT INTO `pesanan_sistem` (`id`, `id_pesanan`, `id_pelanggan`, `catatan`, `st
 (6, 'PS-000000002', 2, 'asas', 'Tervalidasi', '2022-11-21 21:55:04', '2022-11-21 22:00:14'),
 (7, 'PS-000000004', 2, 'tolong segera', 'Tervalidasi', '2022-11-22 02:28:51', '2022-11-22 02:29:33'),
 (8, 'PS-000000006', 4, 'aaaaaaaaaaaaaaaaaaaaa', 'Tervalidasi', '2022-11-22 07:59:32', '2022-11-22 08:14:26'),
-(9, 'PS-000000008', 5, 'aaaaaaaaaaaaaaaaaaaaa', 'Tervalidasi', '2022-11-22 09:28:18', '2022-11-22 09:30:16');
+(9, 'PS-000000008', 5, 'aaaaaaaaaaaaaaaaaaaaa', 'Tervalidasi', '2022-11-22 09:28:18', '2022-11-22 09:30:16'),
+(10, 'PS-000000011', 4, 'segera', 'Pesanan Ditolak', '2022-11-25 10:42:14', '2022-11-25 10:49:12'),
+(11, 'PS-000000012', 4, 'segera', 'Pesanan Ditolak', '2022-11-25 10:48:33', '2022-11-25 10:50:11');
 
 -- --------------------------------------------------------
 
@@ -440,7 +484,9 @@ CREATE TABLE `pesanan_wa` (
 INSERT INTO `pesanan_wa` (`id`, `id_pesanan`, `nama`, `created_at`, `updated_at`) VALUES
 (3, 'PS-000000003', 'Putu Ary Kusuma Yudha', '2022-11-21 22:03:25', '2022-11-21 22:03:25'),
 (4, 'PS-000000005', 'Putu Ary Kusuma Yudha', '2022-11-22 02:33:17', '2022-11-22 02:33:17'),
-(5, 'PS-000000007', 'rian andri waskito', '2022-11-22 08:27:18', '2022-11-22 08:27:18');
+(5, 'PS-000000007', 'rian andri waskito', '2022-11-22 08:27:18', '2022-11-22 08:27:18'),
+(6, 'PS-000000009', 'aqua uchiha', '2022-11-25 03:44:15', '2022-11-25 03:44:15'),
+(7, 'PS-000000010', 'hu tao', '2022-11-25 03:54:27', '2022-11-25 03:54:27');
 
 -- --------------------------------------------------------
 
@@ -496,7 +542,38 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_pesanan`, `total_bayar`, `waktu_tra
 ('TR-000000005', 'PS-000000005', 35800000, '2022-11-22 09:33:17', 'Belum Dibayar', '2022-11-22 02:33:17', '2022-11-22 02:33:17'),
 ('TR-000000006', 'PS-000000006', 6200000, '2022-11-22 15:14:26', 'Belum Dibayar', '2022-11-22 08:14:26', '2022-11-22 08:14:26'),
 ('TR-000000007', 'PS-000000007', 124800000, '2022-11-22 15:27:18', 'Belum Dibayar', '2022-11-22 08:27:18', '2022-11-22 08:27:18'),
-('TR-000000008', 'PS-000000008', 3200000, '2022-11-22 16:30:16', 'Belum Dibayar', '2022-11-22 09:30:16', '2022-11-22 09:30:16');
+('TR-000000008', 'PS-000000008', 3200000, '2022-11-22 16:30:16', 'Belum Dibayar', '2022-11-22 09:30:16', '2022-11-22 09:30:16'),
+('TR-000000009', 'PS-000000009', 9200000, '2022-11-25 10:44:15', 'Belum Dibayar', '2022-11-25 03:44:15', '2022-11-25 03:44:15'),
+('TR-000000010', 'PS-000000010', 142600000, '2022-11-25 10:54:27', 'Belum Dibayar', '2022-11-25 03:54:27', '2022-11-25 03:54:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_keluar`
+--
+
+CREATE TABLE `transaksi_keluar` (
+  `id_transaksi_keluar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_transaksi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `waktu` datetime NOT NULL,
+  `pengeluaran` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi_keluar`
+--
+
+INSERT INTO `transaksi_keluar` (`id_transaksi_keluar`, `nama_transaksi`, `waktu`, `pengeluaran`, `created_at`, `updated_at`) VALUES
+('TK-000000001', 'Membeli Piano', '2022-11-25 16:58:42', 1000000, '2022-11-25 09:58:42', '2022-11-25 09:58:42'),
+('TK-000000002', 'Memperbaiki Gitar', '2022-11-25 17:01:12', 500000, '2022-11-25 10:01:12', '2022-11-25 10:01:12'),
+('TK-000000003', 'Memperbaiki Gitar', '2022-11-25 17:03:04', 500000, '2022-11-25 10:03:04', '2022-11-25 10:03:04'),
+('TK-000000004', 'Membeli Piano', '2022-11-25 17:03:27', 1500000, '2022-11-25 10:03:27', '2022-11-25 10:03:27'),
+('TK-000000005', 'Membeli Piano', '2022-11-25 17:07:07', 1500000, '2022-11-25 10:07:07', '2022-11-25 10:07:07'),
+('TK-000000006', 'Membeli Piano', '2022-11-25 17:20:15', 1500000, '2022-11-25 10:20:15', '2022-11-25 10:20:15'),
+('TK-000000007', 'Membeli Sound System', '2022-11-25 17:20:51', 5000000, '2022-11-25 10:20:51', '2022-11-25 10:20:51'),
+('TK-000000008', 'Memperbaiki Piano', '2022-11-25 17:27:06', 100000, '2022-11-25 10:27:06', '2022-11-25 10:27:06');
 
 -- --------------------------------------------------------
 
@@ -542,6 +619,12 @@ ALTER TABLE `admin`
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
   ADD KEY `barang_id_jenis_barang_foreign` (`id_jenis_barang`);
+
+--
+-- Indexes for table `bukti_pembayaran`
+--
+ALTER TABLE `bukti_pembayaran`
+  ADD KEY `bukti_pembayaran_id_transaksi_foreign` (`id_transaksi`);
 
 --
 -- Indexes for table `catatan_penolakan`
@@ -687,7 +770,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `catatan_penolakan`
 --
 ALTER TABLE `catatan_penolakan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -705,7 +788,7 @@ ALTER TABLE `kondisi_barang`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -717,13 +800,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pesanan_sistem`
 --
 ALTER TABLE `pesanan_sistem`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pesanan_wa`
 --
 ALTER TABLE `pesanan_wa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `social_accounts`
@@ -746,6 +829,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `barang`
   ADD CONSTRAINT `barang_id_jenis_barang_foreign` FOREIGN KEY (`id_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`);
+
+--
+-- Constraints for table `bukti_pembayaran`
+--
+ALTER TABLE `bukti_pembayaran`
+  ADD CONSTRAINT `bukti_pembayaran_id_transaksi_foreign` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`);
 
 --
 -- Constraints for table `catatan_penolakan`

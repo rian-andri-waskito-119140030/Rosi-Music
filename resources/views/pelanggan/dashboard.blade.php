@@ -58,6 +58,7 @@ https://templatemo.com/tm-570-chain-app-dev
     <!-- ***** Preloader End ***** -->
 
     <!-- ***** Header Area Start ***** -->
+    
     <header
       class="header-area header-sticky wow slideInDown"
       data-wow-duration="0.75s"
@@ -143,8 +144,15 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
       </div>
     </header>
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
     @auth
-    {{-- <?php dd($profil); ?> --}}
+    {{-- <?php dd($data['bukti']); ?> --}}
+    {{-- <?php dd($data['pesanan']); ?> --}}
     <div id="modal" class="popupContainer" style="display: none; float: left">
       <div class="popupHeader">
         <span class="header_title" style="color: white">Profile</span>
@@ -184,7 +192,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li>Email: {{ auth()->guard('pelanggan')->user()->email }}</li>
             </ul>
           </nav>
-          @isset($profil)
+          @isset($data['pesanan'])
           <nav>
             <label for="btn-1" class="button">
               Status Pemesanan
@@ -192,11 +200,11 @@ https://templatemo.com/tm-570-chain-app-dev
             </label>
             <input type="checkbox" id="btn-1" />
             <ul class="menu">
-              <li>Status Pesanan : <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($profil->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($profil->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($profil->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $profil->status }}</span></li>
+              <li>Status Pesanan : <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($data['pesanan']->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($data['pesanan']->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($data['pesanan']->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $data['pesanan']->status }}</span></li>
               <div style="margin-top: 5px !important">
-                @if ($profil->status== "Tervalidasi")
+                @if ($data['pesanan']->status== "Tervalidasi")
                 <a
-                href="checkout.html"
+                href="checkout/{{ $data['pesanan']->id_pesanan }}"
                 style="
                   text-decoration: none;
                   border: solid 1px #000000;
@@ -211,8 +219,18 @@ https://templatemo.com/tm-570-chain-app-dev
                 Upload Bukti Pembayaran
               </a>
                 @endif
-                @if ($profil->status== "Pesanan Ditolak")
-                    <p>Catatan Penolakan : {{ $ditolak->catatan_penolakan }}</p>
+                @if ($data['pesanan']->status== "Pesanan Ditolak")
+                    <p  style="
+                  margin-top: 10px;
+                  font-family: 'Roboto';
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 14px;
+                  line-height: 19px;
+                  /* identical to box height */
+                  letter-spacing: -0.006em;
+                  color: #000000;
+                ">Catatan Penolakan : {{ $data['ditolak']->catatan_penolakan }}</p>
                 @endif
                 
               </div>
@@ -231,14 +249,50 @@ https://templatemo.com/tm-570-chain-app-dev
                   letter-spacing: -0.006em;
                   color: #000000;
                 ">
-                {{ $profil->paket->nama_paket }} :
+                {{ $data['pesanan']->paket->nama_paket }} :
               </p>
               <ul style="display: block; list-style: decimal-leading-zero">
-                <?= $profil->paket->deskripsi_panjang; ?>
+                <?= $data['pesanan']->paket->deskripsi_panjang; ?>
               </ul>
             </ul>
           </nav>
           @endisset
+
+          @if (!is_null($data['bukti']))
+          <nav>
+            <label for="btn2" class="button">
+              Status Pembayaran
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn2" />
+            
+            <ul class="menu">
+              @foreach ($data['bukti'] as $key => $item)
+              <li>Bukti {{ $key+1 }} </li>
+              <li>Nominal {{ rupiah($item->nominal) }}</li>
+              <li>Status Pembayaran : {{ $item->status_pembayaran }}</li>
+              @endforeach
+            </ul>
+           
+          </nav> 
+          @endif
+          {{-- @isset($data['bukti'])
+                    
+          @endisset --}}
+
+          @isset($data['hutang'])
+          <nav>
+            <label for="btn3" class="button">
+              Hutang
+              <span class="fas fa-caret-right"></span>
+            </label>
+            <input type="checkbox" id="btn3" />
+            <ul class="menu">
+              <li>Jumlah Hutang : {{ rupiah($data['hutang']->hutang) }} </li>
+            </ul>
+          </nav>              
+          @endisset
+
           <nav>
             <form action="/logout" method="post">
               @csrf
@@ -452,8 +506,8 @@ https://templatemo.com/tm-570-chain-app-dev
               </p>
             </div>
           </div>
-          {{-- <?php dd($data[0]->id_jenis_paket); ?> --}}
-          @foreach ($data as $item)
+          {{-- <?php dd($data); ?> --}}
+          @foreach ($jenis as $item)
           <div class="col-lg-6">
             <div class="pricing-item-regular">
               <div class="img-thumbnail m-3">

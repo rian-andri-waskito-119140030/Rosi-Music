@@ -31,8 +31,9 @@ class AdminAuthController extends Controller
 
         if(Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended('/admin/dashboard')->with('success', 'Login Berhasil!');
         }
+       // $request->session()->flash('flash', 'Welcome!');
         $errors = new MessageBag(['password' => ['username atau password salah.']]);
         return back()->withErrors($errors)->withSuccess('Login details are not valid');
     }
@@ -77,7 +78,7 @@ class AdminAuthController extends Controller
         return redirect('/admin/login')->with('success', 'Registration successfull! Please login');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $jumlah_paket=count(Paket::get());
         $jumlah_pesanan=count(PesananSistem::where('status', 'Menunggu Validasi')->get());
@@ -90,6 +91,7 @@ class AdminAuthController extends Controller
             'pesanan_sistem'    => $jumlah_pesanan,
             'barang'            => $jumlah_barang,
             'saldo'             => $saldo,
-        ]);
+        ])->with('success', 'Login Berhasil!');
+        
     }
 }

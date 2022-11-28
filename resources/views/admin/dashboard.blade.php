@@ -77,6 +77,12 @@
     <main id="main-container">
       <!-- Hero -->
       <div class="content">
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div
           class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center py-2 text-center text-md-start">
           <div class="flex-grow-1 mb-1 mb-md-0">

@@ -51,246 +51,12 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </div>
     <!-- ***** Preloader End ***** -->
-    <!-- ***** Header Area Start ***** -->
-     <header
-      class="header-area header-sticky wow slideInDown"
-      data-wow-duration="0.75s"
-      data-wow-delay="0s">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <nav class="main-nav">
-              <!-- ***** Logo Start ***** -->
-              <a
-                href="/"
-                class="logo"
-                style="
-                  font-size: 32px;
-                  color: black;
-                  font-weight: 600px;
-                  font-family: 'Source Serif Pro';
-                ">
-                ROSI MUSIC
-              </a>
-              <!-- ***** Logo End ***** -->
-              <!-- ***** Menu Start ***** -->
-              <ul class="nav">
-                <li class="scroll-to-section">
-                  <a href="/">Beranda</a>
-                </li>
-                <li class="scroll-to-section">
-                  <a href="#pricing" class="active">Daftar Paket</a>
-                </li>
-                <li class="scroll-to-section"><a href="/galeri">Gallery</a></li>
-                <li class="scroll-to-section">
-                  <a href="/tentang-kami">Tentang Kami</a>
-                </li>
-                <!-- <li class="scroll-to-section">
-                  <a href="#newsletter">Newsletter</a>
-                </li> -->
-                @auth
-                <li>
-                  <link rel="stylesheet" href={{ URL::asset("assets/css/deskripsi-paket-login.css")}} />
-                  <div class="">
-                    <a id="modal_trigger" href="#modal"
-                     ><i class=""></i
-                      ><img
-                        src="{{ auth()->guard('pelanggan')->user()->avatar }}"
-                        style="width: 46px; height: 46px; border-radius: 50%"
-                        /></a>
-                    </div>
-                </li>
-            
-                  @else
-                  <li>
-                    <div class="gradient-button">
-                      <a id="modal_trigger" href="#modal"
-                        ><i class=""></i>Login Sekarang</a
-                      >
-                    </div>
-                  </li>
-                  
-                 
-                @endauth
-              </ul>
-              <a class="menu-trigger">
-                <span>Menu</span>
-              </a>
-              <!-- ***** Menu End ***** -->
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
-    @auth
-    {{-- <?php dd($profil); ?> --}}
-    <div id="modal" class="popupContainer" style="display: none; float: left">
-      <div class="popupHeader">
-        <span class="header_title" style="color: white">Profile</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-      </div>
-      <section class="popupBody">
-        <!-- User Profile -->
-        <div class="user_profile">
-          <img
-            src="{{ auth()->guard('pelanggan')->user()->avatar }}"
-            class="mx-auto"
-            style="
-              width: 112px;
-              height: 112px;
-              border-radius: 50%;
-              margin-left: 100px;
-              margin-bottom: 10px;
-            " />
-          <h5>{{ auth()->guard('pelanggan')->user()->nama }}</h5>
-          <img
-            src="assets/images/heading-line-dec.png"
-            alt=""
-            style="width: 33px; height: 4px" />
-        </div>
-
-        <div class="detail_profile">
-          <!-- Detail Profile -->
-          <!-- dropdown animated -->
-          <nav>
-            <label for="btn" class="button">
-              Profile
-              <span class="fas fa-caret-right"></span>
-            </label>
-            <input type="checkbox" id="btn" />
-            <ul class="menu">
-              <li>Nama : {{ auth()->guard('pelanggan')->user()->nama }}</li>
-              <li>Email: {{ auth()->guard('pelanggan')->user()->email }}</li>
-            </ul>
-          </nav>
-          @isset($profil)
-          <nav>
-            <label for="btn-1" class="button">
-              Status Pemesanan
-              <span class="fas fa-caret-right"></span>
-            </label>
-            <input type="checkbox" id="btn-1" />
-            <ul class="menu">
-              <li>Status Pesanan : <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?php if($profil->status=="Menunggu Validasi") {echo "bg-warning-light text-warning";} else if($profil->status=="Tervalidasi") {echo "bg-success-light text-success";} else if($profil->status=="Pesanan Ditolak") {echo "bg-danger-light text-danger";} ?>">{{ $profil->status }}</span></li>
-              <div style="margin-top: 5px !important">
-                @if ($profil->status== "Tervalidasi")
-                <a
-                href="checkout.html"
-                style="
-                  text-decoration: none;
-                  border: solid 1px #000000;
-                  color: #fffdfd;
-                  padding: 5px 10px;
-                  border-radius: 5px;
-                  background-color: rgb(54, 212, 54);
-                  box-shadow: dimgray;
-                  width: 20%;
-                  height: 30%;
-                ">
-                Upload Bukti Pembayaran
-              </a>
-                @endif
-                
-              </div>
-
-              <br />
-              Informasi Pesanan :
-              <p
-                style="
-                  margin-top: 10px;
-                  font-family: 'Roboto';
-                  font-style: normal;
-                  font-weight: 600;
-                  font-size: 14px;
-                  line-height: 19px;
-                  /* identical to box height */
-                  letter-spacing: -0.006em;
-                  color: #000000;
-                ">
-                {{ $profil->paket->nama_paket }} :
-              </p>
-              <ul style="display: block; list-style: decimal-leading-zero">
-                <?= $profil->paket->deskripsi_panjang; ?>
-              </ul>
-            </ul>
-          </nav>
-          @endisset
-          <nav>
-            <form action="/logout" method="post">
-              @csrf
-              <button
-                type="submit"
-                class="btn mt-3"
-                style="
-                  background-color: white;
-                  width: 108%;
-                  border-bottom: 1px solid #e8e8e8;
-                  border-top: 1px solid #e8e8e8;
-                ">
-                <p
-                  style="
-                    float: left;
-                    margin-left: -5%;
-                    font-family: 'Source Serif Pro';
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 18px;
-                    line-height: 23px;
-                    letter-spacing: -0.006em;
-                    color: #000000;
-                  ">
-                  Log Out
-                </p>
-                <img
-                  src="assets/images/image-13.png"
-                  style="width: 20px; height: 20px; float: right" />
-              </button>
-            </form>
-          </nav>
-        </div>
-        <!-- Social Login -->
-        <!-- <div class="social_login">
-          <div class="">
-            <a href="#" class="social_box google">
-              <span class="icon"><i class="fab fa-google-plus"></i></span>
-              <span class="icon_title">Connect with Google</span>
-            </a>
-          </div>
-        </div> -->
-
-        <!-- Username & Password Login form -->
-
-        <!-- Register Form -->
-      </section>
-    </div>
-    @else
-    <div id="modal" class="popupContainer" style="display: none">
-      <div class="popupHeader">
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-        <span class="header_title">Login</span>
-      </div>
-
-      <section class="popupBody">
-        <!-- Social Login -->
-        <div class="social_login">
-          <div class="">
-            <a href="/auth/google" class="social_box google">
-              <span class="icon"><img src="{{ URL::asset("assets/images/image-6.png")}}" /></span>
-              <span class="icon_title">Login menggunakan Google</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Username & Password Login form -->
-
-        <!-- Register Form -->
-      </section>
-    </div>
-    @endauth
+   
+    @include('layout.user_nav')
     {{-- <?php dd($data); ?> --}}
 
     <div class="container">
-      <div class="deskripsi"><p>Deskripsi {{ $data->nama_paket }}</p></div>
+      <div class="deskripsi"><p>Deskripsi {{ $paket->nama_paket }}</p></div>
     </div>
     <div
       class="main-banner wow fadeIn"
@@ -321,7 +87,7 @@ https://templatemo.com/tm-570-chain-app-dev
                         Pada paket ini kamu akan mendaptkan barang sewa berupa :
                       </p>
                       <ul>
-                        <?= $data->deskripsi_panjang; ?>
+                        <?= $paket->deskripsi_panjang; ?>
                       </ul>
                       <h2>Harga Paket</h2>
                       <p
@@ -332,7 +98,7 @@ https://templatemo.com/tm-570-chain-app-dev
                           font-size: 48px;
                           line-height: 30px;
                         ">
-                        {{ rupiah($data->harga_sewa) }}
+                        {{ rupiah($paket->harga_sewa) }}
                       </p>
                     </div>
                   </div>
@@ -340,10 +106,10 @@ https://templatemo.com/tm-570-chain-app-dev
               </div>
               <div class="col-lg-6">
                 <div
-                  class="img-fluid"
+                  class="img-box wow fadeInRight"
                   data-wow-duration="1s"
                   data-wow-delay="0.5s">
-                  <img src='{{ URL::asset("storage/paket")}}/{{ $data->gambar }}' alt="" />
+                  <img style="width: 437px; height: 375px;" src='{{ URL::asset("storage/paket")}}/{{ $paket->gambar }}' alt="" />
                 </div>
               </div>
             </div>
@@ -357,7 +123,7 @@ https://templatemo.com/tm-570-chain-app-dev
           type="button"
           class="btn btn-success"
           style="background: #2b8700; border-radius: 4px; margin-right: 20px">
-          <a href="/pesanan/{{ $data->id_paket }}" style="text-decoration: none; color: white"
+          <a href="/pesanan/{{ $paket->id_paket }}" style="text-decoration: none; color: white"
             >Buat Pesanan Sekarang</a
           >
         </button>
@@ -369,7 +135,7 @@ https://templatemo.com/tm-570-chain-app-dev
             border: 2px solid #2b8700;
             border-radius: 4px;
             color: #2b8700;
-          "><a href="https://wa.me/+62895347363386?text=Hallo%20Kak,%20Saya%20ingin%20melakukan%20order%20%0ANama%20:%20%0APaket%20:%20{{ $data->nama_paket }}%20({{ $data->id_paket }})%0ATanggal%20mulai%20:%20%0ATanggal%20Selesai%20:%20%0AAlamat%20:%20%0ACatatan%20:">Sewa Melalui Whatsapp</a>
+          "><a href="https://wa.me/+62895347363386?text=Hallo%20Kak,%20Saya%20ingin%20melakukan%20order%20%0ANama%20:%20%0APaket%20:%20{{ $paket->nama_paket }}%20({{ $paket->id_paket }})%0ATanggal%20mulai%20:%20%0ATanggal%20Selesai%20:%20%0AAlamat%20:%20%0ACatatan%20:">Sewa Melalui Whatsapp</a>
         </button>
       </div>
     </div>

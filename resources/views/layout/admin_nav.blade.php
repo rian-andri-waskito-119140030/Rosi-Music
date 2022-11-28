@@ -158,6 +158,11 @@
             </a>
             <ul class="nav-main-submenu">
               <li class="nav-main-item">
+                <a class="nav-main-link" href="/admin/bukti-pembayaran">
+                  <span class="nav-main-link-name">Bukti Pembayaran</span>
+                </a>
+              </li>
+              <li class="nav-main-item">
                 <a class="nav-main-link" href="/admin/keuangan">
                   <span class="nav-main-link-name">Laporan Keuangan</span>
                 </a>

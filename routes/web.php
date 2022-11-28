@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllers\PelangganAuthController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\JenisPaketController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PaketController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\HutangController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\BuktiPembayaranController;
 
 
 /*
@@ -28,22 +29,16 @@ use App\Http\Controllers\KeuanganController;
 |
 */
 
-Route::get('/', [JenisPaketController::class, 'index'])->name('dashboard');
-Route::post('/', [JenisPaketController::class, 'store']);
-
-Route::get('/galeri', function () {
-    return view('pelanggan.galeri');
-})->name('galeri');
-
-Route::get('/tentang-kami', function () {
-    return view('pelanggan.tentang-kami');
-})->name('tentang-kami');
+Route::get('/', [PelangganController::class, 'index'])->name('dashboard');
+Route::get('/galeri', [PelangganController::class, 'galeri'])->name('galeri');
+Route::get('/tentang-kami', [PelangganController::class, 'tentang_kami'])->name('tentang-kami');
 
 Route::get('/jenis-paket/{id_jenis_paket}', [PaketController::class, 'index'])->name('daftar-paket');
 Route::get('/paket/{id_paket}', [PaketController::class, 'show'])->name('deskripsi-paket');
 Route::get('/pesanan/{id_paket}', [PaketController::class, 'pesanan'])->name('pesanan')->middleware('auth:pelanggan');
 Route::post('/pesanan', [PesananSistemController::class, 'store'])->name('pesanan.store')->middleware('auth:pelanggan');
-Route::get('/checkout/{id_pesanan}', [PesananController::class, 'checkout']);
+Route::get('/checkout/{id_pesanan}', [BuktiPembayaranController::class, 'checkout'])->middleware('auth:pelanggan');
+Route::post('/checkout', [BuktiPembayaranController::class, 'store'])->name('bukti.store')->middleware('auth:pelanggan');
 
 Route::get('/admin/pesanan-sistem', [PesananSistemController::class, 'tampil'])->middleware('auth:admin');
 Route::post('/admin/pesanan-sistem/validasi', [PesananSistemController::class, 'validasi_pesanan'])->middleware('auth:admin');
@@ -57,12 +52,17 @@ Route::post('/admin/pesanan-wa/tambah', [PesananWAController::class, 'store'])->
 Route::post('/admin/pembayaran', [PembayaranController::class, 'store'])->middleware('auth:admin');
 
 Route::get('/admin/transaksi-sistem', [TransaksiController::class, 'tampil_transaksi_sistem'])->middleware('auth:admin');
+
 Route::get('/admin/transaksi-wa', [TransaksiController::class, 'tampil_transaksi_wa'])->middleware('auth:admin');
 Route::get('/admin/transaksi-keluar', [TransaksiController::class, 'tampil_transaksi_keluar'])->middleware('auth:admin');
 Route::post('/admin/transaksi-keluar', [TransaksiController::class, 'tambah_transaksi_keluar'])->middleware('auth:admin');
 
 Route::get('/admin/hutang-sistem', [HutangController::class, 'tampil_hutang_sistem'])->middleware('auth:admin');
 Route::get('/admin/hutang-wa', [HutangController::class, 'tampil_hutang_wa'])->middleware('auth:admin');
+
+
+Route::get('/admin/bukti-pembayaran', [BuktiPembayaranController::class, 'tampil'])->middleware('auth:admin');
+Route::post('/admin/bukti-pembayaran/validasi', [BuktiPembayaranController::class, 'validasi_pembayaran'])->name('admin.validasi-bukti')->middleware('auth:admin');
 
 Route::get('/admin/keuangan', [KeuanganController::class, 'index'])->middleware('auth:admin');
 

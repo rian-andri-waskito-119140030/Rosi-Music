@@ -73,10 +73,10 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="card text-center border-0">
           <div class="card-body">
             <h5 class="card-title label-checkout mb-5">
-              Selamat Pesanan Anda Telah Dibuat
+              Selamat Pesanan Anda Telah Tervalidasi
             </h5>
             <p class="card-text bayar-dp mb-5">
-              Silahkan lakukan pembayaran sebesar Rp. 100.000,- ke rekening
+              Silahkan lakukan pembayaran minimal sebesar {{ rupiah(0.5*$pesanan->total_bayar) }} ke rekening
               berikut: <br />
               <b>Bank BCA</b> <br />
               No. Rekening: 1234567890 <br />
@@ -87,29 +87,41 @@ https://templatemo.com/tm-570-chain-app-dev
               Masukkan bukti pembayaran dibawah ini
             </p>
             <form
-              class="upload-bukti"
-              action=""
-              onsubmit="openModal(e)"
-              id="myForm">
-              <div class="form-group mb-5">
-                <label for="exampleFormControlFile1"
-                  >Upload Bukti Pembayaran</label
-                >
-                <div class="upload-btn-wrapper">
-                  <button class="btn">
-                    <img
-                      src={{ URL::asset("assets/images/image-8.png")}}
-                      alt=""
-                      style="width: 50px; height: 50px" />
-                    <p>Upload Files</p>
-                  </button>
-                  <input type="file" name="myfile" />
+            action="/checkout"
+            method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="id_transaksi" value="{{ $pesanan->id_transaksi }}">
+              <div class="row g-4">
+                <div class="col-6">
+                  <label class="form-label">Nominal</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    min="{{ 0.5*$pesanan->total_bayar }}"
+                    value="{{ 0.5*$pesanan->total_bayar }}"
+                    placeholder="Masukkan Nominal"
+                    name="nominal"
+                    required />
                 </div>
-                <div class="confirm-pesan mb-2">
-                  <button class="btn btn-success btn" type="button">
-                    Kirim
-                  </button>
+                <div class="col-6">
+                  <label class="form-label" for="example-file-input"
+                    >Bukti Pembayaran</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="example-file-input"
+                    name="bukti"
+                    required />
+                    @if ($errors->has('bukti'))
+                      <span class="text-danger">{{ $errors->first('bukti') }}</span>
+                    @endif
                 </div>
+              <div class="mb-7">
+                <button type="submit" class="btn btn-primary float-end">
+                  Simpan
+                </button>
               </div>
             </form>
           </div>

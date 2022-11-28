@@ -16,56 +16,12 @@
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href={{ URL::asset("assets/css/oneui.min.css")}} />
 
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
+    <!-- END Stylesheets -->
 @endsection
-    <!-- Page Container -->
-    <!--
-        Available classes for #page-container:
-
-    GENERIC
-
-      'remember-theme'                            Remembers active color theme and dark mode between pages using localStorage when set through
-                                                  - Theme helper buttons [data-toggle="theme"],
-                                                  - Layout helper buttons [data-toggle="layout" data-action="dark_mode_[on/off/toggle]"]
-                                                  - ..and/or One.layout('dark_mode_[on/off/toggle]')
-
-    SIDEBAR & SIDE OVERLAY
-
-      'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
-      'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
-      'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
-      'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
-      'sidebar-dark'                              Dark themed sidebar
-
-      'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
-      'side-overlay-o'                            Visible Side Overlay by default
-
-      'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
-
-      'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
-
-    HEADER
-
-      ''                                          Static Header if no class is added
-      'page-header-fixed'                         Fixed Header
-
-    HEADER STYLE
-
-      ''                                          Light themed Header
-      'page-header-dark'                          Dark themed Header
-
-    MAIN CONTENT LAYOUT
-
-      ''                                          Full width Main Content if no class is added
-      'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
-      'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
-
-    DARK MODE
-
-      'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
-    -->
 
 @section('konten')
-{{-- <?php  dd($data); ?> --}}
     <div
       id="page-container"
       class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-boxed">
@@ -115,8 +71,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-
-              <h3 class="block-title">Data Transaksi</h3>
+              <h3 class="block-title">Data Hutang Whatsapp</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -134,47 +89,42 @@
                 <div class="block-content block-content-full">
                   <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
                   <table
-                    id="example"
                     class="table table-bordered table-vcenter js-dataTable-buttons">
                     <thead>
                       <tr>
                         <th class="text-center">No</th>
-                        <th class="text-center">ID Transaksi</th>
+
                         <th>Nama Pelanggan</th>
-                        <th class="d-none d-sm-table-cell">Tanggal</th>
-                        <th class="d-none d-sm-table-cell">Total Bayar</th>
-                        <th class="d-none d-sm-table-cell">Status</th>
+                        <th class="d-none d-sm-table-cell">Nama Paket</th>
+
+                        <th class="d-none d-sm-table-cell">Hutang</th>
                         <th class="d-none d-sm-table-cell">Action</th>
                         <!-- <th>Action</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($data as $key => $item)
                       <tr>
-                        <td class="text-center fs-sm">{{ $key+1 }}</td>
-                        <td class="fw-semibold fs-sm">{{ $item->id_transaksi }}</td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          {{ $item->nama }}
-                        </td>
-                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->waktu_transaksi }}</td>
-                        <td class="d-none d-sm-table-cell fs-sm">{{ rupiah($item->total_bayar) }}</td>
+                        <td class="text-center fs-sm">1</td>
+                        <td class="fw-semibold fs-sm">Nurhaldi Aldo</td>
+                        <td class="d-none d-sm-table-cell fs-sm">Paket 1 MC</td>
+
                         <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >{{ $item->status_transaksi }}</span
+                            >500.000</span
                           >
                         </td>
                         <td class="text-center fs-sm">
-                          <a
+                          <button
                             id="btn-detail"
                             type="button"
                             class="btn btn-sm btn-alt-primary"
                             data-toggle="modal"
-                            data-target="#modal{{ $item->id_transaksi }}"
-                            data-id="{{ $item->id_transaksi }}"
+                            data-target="#modal-block-normal"
+                            data-bs-toggle="tooltip"
                             title="Bayar">
                             <i class="fa fa-fw fa-money-bill-alt"></i>
-                          </a>
+                          </button>
                           <!--modal-->
                           <!-- <a
                             class="btn btn-sm btn-alt-danger"
@@ -184,7 +134,6 @@
                             <i class="fa fa-fw fa-times"></i>
                           </a> -->
                         </td>
-
                         <!-- <td class="text-center fs-sm">
                           <a
                             class="btn btn-sm btn-alt-secondary"
@@ -202,79 +151,75 @@
                           </a>
                         </td> -->
                       </tr>
-                      <div
-                          class="modal fade"
-                          id="modal{{ $item->id_transaksi }}"
-                          tabindex="-1"
-                          role="dialog"
-                          aria-hidden="true">
-                          <div
-                            class="modal-dialog modal-dialog-popout"
-                            role="document">
-                            <div class="modal-content">
-                              <div class="block block-themed block-transparent mb-0">
-                                <div class="block-header bg-primary-dark">
-                                  <h3 class="block-title">Edit Transaksi</h3>
-                                  <button
-                                    type="button"
-                                    class="btn btn-alt-danger"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <i class="fa fa-fw fa-times"></i>
-                                  </button>
-                                </div>
-                                <form action="/admin/pembayaran" method="POST">
-                                  @csrf
-                                  <div class="block-content fs-sm mb-3">
-                                    <div class="row">
-                                      <div class="col-lg-6">
-                                        <div class="form-group">
-                                          <label for="example-text-input"
-                                            >ID Transaksi</label
-                                          >
-                                          <input
-                                            type="text"
-                                            class="form-control"
-                                            id="example-text-input"
-                                            name="id_transaksi"
-                                            value="{{ $item->id_transaksi }}"
-                                            placeholder="{{ $item->id_transaksi }}"
-                                            disabled />
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-6">
-                                        <div class="form-group">
-                                          <label for="example-text-input"
-                                            >Uang Tunai</label
-                                          >
-                                          <input
-                                            type="text"
-                                            class="form-control"
-                                            id="example-text-input"
-                                            name="uang_bayar"
-                                            placeholder="Masukkan Uang Tunai" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    class="block-content block-content-full text-end border-top">
-                                    <button
-                                      type="submit"
-                                      class="btn btn-alt-primary"
-                                      data-bs-dismiss="modal">
-                                      <i class="fa fa-check me-1"></i>Simpan
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      @endforeach
                     </tbody>
                   </table>
-                  
+                  <div
+                    class="modal fade"
+                    id="modal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-hidden="true">
+                    <div
+                      class="modal-dialog modal-dialog-popout"
+                      role="document">
+                      <div class="modal-content">
+                        <div class="block block-themed block-transparent mb-0">
+                          <div class="block-header bg-primary-dark">
+                            <h3 class="block-title">Edit Transaksi</h3>
+                            <button
+                              type="button"
+                              class="btn btn-alt-danger"
+                              data-bs-dismiss="modal"
+                              aria-label="Close">
+                              <i class="fa fa-fw fa-times"></i>
+                            </button>
+                          </div>
+                          <form action="">
+                            <div class="block-content fs-sm mb-3">
+                              <div class="row">
+                                <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <label for="example-text-input"
+                                      >ID Transaksi</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="example-text-input"
+                                      name="example-text-input"
+                                      placeholder="TR-001"
+                                      disabled />
+                                  </div>
+                                </div>
+                                <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <label for="example-text-input"
+                                      >Uang Tunai</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="example-text-input"
+                                      name="example-text-input"
+                                      placeholder="Masukkan Uang Tunai" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="block-content block-content-full text-end border-top">
+                              <button
+                                type="submit"
+                                class="btn btn-alt-primary"
+                                data-bs-dismiss="modal">
+                                <i class="fa fa-check me-1"></i>Save
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- END Dynamic Table with Export Buttons -->
@@ -349,8 +294,7 @@
       //modal
       $(document).ready(function () {
         $(".btn").on("click", function () {
-          $(".modal").modal("show");
-
+          $("#modal").modal("show");
         });
       });
     </script>

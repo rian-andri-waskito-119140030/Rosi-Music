@@ -76,20 +76,20 @@ https://templatemo.com/tm-570-chain-app-dev
               <div class="row deskripsi-paket mb-4">
                 <div class="col-md-6">
                   <img
-                    src='{{ URL::asset("storage/paket/")}}/{{ $data->gambar }}'
+                    src='{{ URL::asset("storage/paket/")}}/{{ $paket->gambar }}'
                     alt=""
                     class="img-fluid"
                     style="width: 139px; height: 118px" />
                 </div>
                 <div class="col-md-6">
-                  <p class="text-right nama-paket">{{ $data->nama_paket }}</p>
-                  <p class="text-right harga-paket">{{ rupiah($data->harga_sewa) }}</p>
+                  <p class="text-right nama-paket">{{ $paket->nama_paket }}</p>
+                  <p class="text-right harga-paket">{{ rupiah($paket->harga_sewa) }}</p>
                 </div>
               </div>
               <div class="rincian-paket mb-4">
                 <h6>Pada Paket ini akan berisi:</h6>
                 <ul class="aksesoris">
-                  <?= $data->deskripsi_panjang; ?>
+                  <?= $paket->deskripsi_panjang; ?>
                 </ul>
               </div>
 
@@ -136,9 +136,9 @@ https://templatemo.com/tm-570-chain-app-dev
                       type="text"
                       class="form-control"
                       placeholder="Nama Paket"
-                      value="{{ $data->nama_paket }}"
+                      value="{{ $paket->nama_paket }}"
                       required />
-                      <input type="text" class="form-control"  name="id_paket" value="{{ $data->id_paket }}" style='display:none'>
+                      <input type="text" class="form-control"  name="id_paket" value="{{ $paket->id_paket }}" style='display:none'>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="">Tanggal Mulai</label>
@@ -396,7 +396,7 @@ https://templatemo.com/tm-570-chain-app-dev
                     var firstDate = new Date($("#tgl1").val());
                     var secondDate = new Date($("#tgl2").val());
                     var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
-                    $("#selisih").html(formatRupiah((diffDays+1)*{{ $data->harga_sewa }}-(diffDays*200000)));
+                    $("#selisih").html(formatRupiah((diffDays+1)*{{ $paket->harga_sewa }}-(diffDays*200000)));
                 }
             });
         });

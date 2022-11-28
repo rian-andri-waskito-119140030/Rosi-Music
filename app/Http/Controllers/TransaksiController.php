@@ -96,7 +96,7 @@ class TransaksiController extends Controller
 
 
         //return response
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Transaksi Keluar Berhasil Ditambahkan');
     }
 
     public function show(Paket $paket)

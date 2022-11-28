@@ -72,7 +72,7 @@ class PesananSistemController extends Controller
         ]);
 
         //return response
-        return redirect('/');
+        return redirect('/')->with('success', 'Pesanan Berhasil Dibuat, Silahkan Tunggu Konfirmasi');
     }
 
     public function validasi_pesanan(Request $request)
@@ -111,7 +111,7 @@ class PesananSistemController extends Controller
         ]);
 
         //return collection of posts as a resource
-        return redirect('/admin/pesanan-sistem');
+        return redirect('/admin/pesanan-sistem')->with('success', 'Pesanan Berhasil Divalidasi');
     }
 
     public function tolak_pesanan(Request $request)
@@ -127,7 +127,7 @@ class PesananSistemController extends Controller
         ]);
 
         //return collection of posts as a resource
-        return redirect('/admin/pesanan-sistem');
+        return redirect('/admin/pesanan-sistem')->with('success', 'Pesanan Berhasil Ditolak');
     }
 
     public function detail($id_pesanan)
@@ -187,13 +187,6 @@ class PesananSistemController extends Controller
             'message' => 'Barang berhasil diubah',
             'data'    => $barang,
         ]);
-    }
-
-    public function checkout($id_pesanan)
-    {
-        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
-        
-        return view('pelanggan.checkout', ['data' => $pesanan]);
     }
     
     /**
