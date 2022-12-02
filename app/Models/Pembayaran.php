@@ -17,5 +17,6 @@ class Pembayaran extends Model
         'id_transaksi',
         'uang_bayar',
         'waktu_bayar',
+        'status_pembayaran'
     ];
 }

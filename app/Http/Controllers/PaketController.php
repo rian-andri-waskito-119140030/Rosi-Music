@@ -9,6 +9,8 @@ use App\Models\Jenis_Paket;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\SocialiteController;
 use Illuminate\Support\MessageBag;
 
 
@@ -32,10 +34,14 @@ class PaketController extends Controller
         //get posts
         $paket=Jenis_Paket::with('paket')->where('id_jenis_paket', $id_jenis_paket)->get();
 
-        //return collection of posts as a resource
-        return view('pelanggan.daftar-paket', ['data' => $paket]);
+        if (Auth::guard('pelanggan')->check()) {
+            $data=new SocialiteController;
+            return view('pelanggan.daftar-paket', ['paket' => $paket, 'data' => $data->profil() ]);
+        } else {
+            return view('pelanggan.daftar-paket', ['paket' => $paket]);
+        }
     }
-
+    
     public function tambah()
     {
         $jenis_paket=Jenis_Paket::get();
@@ -82,12 +88,13 @@ class PaketController extends Controller
     public function show($id_paket)
     {
         $paket=Paket::where('id_paket', $id_paket)->get();
-        //return single post as a resource
-        // return response()->json([
-        //     'message' => 'Paket berhasil ditambahkan',
-        //     'data'    => $paket,
-        // ]);
-        return view('pelanggan.deskripsi-paket', ['data' => $paket[0]]);
+    
+        if (Auth::guard('pelanggan')->check()) {
+            $data=new SocialiteController;
+            return view('pelanggan.deskripsi-paket', ['paket' => $paket[0], 'data' => $data->profil() ]);
+        } else {
+            return view('pelanggan.deskripsi-paket', ['paket' => $paket[0]]);
+        }
     }
 
     public function pesanan($id_paket)
@@ -95,7 +102,12 @@ class PaketController extends Controller
         $paket=Paket::where('id_paket', $id_paket)->get();
         //return single post as a resource
         
-        return view('pelanggan.pesanan', ['data' => $paket[0]]);
+        if (Auth::guard('pelanggan')->check()) {
+            $data=new SocialiteController;
+            return view('pelanggan.pesanan', ['paket' => $paket[0], 'data' => $data->profil() ]);
+        } else {
+            return view('pelanggan.pesanan', ['paket' => $paket[0]]);
+        }
     }
 
     public function edit($id_paket)
@@ -178,16 +190,19 @@ class PaketController extends Controller
      * @param  mixed $post
      * @return void
      */
-    public function destroy(Request $request)
+    public function destroy(Paket $paket)
     {
-        $paket=Paket::where('id_paket', $request->id_paket);
-        // dd($paket);
-        //delete old image
-        Storage::delete('public/paket/'.$paket->first()->gambar);
+        //delete image
+        Storage::delete('public/paket/'.$paket->gambar);
+
+        //delete post
         $paket->delete();
-        return response()->json($paket);
+
+        //return response
+        return response()->json([
+            'message' => 'Paket berhasil dihapus',
+        ]);
     }
-      
 
     public function paket()
     {

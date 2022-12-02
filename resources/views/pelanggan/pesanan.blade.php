@@ -13,7 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet" />
 
-    <link rel="icon" type="image/x-icon" href="assets/images/logo-rm.png" />
+    <link rel="icon" type="image/x-icon" href={{ URL::asset("assets/images/logo-rm.png")}} />
     <title>Rosi Music</title>
 
     <!-- Bootstrap core CSS -->
@@ -51,17 +51,21 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </div>
     <!-- ***** Preloader End ***** -->
-
+    
     @include('layout.user_nav')
     
     <div class="container">
       <div class="deskripsi"><p>Checkout</p></div>
     </div>
+    
     <div
       class="main-banner wow fadeIn"
       id="top"
       data-wow-duration="1s"
       data-wow-delay="0.5s"></div>
+      <div id="alert">
+          
+        </div>
     <div class="container pesanan m-auto" style="margin: -200px">
       <div class="row">
         <div class="col-sm-6">
@@ -76,20 +80,20 @@ https://templatemo.com/tm-570-chain-app-dev
               <div class="row deskripsi-paket mb-4">
                 <div class="col-md-6">
                   <img
-                    src='{{ URL::asset("storage/paket/")}}/{{ $data->gambar }}'
+                    src='{{ URL::asset("storage/paket/")}}/{{ $paket->gambar }}'
                     alt=""
                     class="img-fluid"
                     style="width: 139px; height: 118px" />
                 </div>
                 <div class="col-md-6">
-                  <p class="text-right nama-paket">{{ $data->nama_paket }}</p>
-                  <p class="text-right harga-paket">{{ rupiah($data->harga_sewa) }}</p>
+                  <p class="text-right nama-paket">{{ $paket->nama_paket }}</p>
+                  <p class="text-right harga-paket">{{ rupiah($paket->harga_sewa) }}</p>
                 </div>
               </div>
               <div class="rincian-paket mb-4">
                 <h6>Pada Paket ini akan berisi:</h6>
                 <ul class="aksesoris">
-                  <?= $data->deskripsi_panjang; ?>
+                  <?= $paket->deskripsi_panjang; ?>
                 </ul>
               </div>
 
@@ -136,9 +140,9 @@ https://templatemo.com/tm-570-chain-app-dev
                       type="text"
                       class="form-control"
                       placeholder="Nama Paket"
-                      value="{{ $data->nama_paket }}"
+                      value="{{ $paket->nama_paket }}"
                       required />
-                      <input type="text" class="form-control"  name="id_paket" value="{{ $data->id_paket }}" style='display:none'>
+                      <input type="text" class="form-control"  name="id_paket" value="{{ $paket->id_paket }}" style='display:none'>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="">Tanggal Mulai</label>
@@ -185,7 +189,7 @@ https://templatemo.com/tm-570-chain-app-dev
                       id="exampleFormControlTextarea1"
                       name="catatan"
                       rows="3"
-                      required></textarea>
+                      ></textarea>
                   </div>
                   {{-- <div class="confirm-pesan mb-2">
                     <button class="btn btn-success btn" type="submit">
@@ -382,6 +386,45 @@ https://templatemo.com/tm-570-chain-app-dev
     <script src={{ URL::asset("assets/js/popup.js")}}></script>
     <script src={{ URL::asset("assets/js/custom.js")}}></script>
     <script>
+      // check datepicker not less than today
+      $(document).ready(function () {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, "0");
+        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + "-" + mm + "-" + dd;
+        $("#tgl1").attr("min", today);
+      });
+      $(document).ready(function () {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, "0");
+        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + "-" + mm + "-" + dd;
+        $("#tgl2").attr("min", today);
+      });
+
+      // check datepicker not less than tgl1
+      $(document).ready(function () {
+        $("#tgl2").change(function () {
+          var tgl1 = $("#tgl1").val();
+          var tgl2 = $("#tgl2").val();
+          if (tgl1 > tgl2) {
+            //custom alert
+            var alert = '';
+            alert += '<div class="alert alert-danger alert-dismissible fade show m-5" role="alert">';
+            alert += '<strong>Peringatan!</strong> Tanggal kedua tidak boleh kurang dari tanggal pertama.';
+            alert += '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alert += '</div>';
+            $("#alert").html(alert);
+            $("#tgl2").val("");
+          }
+        });
+      });
+
+
       const formatRupiah = (money) => {
         return new Intl.NumberFormat('id-ID', {
           style: 'currency',
@@ -396,8 +439,15 @@ https://templatemo.com/tm-570-chain-app-dev
                     var firstDate = new Date($("#tgl1").val());
                     var secondDate = new Date($("#tgl2").val());
                     var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
-                    $("#selisih").html(formatRupiah((diffDays+1)*{{ $data->harga_sewa }}-(diffDays*200000)));
+                    $("#selisih").html(formatRupiah((diffDays+1)*{{ $paket->harga_sewa }}-(diffDays*200000)));
+                    if (diffDays < 0) {
+                        $("#selisih").html(' ');
+                    }
+
+
                 }
+              
+
             });
         });
     </script> 

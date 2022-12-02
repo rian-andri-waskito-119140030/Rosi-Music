@@ -132,9 +132,9 @@ class PesananSistemController extends Controller
 
     public function detail($id_pesanan)
     {
-        $pesanan=PesananSistem::with(['pelanggan', 'pesanan'])->where('id_pesanan', $id_pesanan)->first();
+        $pesanan=PesananSistem::with(['user', 'pesanan'])->where('id_pesanan', $id_pesanan)->first();
         $paket=Paket::class::with('jenis_paket')->where('id_paket', $pesanan->pesanan->id_paket)->first();
-        // dd($paket);
+        //dd($pesanan);
         //return single post as a resource
         return view('admin.pesanan.pesanan_sistem.detail_pesanan', ['pesanan' => $pesanan, 'paket' => $paket]);
     }
@@ -187,13 +187,6 @@ class PesananSistemController extends Controller
             'message' => 'Barang berhasil diubah',
             'data'    => $barang,
         ]);
-    }
-
-    public function checkout($id_pesanan)
-    {
-        $pesanan=Pesanan::where('id_pesanan', $id_pesanan)->get();
-        
-        return view('pelanggan.checkout', ['data' => $pesanan]);
     }
     
     /**

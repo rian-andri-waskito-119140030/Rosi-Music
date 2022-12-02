@@ -18,5 +18,8 @@ class Keuangan extends Model
         'keterangan',
         'debit',
         'kredit',
+        'saldo',
     ];
+
+    
 }

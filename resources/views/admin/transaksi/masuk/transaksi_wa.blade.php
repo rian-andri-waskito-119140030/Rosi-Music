@@ -90,6 +90,12 @@
       <!-- Main Container -->
       <main id="main-container">
         <!-- Page Content -->
+      @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div class="content">
           <!-- Quick Overview -->
           <!-- <div class="row">
@@ -149,19 +155,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      @foreach ($data as $key => $item)
                       <tr>
-                        <td class="text-center fs-sm"></td>
-                        <td class="fw-semibold fs-sm"></td>
-                        <td class="d-none d-sm-table-cell fs-sm">
-                          
+                        <td class="text-center fs-sm">{{ $key+1 }}</td>
+                        <td class="fw-semibold fs-sm">{{ $item->id_transaksi }}</td>
+                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->nama }}
                         </td>
-                        <td class="d-none d-sm-table-cell fs-sm"></td>
-                        <td class="d-none d-sm-table-cell fs-sm"></td>
+                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->waktu_transaksi }}</td>
+                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->total_bayar }}</td>
                         <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            ></span
+                            >{{ $item->status_transaksi }}</span
                           >
                         </td>
                         <td class="text-center fs-sm">
@@ -202,7 +207,7 @@
                           </a>
                         </td> -->
                       </tr>
-                      
+                      @endforeach
                       <div
                           class="modal fade"
                           id="modal"
@@ -226,6 +231,8 @@
                                 </div>
                                 <form action="/admin/pembayaran" method="POST">
                                   @csrf
+                                  <input type="text" name="nama_pelanggan" id="nama_pelanggan" hidden>
+                                  <input type="text" name="nama_paket" id="nama_paket" hidden>
                                   <div class="block-content fs-sm mb-3">
                                     <div class="row">
                                       <div class="col-lg-6">
@@ -345,7 +352,7 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js")}}></script>
 
     <!-- Page JS Code -->
-    <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/pages/transaksi_masuk/be_tables_datatables.min.js")}}></script>
     <script>
       $(document).ready(function(){
         fetch_data_transaksi_wa();
@@ -357,22 +364,38 @@
             dataType: "json",
             success: function(response){
               console.log(response);
-              $('tbody').html("");
-              $.each(response.data, function(key, item){
-                $('tbody').append('<tr>\
-                  <td class="text-center fs-sm">'+key+'</td>\
-                  <td class="fw-semibold fs-sm">'+item.id_transaksi+'</td>\
-                  <td class="d-none d-sm-table-cell fs-sm">'+item.nama+'</td>\
-                  <td class="d-none d-sm-table-cell fs-sm">'+item.waktu_transaksi+'</td>\
-                  <td class="d-none d-sm-table-cell fs-sm">'+item.total_bayar+'</td>\
-                  <td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">'+item.status_transaksi+'</span></td>\
-                  <td class="text-center fs-sm">\
-                    <button  id="btn-detail" type="button" value="'+item.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-wa" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" >\
-                      <i class="fa fa-fw fa-money-bill-alt"></i>\
-                    </button>\
-                  </td>\
-                </tr>');
+              console.log(response);
+              var transaksi_sistem = '';
+              //forEach
+              response.data.forEach(function(data,index){
+                transaksi_sistem += `<tr>`;
+                transaksi_sistem += `<td class="text-center fs-sm">${index+1}</td>`;
+                transaksi_sistem += `<td class="fw-semibold fs-sm">${data.id_transaksi}</td>`;
+                transaksi_sistem += `<td class="d-none d-sm-table-cell fs-sm">${data.nama}</td>`;
+                transaksi_sistem += `<td class="d-none d-sm-table-cell fs-sm">${data.waktu_transaksi}</td>`;
+                transaksi_sistem += `<td class="d-none d-sm-table-cell fs-sm" id="total_bayar">${data.total_bayar}</td>`;
+                transaksi_sistem += `<td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">${data.status_transaksi}</span></td>`;
+                transaksi_sistem += '<td class="text-center fs-sm"><button  id="btn-detail" type="button" value="'+data.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-wa" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" ><i class="fa fa-fw fa-money-bill-alt"></i></button></td>'
               });
+              $('tbody').html(transaksi_sistem);
+              
+
+              // $('tbody').html("");
+              // $.each(response.data, function(key, item){
+              //   $('tbody').append('<tr>\
+              //     <td class="text-center fs-sm">'+key+'</td>\
+              //     <td class="fw-semibold fs-sm">'+item.id_transaksi+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.nama+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.waktu_transaksi+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.total_bayar+'</td>\
+              //     <td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">'+item.status_transaksi+'</span></td>\
+              //     <td class="text-center fs-sm">\
+              //       <button  id="btn-detail" type="button" value="'+item.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-wa" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" >\
+              //         <i class="fa fa-fw fa-money-bill-alt"></i>\
+              //       </button>\
+              //     </td>\
+              //   </tr>');
+              // });
             }
           })
         }
@@ -390,9 +413,9 @@
               if (response.status == 404) {
                 alert(response.message);
               } else {
-                $('#id_transaksi').val(response.data.id_transaksi);
-                // $('#nama').val(response.data.nama);
-                // $('#tanggal_booking').val(response.data.tanggal_booking);
+                $('#id_transaksi').val(response.data.transaksi.id_transaksi);
+                $('#nama_pelanggan').val(response.data.pesanan_wa.nama);
+                $('#nama_paket').val(response.data.paket.nama_paket);
                 // $('#total_bayar').val(response.data.total_bayar);
                 // $('#status_transaksi').val(response.data.status_transaksi);
               }

@@ -185,8 +185,8 @@
                             <i class="fa fa-fw fa-pencil-alt"></i>
                           </a>
                           <!-- <button
-                            class="btn btn-sm btn-alt-secondary hapus"
-                            data-id = "{{ $item->id_paket }}"
+                            class="btn btn-sm btn-alt-secondary"
+                            onclick="hapus('{{ $item->id_paket }}')"
                             data-bs-toggle="tooltip"
                             title="Hapus">
                             <i class="fa fa-fw fa-times"></i>
@@ -265,7 +265,7 @@
     <script src={{  URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js") }}></script>
 
     <!-- Page JS Code -->
-    <script src={{  URL::asset("assets/js/pages/be_tables_datatables.min.js") }}></script>
+    <script src={{  URL::asset("assets/js/pages/paket/be_tables_datatables.min.js") }}></script>
     <script>
       function hapus(id_paket) {
       let url=`{{ URL::to('/') }}/admin/paket/hapus/${id_paket}`;

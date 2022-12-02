@@ -46,6 +46,12 @@
       <!-- Main Container -->
       <main id="main-container">
         <!-- Page Content -->
+         @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+          <strong>{{ session()->get('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
         <div class="content">
           <!-- Quick Overview -->
           <!-- <div class="row">
@@ -71,7 +77,7 @@
           <!-- All Products -->
           <div class="block block-rounded">
             <div class="block-header block-header-default">
-              <h3 class="block-title">Data Hutang Whatsapp</h3>
+              <h3 class="block-title">Data Hutang</h3>
             </div>
             <div class="block-content">
               <!-- Search Form -->
@@ -103,15 +109,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($data as $key => $item)
                       <tr>
-                        <td class="text-center fs-sm">1</td>
-                        <td class="fw-semibold fs-sm">Nurhaldi Aldo</td>
-                        <td class="d-none d-sm-table-cell fs-sm">Paket 1 MC</td>
+                        <td class="text-center fs-sm">{{ $key+1 }}</td>
+                        <td class="fw-semibold fs-sm">{{ $item->nama }}</td>
+                        <td class="d-none d-sm-table-cell fs-sm">{{ $item->nama_paket }}</td>
 
                         <td class="d-none d-sm-table-cell">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
-                            >500.000</span
+                            >{{ $item->hutang }}</span
                           >
                         </td>
                         <td class="text-center fs-sm">
@@ -151,75 +158,82 @@
                           </a>
                         </td> -->
                       </tr>
-                    </tbody>
-                  </table>
-                  <div
-                    class="modal fade"
-                    id="modal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-hidden="true">
-                    <div
-                      class="modal-dialog modal-dialog-popout"
-                      role="document">
-                      <div class="modal-content">
-                        <div class="block block-themed block-transparent mb-0">
-                          <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Edit Transaksi</h3>
-                            <button
-                              type="button"
-                              class="btn btn-alt-danger"
-                              data-bs-dismiss="modal"
-                              aria-label="Close">
-                              <i class="fa fa-fw fa-times"></i>
-                            </button>
-                          </div>
-                          <form action="">
-                            <div class="block-content fs-sm mb-3">
-                              <div class="row">
-                                <div class="col-lg-6">
-                                  <div class="form-group">
-                                    <label for="example-text-input"
-                                      >ID Transaksi</label
-                                    >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="example-text-input"
-                                      name="example-text-input"
-                                      placeholder="TR-001"
-                                      disabled />
-                                  </div>
-                                </div>
-                                <div class="col-lg-6">
-                                  <div class="form-group">
-                                    <label for="example-text-input"
-                                      >Uang Tunai</label
-                                    >
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="example-text-input"
-                                      name="example-text-input"
-                                      placeholder="Masukkan Uang Tunai" />
-                                  </div>
-                                </div>
+                      @endforeach
+                      <div
+                        class="modal fade"
+                        id="modal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-hidden="true">
+                        <div
+                          class="modal-dialog modal-dialog-popout"
+                          role="document">
+                          <div class="modal-content">
+                            <div class="block block-themed block-transparent mb-0">
+                              <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Bayar Hutang</h3>
+                                <button
+                                  type="button"
+                                  class="btn btn-alt-danger"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close">
+                                  <i class="fa fa-fw fa-times"></i>
+                                </button>
                               </div>
+                              <form action="/admin/pembayaran" method="POST">
+                                @csrf
+                                <input type="text" name="nama_pelanggan" id="nama_pelanggan" hidden>
+                                <input type="text" name="nama_paket" id="nama_paket" hidden>
+                                <div class="block-content fs-sm mb-3">
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="example-text-input"
+                                          >ID Transaksi</label
+                                        >
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="id_transaksi"
+                                          name="id_transaksi"
+                                          
+                                          readonly/>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="example-text-input"
+                                          >Uang Tunai</label
+                                        >
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="example-text-input"
+                                          name="uang_bayar"
+                                          placeholder="Masukkan Uang Tunai" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="block-content block-content-full text-end border-top">
+                                  <button
+                                    type="submit"
+                                    class="btn btn-alt-primary"
+                                    data-bs-dismiss="modal">
+                                    <i class="fa fa-check me-1"></i>Save
+                                  </button>
+                                </div>
+                              </form>
                             </div>
-                            <div
-                              class="block-content block-content-full text-end border-top">
-                              <button
-                                type="submit"
-                                class="btn btn-alt-primary"
-                                data-bs-dismiss="modal">
-                                <i class="fa fa-check me-1"></i>Save
-                              </button>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                      
+                    
+                    </tbody>
+                  </table>
+                  
                 </div>
               </div>
               <!-- END Dynamic Table with Export Buttons -->
@@ -289,13 +303,72 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js")}}></script>
 
     <!-- Page JS Code -->
-    <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
-    <script>
+    <script src={{ URL::asset("assets/js/pages/hutang/be_tables_datatables.min.js")}}></script>
+     <script>
       //modal
-      $(document).ready(function () {
-        $(".btn").on("click", function () {
-          $("#modal").modal("show");
-        });
+        $(document).ready(function(){
+        fetch_data_transaksi_sistem();
+
+        function fetch_data_transaksi_sistem(){
+          $.ajax({
+            type: "GET",
+            url: "/admin/hutang-wa",
+            dataType: "json",
+            success: function(response){
+              console.log(response);
+              var hutang_sistem = '';
+              //forEach
+              response.data.forEach(function(data,index){
+                hutang_sistem += `<tr>`;
+                hutang_sistem += `<td class="text-center fs-sm">${index+1}</td>`;
+                hutang_sistem += `<td class="fw-semibold fs-sm">${data.nama}</td>`;
+                hutang_sistem += `<td class="d-none d-sm-table-cell fs-sm">${data.nama_paket}</td>`;
+                hutang_sistem += `<td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">${data.hutang}</span></td>`;
+                hutang_sistem += '<td class="text-center fs-sm"><button  id="btn-detail" type="button" value="'+data.id_hutang+'" class="btn btn-sm btn-alt-primary tombol-hutang" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" ><i class="fa fa-fw fa-money-bill-alt"></i></button></td>'
+              });
+              $('tbody').html(hutang_sistem);
+              //$('tbody').html("");
+              // $.each(response.data, function(key, item){
+              //   $('tbody').append('<tr>\
+              //     <td class="text-center fs-sm">'+key+1+'</td>\
+              //     <td class="fw-semibold fs-sm">'+item.id_transaksi+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.nama+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.waktu_transaksi+'</td>\
+              //     <td class="d-none d-sm-table-cell fs-sm">'+item.total_bayar+'</td>\
+              //     <td class="d-none d-sm-table-cell"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">'+item.status_transaksi+'</span></td>\
+                  // <td class="text-center fs-sm">\
+                  //   <button  id="btn-detail" type="button" value="'+item.id_transaksi+'" class="btn btn-sm btn-alt-primary tombol-sistem" data-bs-toggle="modal" data-bs-target="#modal-block-normal" title="Bayar" >\
+                  //     <i class="fa fa-fw fa-money-bill-alt"></i>\
+                  //   </button>\
+                  // </td>
+              //   </tr>');
+              // });
+            }
+          })
+        }
+      });
+      $(document).on('click', '.tombol-hutang', function(){
+        var id_hutang = $(this).val();
+        console.log(id_hutang);
+        $('.modal').modal('show');
+          $.ajax({
+            url: "/admin/edit-hutang-wa/" + id_hutang,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              console.log(response);
+              if (response.status == 404) {
+                alert(response.message);
+              } else {
+                $('#id_transaksi').val(response.data.id_transaksi);
+                $('#nama_pelanggan').val(response.data.nama);
+                $('#nama_paket').val(response.data.nama_paket);
+                // $('#tanggal_booking').val(response.data.tanggal_booking);
+                // $('#total_bayar').val(response.data.total_bayar);
+                // $('#status_transaksi').val(response.data.status_transaksi);
+              }
+            },
+          });
       });
     </script>
 @endsection

@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bukti_pembayaran', function (Blueprint $table) {
-            $table->string('id_bukti_pembayaran');
+            $table->string('id_bukti_pembayaran')->primary();
             $table->string('id_transaksi');
-            $table->string('gambar');
-            $table->string('nominal');
+            $table->string('bukti');
+            $table->integer('nominal');
+            $table->string('status_pembayaran');
             $table->timestamps();
 
             $table->foreign('id_transaksi')->references('id_transaksi')->on('transaksi');

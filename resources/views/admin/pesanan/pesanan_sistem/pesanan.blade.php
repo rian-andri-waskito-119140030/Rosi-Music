@@ -151,7 +151,7 @@
                                                         title="Validasi">
                                                         <i class="fa fa-fw fa-check-circle"></i>
                                                     </button>
-                                              
+                                                 
                                                 <button
                                                   id="btn-detail"
                                                   type="button"
@@ -169,7 +169,7 @@
                                                   title="View">
                                                   <i class="fa fa-fw fa-eye"></i>
                                                 </a>
-                                                   </form>
+                                                 </form>
                                             </td>
                                         </tr>
                                         <div
@@ -300,7 +300,7 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js")}}></script>
 
     <!-- Page JS Code -->
-    <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/pages/pesanan/be_tables_datatables.min.js")}}></script>
     <script>
       //modal
       $(document).ready(function () {

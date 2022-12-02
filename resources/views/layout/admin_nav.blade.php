@@ -98,7 +98,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="/admin/transaksisistem">
+                  href="/admin/view-transaksi-sistem">
                   <span class="nav-main-link-name"
                     >Transaksi Masuk Via Sistem</span
                   >
@@ -107,7 +107,7 @@
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="/admin/transaksiwa">
+                  href="/admin/view-transaksi-wa">
                   <span class="nav-main-link-name"
                     >Transaksi Masuk Via WA</span
                   >
@@ -134,14 +134,14 @@
             </a>
             <ul class="nav-main-submenu">
               <li class="nav-main-item">
-                <a class="nav-main-link" href="/admin/hutang-sistem">
+                <a class="nav-main-link" href="/admin/view-hutang-sistem">
                   <span class="nav-main-link-name">Hutang Transaksi Sistem</span>
                 </a>
               </li>
               <li class="nav-main-item">
                 <a
                   class="nav-main-link"
-                  href="/admin/hutang-wa">
+                  href="/admin/view-hutang-wa">
                   <span class="nav-main-link-name">Hutang Transaksi WA</span>
                 </a>
               </li>
@@ -158,6 +158,11 @@
             </a>
             <ul class="nav-main-submenu">
               <li class="nav-main-item">
+                <a class="nav-main-link" href="/admin/bukti-pembayaran">
+                  <span class="nav-main-link-name">Bukti Pembayaran</span>
+                </a>
+              </li>
+              <li class="nav-main-item">
                 <a class="nav-main-link" href="/admin/keuangan">
                   <span class="nav-main-link-name">Laporan Keuangan</span>
                 </a>
@@ -170,7 +175,7 @@
             aria-haspopup="true"
             aria-expanded="false"
             href="#">
-              <i class="nav-main-link-icon si si-bar-chart"></i>
+              <i class="nav-main-link-icon fa fa-bars"></i>
               <span class="nav-main-link-name">Barang dan Jenis Barang</span>
             </a>
             <ul class="nav-main-submenu">
@@ -194,7 +199,7 @@
             aria-haspopup="true"
             aria-expanded="false"
             href="#">
-              <i class="nav-main-link-icon si si-bar-chart"></i>
+              <i class="nav-main-link-icon fa fa-bars"></i>
               <span class="nav-main-link-name">Paket dan Jenis Paket</span>
             </a>
             <ul class="nav-main-submenu">

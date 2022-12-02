@@ -28,6 +28,24 @@ class TransaksiController extends Controller
         //return collection of posts as a resource
         return view('admin.transaksi.transaksi', ['data' => $transaksi]);
     }
+    public function show_transaksi_sistem(){
+         //get posts
+        $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                            ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                            ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
+                            ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+                            ->where('status_transaksi', '!=', 'Lunas')
+                            //sortir berdasarkan tanggal pesanan
+                            ->orderBy('pesanan.created_at', 'asc')
+                            ->get();
+        
+        $transaksi_sistem = $transaksi_sistem->map(function($item, $key){
+            $item->total_bayar = 'Rp. '.number_format($item->total_bayar, 0, ',', '.');
+            return $item;
+        });
+        //return collection of posts as a resource
+        return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
+    }
 
     public function tampil_transaksi_sistem()
     {
@@ -36,8 +54,15 @@ class TransaksiController extends Controller
                             ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
                             ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
                             ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+                            ->where('status_transaksi', '!=', 'Lunas')
+                            //sortir berdasarkan tanggal pesanan
+                            ->orderBy('pesanan.created_at', 'asc')
                             ->get();
-
+        
+        $transaksi_sistem = $transaksi_sistem->map(function($item, $key){
+            $item->total_bayar = 'Rp. '.number_format($item->total_bayar, 0, ',', '.');
+            return $item;
+        });
         //return collection of posts as a resource
         //return view('admin.transaksi.masuk.transaksi', ['data' => $transaksi_sistem]);
         return response()->json([
@@ -45,14 +70,67 @@ class TransaksiController extends Controller
             'data' => $transaksi_sistem
         ], 200);
     }
-
-    public function tampil_transaksi_wa()
+    public function detail_transaksi_sistem($id)
     {
         //get posts
         $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
                             ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
-                            ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
+                            ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
+                            ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+                            ->where('transaksi.id_transaksi', $id)
                             ->get();
+        
+        $transaksi_sistem = $transaksi_sistem->map(function($item, $key){
+            $item->total_bayar = 'Rp. '.number_format($item->total_bayar, 0, ',', '.');
+            return $item;
+        });
+        //return collection of posts as a resource
+        //dd($transaksi_sistem);
+        return view('admin.transaksi.masuk.modal_transaksi_sistem', ['data' => $transaksi_sistem]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'data' => $transaksi_sistem
+        // ], 200);
+    }
+
+    public function show_transaksi_wa(){
+         //get posts 
+        //
+        $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                            ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                            ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
+                            ->where('status_transaksi', '!=', 'Lunas')
+                            //convert currency to rupiah
+                            ->get();
+
+        //convert currency rupiah
+        $transaksi_sistem = $transaksi_sistem->map(function($item, $key){
+            $item->total_bayar = 'Rp. '.number_format($item->total_bayar, 0, ',', '.');
+            return $item;
+        });
+        
+
+        //return collection of posts as a resource
+    
+        return view('admin.transaksi.masuk.transaksi_wa', ['data' => $transaksi_sistem]);
+    }
+    public function tampil_transaksi_wa()
+    {
+        //get posts 
+        //
+        $transaksi_sistem = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+                            ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+                            ->join('pesanan_wa', 'pesanan.id_pesanan', '=', 'pesanan_wa.id_pesanan')
+                            ->where('status_transaksi', '!=', 'Lunas')
+                            //convert currency to rupiah
+                            ->get();
+
+        //convert currency rupiah
+        $transaksi_sistem = $transaksi_sistem->map(function($item, $key){
+            $item->total_bayar = 'Rp. '.number_format($item->total_bayar, 0, ',', '.');
+            return $item;
+        });
+        
 
         //return collection of posts as a resource
         return response()->json([
@@ -100,8 +178,23 @@ class TransaksiController extends Controller
             'waktu'         => date("Y-m-d H:i:s"),
             'keterangan'    =>  $transaksi->nama_transaksi,
             'kredit'         => $transaksi->pengeluaran,
+            //create balance saldo
+            'saldo'        => '0',
         ]);
-
+        //create balance saldo dikurangi pengeluaran
+        $saldo = Keuangan::orderBy('id_keuangan', 'desc')->first()->get();
+        $total_saldo = 0;
+        foreach ($saldo as $key => $value) {
+            if ($value->kredit != null) {
+                $total_saldo = $total_saldo - $value->kredit;
+            }
+            else{
+                $total_saldo = $total_saldo + $value->debit;
+            }
+            $value->saldo = $total_saldo;
+            $value->save();
+        }
+        
 
         //return response
         return redirect()->back()->with('success', 'Transaksi Keluar Berhasil Ditambahkan');

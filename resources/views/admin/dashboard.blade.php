@@ -114,7 +114,7 @@
                   </dd>
                 </dl>
                 <div class="item item-rounded-lg bg-body-light">
-                  <i class="far fa-envelope fs-3 text-primary"></i>
+                  <i class="fa fa-bars fs-3 text-primary"></i>
                 </div>
               </div>
               <div class="bg-body-light rounded-bottom">
@@ -141,7 +141,7 @@
                   </dd>
                 </dl>
                 <div class="item item-rounded-lg bg-body-light">
-                  <i class="far fa-user-circle fs-3 text-primary"></i>
+                  <i class="fa fa-bars fs-3 text-primary"></i>
                 </div>
               </div>
               <div class="bg-body-light rounded-bottom">

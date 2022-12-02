@@ -194,7 +194,7 @@ https://templatemo.com/tm-570-chain-app-dev
     <script src={{ URL::asset("assets/js/owl-carousel.js")}}></script>
     <script src={{ URL::asset("assets/js/animation.js")}}></script>
     <script src={{ URL::asset("assets/js/imagesloaded.js")}}></script>
-    <script src={{ URL::asset("assets/js/popup.js")}}></scrpt>
+    <script src={{ URL::asset("assets/js/popup.js")}}></script>
     <script src={{ URL::asset("assets/js/custom.js")}}></script>
   </body>
 </html>

@@ -7,6 +7,13 @@ use App\Models\SocialAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\BuktiPembayaran;
+use App\Models\CatatanPenolakan;
+use App\Models\Hutang;
+use App\Models\Pesanan;
+use App\Models\PesananSistem;
+use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 
 class SocialiteController extends Controller
 {
@@ -73,5 +80,29 @@ class SocialiteController extends Controller
             // return user
             return $user;
         }
+    }
+
+    public function profil()
+    {
+        $pesanan=Pesanan::with('paket')->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')->where('id_pelanggan', Auth::guard('pelanggan')->user()->id)->latest('pesanan.created_at')->first();
+        $data=array(
+            'pesanan' => $pesanan,
+            'ditolak' => null,
+            'bukti'   => null,
+            'hutang'  => null,
+        );
+        // dd($data);
+        if(!is_null($pesanan)) {
+            $ditolak=CatatanPenolakan::class::where('id_pesanan', $pesanan->id_pesanan)->first();
+            $data['ditolak'] = $ditolak;
+            $transaksi=Transaksi::where('id_pesanan', $pesanan->id_pesanan)->first();
+            if(!is_null($transaksi)) {
+                $bukti=BuktiPembayaran::where('id_transaksi', $transaksi->id_transaksi)->get();
+                $hutang=Hutang::where('id_transaksi', $transaksi->id_transaksi)->first();
+                $data['bukti']=$bukti;
+                $data['hutang']=$hutang;
+            }
+        }
+        return $data;
     }
 }

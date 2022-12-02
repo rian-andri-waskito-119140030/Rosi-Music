@@ -105,7 +105,7 @@
            <div class="row">
             <div class="col-6 col-lg-3">
               <a
-                class="btn block block-rounded block-link-shadow text-center"
+                class="btn block block-rounded block-link-shadow text-center tombol"
                 id="btn-detail"
                 type="button"
                 data-toggle="modal"
@@ -298,11 +298,11 @@
     <script src={{  URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js") }}></script>
 
     <!-- Page JS Code -->
-    <script src={{  URL::asset("assets/js/pages/be_tables_datatables.min.js") }}></script>
+    <script src={{  URL::asset("assets/js/pages/jenis_barang/be_tables_datatables.min.js") }}></script>
     <script>
       //modal
       $(document).ready(function () {
-        $(".btn").on("click", function () {
+        $(".tombol").on("click", function () {
           $("#modal").modal("show");
         });
       });

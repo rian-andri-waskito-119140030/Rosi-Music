@@ -182,9 +182,9 @@
                           </a>
                           <a
                             class="btn btn-sm btn-alt-secondary hapus"
+                            data-id = "{{ $item->id_barang }}"
                             href="javascript:void(0)"
                             data-bs-toggle="tooltip"
-                            data-id = "{{ $item->id_barang }}"
                             title="Delete">
                             <i class="fa fa-fw fa-times"></i>
                           </a>
@@ -262,8 +262,8 @@
     <script src={{  URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js") }}></script>
 
     <!-- Page JS Code -->
-    <script src={{  URL::asset("assets/js/pages/be_tables_datatables.min.js") }}></script>
-    <script>
+    <script src={{  URL::asset("assets/js/pages/barang/be_tables_datatables.min.js") }}></script>
+     <script>
       $(function(){
         $.ajaxSetup({
           headers: {

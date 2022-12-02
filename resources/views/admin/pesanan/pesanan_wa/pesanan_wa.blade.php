@@ -193,5 +193,5 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js")}}></script>
 
     <!-- Page JS Code -->
-    <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/pages/pesanan/be_tables_datatables.min.js")}}></script>
 @endsection

@@ -23,9 +23,9 @@ class PesananSistem extends Model
     {
         return $this->belongsTo(Pesanan::class, 'id_pesanan');
     }
-
-    public function pelanggan()
+    public function user()
     {
         return $this->belongsTo(User::class, 'id_pelanggan');
     }
+
 }

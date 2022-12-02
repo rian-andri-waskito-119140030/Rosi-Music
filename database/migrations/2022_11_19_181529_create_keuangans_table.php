@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('keterangan');
             $table->integer('debit')->nullable();
             $table->integer('kredit')->nullable();
+            $table->integer('saldo')->nullable();
             $table->timestamps();
         });
     }

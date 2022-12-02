@@ -6,36 +6,20 @@ use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Jenis_Paket;
 use App\Http\Controllers\Controller;
+use App\Models\BuktiPembayaran;
 use App\Models\CatatanPenolakan;
+use App\Models\Hutang;
 use App\Models\Pesanan;
 use App\Models\PesananSistem;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\SocialiteController;
 
 
 class JenisPaketController extends Controller
 {
-    public function index()
-    {
-        //get posts
-        
-        $jenis_paket = Jenis_Paket::get();
-
-        if (Auth::guard('pelanggan')->check()) {
-            $pesanan=Pesanan::with('paket')->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')->where('id_pelanggan', Auth::guard('pelanggan')->user()->id)->latest('pesanan.created_at')->first();
-            $ditolak=CatatanPenolakan::class::where('id_pesanan', $pesanan->id_pesanan)->first();
-            return view('pelanggan.dashboard', [
-                'data'  => $jenis_paket,
-                'profil'=> $pesanan,
-                'ditolak'=> $ditolak,
-            ]);
-        } else {
-            //return collection of posts as a resource
-        return view('pelanggan.dashboard', ['data' => $jenis_paket]);
-        }
-    }
-
     public function tampil()
     {
         //get posts

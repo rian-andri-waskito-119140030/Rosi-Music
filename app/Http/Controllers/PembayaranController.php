@@ -38,10 +38,12 @@ class PembayaranController extends Controller
     }
     public function edit_wa($id_transaksi){
         $transaksi = Transaksi::find($id_transaksi);
-        if ($transaksi){
+        $pesanan = Pesanan::with('pesanan_wa','paket','transaksi')->where('id_pesanan', $transaksi->id_pesanan)->first();
+
+        if ($pesanan){
             return response()->json([
                 'status' => 'success',
-                'data' => $transaksi
+                'data' => $pesanan
             ], 200);
         }
         return response()->json([
@@ -51,10 +53,17 @@ class PembayaranController extends Controller
     }
     public function edit_sistem($id_transaksi){
         $transaksi = Transaksi::find($id_transaksi);
-        if ($transaksi){
+        $pesanan = Transaksi::join('pesanan', 'transaksi.id_pesanan', '=', 'pesanan.id_pesanan')
+        ->join('pesanan_sistem', 'pesanan.id_pesanan', '=', 'pesanan_sistem.id_pesanan')
+        ->join('paket', 'pesanan.id_paket', '=', 'paket.id_paket')
+        ->join('users', 'pesanan_sistem.id_pelanggan', '=', 'users.id')
+        ->where('transaksi.id_transaksi', $id_transaksi)->first();
+        
+
+        if ($pesanan){
             return response()->json([
                 'status' => 'success',
-                'data' => $transaksi
+                'data' => $pesanan
             ], 200);
         }
         return response()->json([
@@ -97,16 +106,46 @@ class PembayaranController extends Controller
         $hutang->hutang = $hutang->hutang - $request->uang_bayar;
         $hutang->save();
 
+        //update transaksi
+        // $transaksi = Transaksi::where('id_transaksi', $request->id_transaksi)->first();
+        // $transaksi->status_transaksi = 'Sudah Dibayar';
+        // $transaksi->save();
+        if ($hutang->hutang == 0) {
+            $transaksi = Transaksi::where('id_transaksi', $request->id_transaksi)->first();
+            $transaksi->status_transaksi = 'Lunas';
+            $transaksi->save();
+        }
+        else{
+            $transaksi = Transaksi::where('id_transaksi', $request->id_transaksi)->first();
+            $transaksi->status_transaksi = 'Belum Lunas';
+            $transaksi->save();
+        }
+
         $id_keuangan = IdGenerator::generate(['table' => 'keuangan', 'field'=>'id_keuangan', 'length' => 12, 'prefix' => 'KU-']);
         Keuangan::create([
             'id_keuangan'   => $id_keuangan,
             'waktu'         => date("Y-m-d H:i:s"),
             'keterangan'    =>  "Pembayaran penyewaan ".$request->nama_paket." oleh ".$request->nama_pelanggan,
             'debit'         => $pembayaran->uang_bayar,
+            'saldo'        => '0',
+            
         ]);
+        //create balance saldo debit
+        $saldo = Keuangan::orderBy('id_keuangan', 'desc')->first()->get();
+        $total_saldo = 0;
+        foreach ($saldo as $key => $value) {
+            if ($value->debit != null) {
+                $total_saldo = $total_saldo + $value->debit;
+            }
+            else{
+                $total_saldo = $total_saldo - $value->kredit;
+            }
+            $value->saldo = $total_saldo;
+            $value->save();
+        }
 
         //return response
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Pembayaran Berhasil');
     }
 
     public function validasi_pesanan($id_pesanan)

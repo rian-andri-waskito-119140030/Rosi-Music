@@ -16,8 +16,9 @@ class BuktiPembayaran extends Model
     protected $fillable = [
         'id_bukti_pembayaran',
         'id_transaksi',
-        'gambar',
+        'bukti',
         'nominal',
+        'status_pembayaran'
     ];
 
     public function transaksi()

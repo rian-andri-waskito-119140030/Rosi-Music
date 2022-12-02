@@ -105,7 +105,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="{{ $pesanan->pelanggan->nama }}"
+                          placeholder="{{ $pesanan->user->nama }}"
                           readonly />
                       </div>
                       <div class="col-6">
@@ -148,14 +148,7 @@
                           placeholder="{{ $pesanan->status }}"
                           readonly />
                       </div>
-                      <div class="col-6">
-                        <label class="form-label">No HP</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="{{ $pesanan->pesanan->no_hp }}"
-                          readonly />
-                      </div>
+                      
                       <div class="col-6">
                         <label
                           class="form-label"
@@ -169,6 +162,14 @@
                           rows="4"
                           placeholder="{{ $pesanan->pesanan->alamat }}"
                           readonly></textarea>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">No HP</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="{{ $pesanan->pesanan->no_hp }}"
+                          readonly />
                       </div>
                       <div class="col-6 mb-4">
                         <label

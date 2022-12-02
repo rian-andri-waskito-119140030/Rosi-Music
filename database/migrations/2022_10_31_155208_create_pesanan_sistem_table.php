@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_pesanan');
             $table->bigInteger('id_pelanggan')->unsigned();
-            $table->text('catatan');
+            $table->text('catatan')->nullable();
             $table->string('status');
             $table->timestamps();
 

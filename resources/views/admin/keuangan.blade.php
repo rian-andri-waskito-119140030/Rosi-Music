@@ -11,6 +11,33 @@
     <link
       rel="stylesheet"
       href={{ URL::asset("assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css")}} />
+       <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css")}} />
+     <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css")}} />
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/select2/css/select2.min.css")}} />
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.css")}} />
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/dropzone/min/dropzone.min.css")}} />
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/flatpickr/flatpickr.min.css")}} />
+    <!-- Page JS Plugins CSS -->
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/select2/css/select2.min.css")}} />
+    <link
+      rel="stylesheet"
+      href={{ URL::asset("assets/js/plugins/dropzone/min/dropzone.min.css")}} />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href={{ URL::asset("assets/css/oneui.min.css")}} />
@@ -87,8 +114,52 @@
                   </h3>
                 </div> -->
                 <div class="block-content block-content-full">
+                <form id="form_date_range" action="/admin/keuangan" method="POST">
+                @csrf
+
+                <!-- <div class="row mb-3">
+                  <div class="col-lg-5">
+                    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                      <i class="fa fa-calendar"></i>&nbsp;
+                          <span></span> <i class="fa fa-caret-down"></i>
+                      </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                  </div>
+                </div> -->
+                <div class="row mb-3">
+                  <div class="col-lg-5">
+                    <label>Tanggal Mulai</label>
+                    <input
+                          type="text"
+                          class="js-flatpickr form-control"
+                          id="example-flatpickr-custom"
+                          name="start"
+                          placeholder="Y-m-d"
+                          required />
+                  </div>
+                  <div class="col-lg-5">
+                    <label>Tanggal Selesai</label>
+                    <input
+                          type="text"
+                          class="js-flatpickr form-control"
+                          id="example-flatpickr-custom"
+                          name="end"
+                          placeholder="Y-m-d"
+                          required />
+                  </div>
+                  <div class="col-lg-8 mt-2">
+                    
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                  </div>
+                </div>
+                </form>
+
+              
+
                   <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                  <table
+                  <table id="example"
                     class="table table-bordered table-vcenter js-dataTable-buttons">
                     <thead>
                       <tr>
@@ -100,7 +171,8 @@
                         <th>Saldo</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="keuangan">
+                      
                       @foreach ($data as $key => $item)
                       <tr>
                         <td class="text-center fs-sm">{{ $key+1 }}</td>
@@ -124,7 +196,7 @@
                         @else
                         <td class="d-none d-sm-table-cell fs-sm">
                           <span
-                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
                             >{{ rupiah($item->kredit) }}</span
                           >
                         </td>
@@ -132,7 +204,7 @@
                         <td class="d-none d-sm-table-cell fs-sm">
                           <span
                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
-                            >Rp 1.300.000</span
+                            >{{ rupiah($item->saldo) }}</span
                           >
                         </td>
                       </tr>
@@ -199,6 +271,7 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/dataTables.buttons.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons-jszip/jszip.min.js")}}></script>
@@ -206,7 +279,142 @@
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.print.min.js")}}></script>
     <script src={{ URL::asset("assets/js/plugins/datatables-buttons/buttons.html5.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/select2/js/select2.full.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/ckeditor/ckeditor.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/dropzone/min/dropzone.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/flatpickr/flatpickr.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/select2/js/select2.full.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/plugins/dropzone/min/dropzone.min.js")}}></script>
+    <!-- <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- Page JS Code -->
-    <script src={{ URL::asset("assets/js/pages/be_tables_datatables.min.js")}}></script>
+    <script src={{ URL::asset("assets/js/pages/keuangan/be_tables_datatables.min.js")}}></script>
+    <script>
+      One.helpersOnLoad([
+        "js-flatpickr",
+        "jq-datepicker",
+        "jq-maxlength",
+        "jq-select2",
+        "jq-masked-inputs",
+        "jq-rangeslider",
+        "jq-colorpicker",
+        "js-ckeditor",
+      ]);
+      
+      // $(function() {
+
+      //     var start = moment().subtract(29, 'days');
+      //     var end = moment();
+
+      //     function cb(start, end) {
+      //       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      //     }
+
+      //     $('#reportrange').daterangepicker({
+      //         startDate: start,
+      //         endDate: end,
+      //         ranges: {
+      //           'Hari Ini': [moment(), moment()],
+      //           'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      //           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      //           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      //           'This Month': [moment().startOf('month'), moment().endOf('month')],
+      //           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      //         }
+      //     }, cb);
+      //     //search date range
+          
+
+      //     cb(start, end);
+      //     //search date range by default
+      //     // $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+      //     //   var start = picker.startDate.format('YYYY-MM-DD');
+      //     //   var end = picker.endDate.format('YYYY-MM-DD');
+      //     //   //make form submit for start and end date
+      //     //   $('#reportrange').val(start);
+      //     //   $('#reportrange').val(end);
+      //     //   $('#form_date_range').submit();
+            
+      //     // });
+          
+      //     //search date range by ajax and jquery
+      //     $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+      //       var start = picker.startDate.format('YYYY-MM-DD');
+      //       var end = picker.endDate.format('YYYY-MM-DD');
+            
+      //       var url = "/admin/keuangan";
+      //       var _token = $('input[name="_token"]').val();
+      //       $.ajax({
+      //         url: url,
+      //         method: "POST",
+      //         data: {start: start, end: end, _token: _token},
+      //         success: function(response) {
+      //           showresult();
+      //           //document.write(response);
+      //            //console.log(response);
+      //           // var keuangan = '';
+      //           //   //forEach
+      //           //   // keuangan += '<table id="example"  class="table table-bordered table-vcenter js-dataTable-buttons">';
+      //           //   // keuangan += '<thead>';
+      //           //   // keuangan += '<tr>';
+      //           //   // keuangan += '<th class="text-center">No</th>';
+      //           //   // keuangan += '<th class="d-none d-sm-table-cell fs-sm">waktu</th>';
+      //           //   // keuangan += '<th class="d-none d-sm-table-cell fs-sm">Keterangan</th>';
+      //           //   // keuangan += '<th class="d-none d-sm-table-cell fs-sm">Debit</th>';
+      //           //   // keuangan += '<th class="d-none d-sm-table-cell fs-sm">Kredit</th>';
+      //           //   // keuangan += '<th class="d-none d-sm-table-cell fs-sm">Saldo</th>';
+      //           //   // keuangan += '</tr>';
+      //           //   // keuangan += '</thead>';
+      //           //   response.data.forEach(function(data,index){
+                  
+      //           //     keuangan += `<tr>`;
+      //           //     keuangan += `<td class="text-center fs-sm">${index+1}</td>`;
+      //           //     keuangan += `<td class="fw-semibold fs-sm">${data.waktu}</td>`;
+      //           //     keuangan += `<td class="d-none d-sm-table-cell fs-sm">${data.keterangan}</td>`;
+      //           //     if(data.debit === null){
+      //           //       keuangan += `<td class="d-none d-sm-table-cell fs-sm"></td>`;
+      //           //     }else{
+      //           //       keuangan += `<td class="d-none d-sm-table-cell fs-sm"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${data.debit}</span></td>`;
+      //           //     }
+      //           //     if(data.kredit === null){
+      //           //       keuangan += `<td class="d-none d-sm-table-cell fs-sm"></td>`;
+      //           //     }else{
+      //           //       keuangan += `<td class="d-none d-sm-table-cell fs-sm"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">${data.kredit}</span></td>`;
+      //           //     }
+                    
+                    
+      //           //     keuangan += `<td class="d-none d-sm-table-cell fs-sm"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${data.saldo}</span></td>`;
+      //           //   });
+      //           //   // keuangan += '</table>';
+      //           //   $('.keuangan').append(keuangan);
+      //           //   // datatable
+                  
+
+
+      //         }
+      //       });
+      //     });
+      //     function showresult(){
+      //       $.ajax({
+      //         url: "/admin/keuangan",
+      //         method: "POST",
+      //         data: {action: view, _token: _token},
+      //         success: function(response) {
+      //           $('.keuangan').html(response);
+      //         }
+      //       });
+      //     }
+
+
+      // });
+    </script>
 @endsection

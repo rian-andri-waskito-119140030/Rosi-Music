@@ -6,6 +6,7 @@ use App\Models\PesananSistem;
 use App\Models\PesananWA;
 use App\Models\CatatanPenolakan;
 use App\Models\Transaksi;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -49,5 +50,9 @@ class Pesanan extends Model
     public function transaksi()
     {
         return $this->hasOne(Transaksi::class, 'id_pesanan');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_pelanggan');
     }
 }
